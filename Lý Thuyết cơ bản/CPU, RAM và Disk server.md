@@ -96,7 +96,7 @@ do đó gửi thông tin sẽ được xử lý tới từng chip trên thanh RA
 
 ### 3.1 Ổ cứng là gì?
 
-Ổ cứng là thiết bị phần cứng dùng để lưu trữ dữ liệu chính như: hệ điều hành, phần mềm và các tệp tin khác. Đầu cuối của ổ cứng chứa một cổng cho cap kết nối bo mạch. Cap sử dụng có thể là SATA hoặc PATA, phụ thuộc vào loại ổ đĩa. Hầu hết các ổ đĩa cứng đều có thiết lập jumper ở mặt sau để xác định cách bo mạch chủ nhận diện được ổ đĩa khi có nhiều hơn một ổ cứng.
+Ổ cứng là thiết bị phần cứng dùng để lưu trữ dữ liệu chính như: hệ điều hành, phần mềm và các tệp tin khác. Đầu cuối của ổ cứng chứa một cổng cho cap kết nối bo mạch. Cap sử dụng có thể là SATA hoặc SAS, phụ thuộc vào loại ổ đĩa. Hầu hết các ổ đĩa cứng đều có thiết lập jumper ở mặt sau để xác định cách bo mạch chủ nhận diện được ổ đĩa khi có nhiều hơn một ổ cứng.
 
 Ổ cứng sẽ hỗ trợ và thay đổi một số khả năng của máy như: tốc độ khởi động, chép dữ liệu và mức độ an toàn của dữ liệu.
 
@@ -106,19 +106,22 @@ do đó gửi thông tin sẽ được xử lý tới từng chip trên thanh RA
 
 💾 HDD (Hard Disk Drive): là một loại ổ cứng cho máy chủ giống như những máy tính thông thường. Tuy nhiên, do đặc thù của máy chủ đòi hỏi dung lương bộ nhớ lớn nên một server có thể gắn kèm nhiều HDD. Việc sở hữu một HDD server tốt sẽ đem lại cho người dùng rất nhiều lợi ích về: khả năng lưu trữ, tốc độ và khả năng truy xuất, bảo vệ dữ liệu. Ngoài ra, HDD có vai trò mật thiết trong việc gia tăng tuổi thọ cho máy chủ.
 
+
 <img src="https://user-images.githubusercontent.com/79830542/166857433-7548012c-534e-4c32-8d38-d0b5657dd815.png" width="600">
 
-HDD server có hai chuẩn giao tiếp phổ biến là:  SATA (Serial Advanced Technology Attachment) - chuẩn giao tiếp truyền dữ liệu theo dạng nối tiếp và SAS (Serial Attached SCSI) – chuẩn giao tiếp có tốc độ truyền tải dữ liệu nhanh nhất hiện nay).
+Phổ biến hiện nay thường thấy nhất chính là HDD 2.5in và HDD 3.5in, có hai chuẩn giao tiếp phổ biến là:  
+ - SATA (Serial Advanced Technology Attachment) - chuẩn giao tiếp truyền dữ liệu theo dạng song song
+ - SAS (Serial Attached SCSI) – chuẩn giao tiếp có tốc độ truyền tải dữ liệu nhanh nhất hiện nay, truyền tải dữ liệu theo kiểu nối tiếp.
 
-Trong việc lựa chọn ổ HDD cho server của mình thì ta nên để tâm đến tốc độ đọc/ghi của ổ đĩa (thường được thể hiện qua tốc độ quay của ổ đĩa - rpm càng lớn thì đọc/ghi càng nhanh) 
+Trong việc lựa chọn ổ HDD cho server của mình thì ta nên để tâm đến tốc độ đọc/ghi của ổ đĩa (thường được thể hiện qua tốc độ quay của ổ đĩa - rpm càng lớn thì đọc/ghi càng nhanh), chuẩn giao tiếp của ổ cứng, kích thước ổ cứng.
 
 💾 SSD (Solide Sate Drive): là một loại ổ cứng mảy chủ thể rắn. Dữ liệu được lưu trữ trong chip flash, nhờ vậy, dù dữ liệu bị phân mảnh (như trên HDD) thì cũng tốc độ truy xuất dữ liệu cũng không bị ảnh hưởng. Hầu như không có dộ trễ khi người dùng cần truy xuât dữ liệu trong máy.
 
 <img src="https://user-images.githubusercontent.com/79830542/166857642-dbacb905-ebf0-4284-90e0-b29fd8ec72e5.png" width="600">
 
-Ổ cứng SSD server có 3 loại phổ biến hiện nay: SATA, SAS và PCIe (PCI – Express). Xem chi tiết [tại đây](https://tuanphong.vn/news/cong-nghe-chip-nho-tren-o-cung-ssd-slc-mlc-tlc-qlc-va-plc-la-gi-id198)
+Công nghệ lưu trữ phổ biến của ổ cứng SSD phổ biến hiện nay: SLC (Single-layer cell), MLC (Multi-layer cell), TLC (Triple-layer cell), QLC (Quad-level cell), PLC (Penta-level cell). Xem chi tiết [tại đây](https://tuanphong.vn/news/cong-nghe-chip-nho-tren-o-cung-ssd-slc-mlc-tlc-qlc-va-plc-la-gi-id198)
 
-So sánh hai loại ổ cứng HDD và SSD
+### 3.3 So sánh hai loại ổ cứng HDD và SSD
 
 So với ổ cứng HDD truyền thống, ổ cứng SSD server được nghiên cứu và cải thiện rất nhiều nên có khá nhiều tính năng vượt trội hơn HDD:
 
