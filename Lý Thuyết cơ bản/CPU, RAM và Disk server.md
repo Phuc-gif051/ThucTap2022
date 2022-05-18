@@ -6,7 +6,7 @@
       - [a. RAM buffered](#RAMbuff)
       - [b. RAM unbuffered](#RAMunBuff)
  - [3. Disk (ổ cứng)](#3.Disks)
-
+[II. Thực hành 🖥️ (lab)](#II.Lab)
 [Tài liệu tham khảo](#tailieu) 
 
 <a name="I.LyThuyet"></a>
@@ -148,6 +148,35 @@ Tuy nhiên, để đạt được hiệu quả cao trong quá trình vận hành
 - Khả năng tiết kiệm điện: Ví dụ như các ổ cứng SSD (SATA2, SATA3) có mức tiêu thụ điện năng trung bình khoảng 3W. Dựa vào đây người mua có thể so sánh khả năng tiết kiệm điện của các loại ổ cứng.
 
 - Tính năng đi kèm: Tất cả các ổ cứng SSD hiện nay đều hỗ trợ lệnh TRIM, giúp hệ điều hành chủ động xem xét và xóa bỏ những dữ liệu không còn được dùng. Việc này giúp cho ổ cứng hoạt động mượt mà hơn, tăng tuổi thọ của ổ cứng.
+
+<a name="II.Lab"></a>
+# II. Thực hành 🖥️ (lab)
+
+Sử dụng "stress" để test tải hệ thống trên Centos 7. Đây là 1 công cụ ngoài, cần cài đặt thêm nếu muốn sử dụng `yum install -y stress`
+ - Đối với CPU, stress sẽ yêu cầu CPU tính căn bậc 2 của một số tự nhiên bất kỳ, tính liên tục cho đến khi có lệnh dừng
+ - Đối với RAM, stress sẽ yêu cầu cấp phát bộ nhớ liên tục (dung lượng được cấp phát có thể tuỳ chỉnh)
+ - 
+
+Chủ yếu stress dùng để test tải cho CPU và RAM. Xem chi tiết tại đây: 
+ - [1. Chạy từng lệnh riêng biệt](https://quantrimang.com/cach-kiem-tra-ap-luc-cua-he-thong-linux-173237)
+ - [2.hahahha](https://blog.cloud365.vn/linux/huong-dan-su-dung-stress/)
+ - 
+Cn đối với disk ta dùng fio: đây cũng là công cụ ngoài cần phải cài đặt thêm. `yum install -y fio`
+
+Câu lệnh để sử dụng fio như sau:
+`fio --randrepeat=0 --ioengine=libaio --direct=1 --gtod_reduce=1 --name=vhost --filename=vhost --bs=4k --iodepth=64 --size=4G --readwrite=randrw --rwmixread=75`
+
+Đây là câu lệnh dùng để test IOPS của ổ cứng. Câu lệnh này sẽ tạo ra file 4GB và test theo cơ chế read và write file 4KB đồng thời với tỉ lệ 75%/25% (cứ 3 requests read thì sẽ có 1 request write) với 64 lần thực hiện đồng thời tại một thời điểm. Tỉ lệ 3:1 rất phổ biến với các dạng database ngày nay. IOPS được viết tắt bởi cụm từ Input – output operation per second được hiểu nôm na là 1 truy cập đọc và viết với mỗi giây. Đối với các thiết bị lưu trữ file thì băng thông chính là thông số quan trọng nhất. 
+chi tiết [tại đây](https://vhost.vn/lam-the-nao-kiem-tra-hieu-suat-cua-o-cung/)
+
+Một số câu lệnh thao tác với hệ thống
+
+[dmidecode](https://ubunlog.com/vi/verifica-la-ram-instalada-ubuntu/)
+
+[Kiểm tra phần cứng](https://wiki.ngoisaoso.vn/dich-vu-mang/Linux-Huong-dan-kiem-tra-cau-hinh-may-chu-192.html)
+
+[Kiểm tra phần cứng 2](https://thuthuat.taimienphi.vn/kiem-tra-cau-hinh-may-tinh-linux-45645n.aspx)
+
 <a name="tailieu"></a>
 # Tài liệu tham khảo 🔖
 [1. CPU máy tính](https://stream-hub.com/cpu-may-tinh/)
