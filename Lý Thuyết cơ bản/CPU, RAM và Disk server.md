@@ -166,8 +166,28 @@ Cn đối với disk ta dùng fio: đây cũng là công cụ ngoài cần phả
 Câu lệnh để sử dụng fio như sau:
 `fio --randrepeat=0 --ioengine=libaio --direct=1 --gtod_reduce=1 --name=vhost --filename=vhost --bs=4k --iodepth=64 --size=4G --readwrite=randrw --rwmixread=75`
 
-Đây là câu lệnh dùng để test IOPS của ổ cứng. Câu lệnh này sẽ tạo ra file 4GB và test theo cơ chế read và write file 4KB đồng thời với tỉ lệ 75%/25% (cứ 3 requests read thì sẽ có 1 request write) với 64 lần thực hiện đồng thời tại một thời điểm. Tỉ lệ 3:1 rất phổ biến với các dạng database ngày nay. IOPS được viết tắt bởi cụm từ Input – output operation per second được hiểu nôm na là 1 truy cập đọc và viết với mỗi giây. Đối với các thiết bị lưu trữ file thì băng thông chính là thông số quan trọng nhất. 
+Đây là câu lệnh dùng để test IOPS của ổ cứng. Câu lệnh này sẽ tạo ra file 4GB, có block size 4KB và test theo cơ chế read và write đồng thời với tỉ lệ 75%/25% (cứ 3 requests read thì sẽ có 1 request write) với 64 lần thực hiện đồng thời tại một thời điểm. Tỉ lệ 3:1 rất phổ biến với các dạng database ngày nay. IOPS được viết tắt bởi cụm từ Input – output operation per second được hiểu nôm na là 1 truy cập đọc và viết với mỗi giây. Đối với các thiết bị lưu trữ file thì băng thông chính là thông số quan trọng nhất. 
 chi tiết [tại đây](https://vhost.vn/lam-the-nao-kiem-tra-hieu-suat-cua-o-cung/)
+
+Test đọc ghi bằng fio thì có 2 trường hợp cần test:
+ - TH1: hệ thống chỉ có 1 kho lưu trữ, trong đó lưu cả hệ điều hành (OS). Lúc này hệ thống có thế được cài đặt RAID hoặc không, ta cần phải kiểm tra rồi mới tiến hành test để thu được kết quả đúng nhất.
+ - TH2: hệ thống có nhiều nơi lưu trữ hơn (có từ 2 ổ cứng trở lên - sử dụng `lsblk` để kiểm tra). Khi đó ta cần phải test ở tất cả các ổ để thu được kết quả trực quan nhất. Test trên ổ lưu trữ OS thì làm như TH1. Test trên các ổ không chứa OS ta cần phải thiết lập phân vùng để OS nhận diện ổ cứng. Tham khảo việc thiết lập phân vùng [tại đây](https://blogd.net/linux/quan-ly-phan-vung-dia-cung-tren-linux/).
+_Lưu ý: trong thiết lập phân vùng, khi thiết lập thành công sẽ có MOUNTPOINT và hệ thống sẽ hiện thêm phân vùng đó khi chạy lệnh `df -h`_
+
+Kết quả test cá nhân trên 6 ổ HDD 500GB, sử dụng chuẩn giao tiếp SAS. Thu được kết quả như sau:
+
+1, Test trên 4 ổ sử dụng RAID 10, cài OS. Tha thu được chỉ số IOPS đọc khoảng 2044, ghi khoảng 719
+
+<img src="https://user-images.githubusercontent.com/79830542/169240319-7b0516a2-6aa9-49a2-a6fb-e7c5db36c6c5.png" width=600>
+
+2, Test trên 1 ổ thường, đã được thiết lập phân vùng để OS nhận diện và sử dụng. Lúc này cần chuyển đến phân vùng mới đó để tiến hành test, sử dụng `cd` để di chuyển. Thu được kết quả, chỉ số IOPS đọc khoảng 530, ghi khoảng 186.
+
+<img src="https://user-images.githubusercontent.com/79830542/169243385-1e37cec5-9e8e-4388-858b-2afc91f08d86.png" width = 600>
+
+Cả 2 trường hợp test đều sử dụng chung 1 câu lệnh fio, chỉ khác môi trường test là test trên 2 vị trí lưu được cấu hình khác nhau.
+
+
+
 
 Một số câu lệnh thao tác với hệ thống
 
