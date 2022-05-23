@@ -6,7 +6,10 @@
       - [a. RAM buffered](#RAMbuff)
       - [b. RAM unbuffered](#RAMunBuff)
  - [3. Disk (ổ cứng)](#3.Disks)
+
+
 [II. Thực hành 🖥️ (lab)](#II.Lab)
+
 [Tài liệu tham khảo](#tailieu) 
 
 <a name="I.LyThuyet"></a>
@@ -113,7 +116,7 @@ Phổ biến hiện nay thường thấy nhất chính là HDD 2.5in và HDD 3.5
  - SATA (Serial Advanced Technology Attachment) - chuẩn giao tiếp truyền dữ liệu theo dạng song song
  - SAS (Serial Attached SCSI) – chuẩn giao tiếp có tốc độ truyền tải dữ liệu nhanh nhất hiện nay, truyền tải dữ liệu theo kiểu nối tiếp.
 
-Trong việc lựa chọn ổ HDD cho server của mình thì ta nên để tâm đến tốc độ đọc/ghi của ổ đĩa (thường được thể hiện qua tốc độ quay của ổ đĩa - rpm càng lớn thì đọc/ghi càng nhanh), chuẩn giao tiếp của ổ cứng, kích thước ổ cứng.
+Trong việc lựa chọn ổ HDD cho server của mình thì ta nên để tâm đến:tốc độ đọc/ghi của ổ đĩa (thường được thể hiện qua tốc độ quay của ổ đĩa - rpm càng lớn thì đọc/ghi càng nhanh), chuẩn giao tiếp của ổ cứng, kích thước ổ cứng.
 
 💾 SSD (Solide Sate Drive): là một loại ổ cứng mảy chủ thể rắn. Dữ liệu được lưu trữ trong chip flash, nhờ vậy, dù dữ liệu bị phân mảnh (như trên HDD) thì cũng tốc độ truy xuất dữ liệu cũng không bị ảnh hưởng. Hầu như không có dộ trễ khi người dùng cần truy xuât dữ liệu trong máy.
 
@@ -137,13 +140,13 @@ So với ổ cứng HDD truyền thống, ổ cứng SSD server được nghiên
 Tuy nhiên, để đạt được hiệu quả cao trong quá trình vận hành cũng như tối ưu về chi phí thì nên sử dụng kết hợp cả 2 loại ổ cứng.
 
 💾 Những thông số quan trọng trên ổ cứng
-- Cổng giao tiếp: Có tổng cộng 4 cổng giao tiếp sau: SATA2, SATA3, PCI-Express, USB 3.0. Thông thường ổ cứng có cổng giao tiếp SATA 2 được ưa chuộng nhất vì có thể hỗ trợ nhiều thiết bị nếu bạn muốn phát huy hết hiệu năng của SSD thì nên chọn cổng SATA 3
+- Cổng giao tiếp: Có một số chuẩn giao tiếp sau: SATA (0->4), SAS, PCI-Express, USB 3.0. Thông thường ổ cứng có cổng giao tiếp SATA 2 được ưa chuộng nhất vì có thể hỗ trợ nhiều thiết bị nếu bạn muốn phát huy hết hiệu năng của SSD thì nên chọn cổng SATA 3, còn đối với HHD thì là SAS.
 
 - Tốc độ đọc/ghi tuần tự tối đa (Max Sequential Read/Writes) hiển thị dưới dạng MB/s ví dụ như 550MB/s hoặc 520 MB/s 
 
-- Tốc độ đọc/ghi ngẫu nhiên (Random Read/Write) là thông số người dùng cần quan tâm khi chọn mua ổ cứng. Tốc độ đọc các file nhỏ của ổ cứng càng cao khi các thông số IPOS lớn hơn.
+- Tốc độ đọc/ghi ngẫu nhiên (Random Read/Write) là thông số người dùng cần quan tâm khi chọn mua ổ cứng. Tốc độ đọc các file nhỏ của ổ cứng càng cao khi các thông số IOPS lớn hơn.
 
-- Chuẩn bộ nhớ lưu trữ: Các chuẩn công nghệ ổ cứng hiện tại bao gồm QLC, MLC, TLC. Trong đó MLC – Multi level cell là dạng ổ cứng SSD cho laptop cá nhân nên dùng còn các doanh nghiệp nên chọn SLC – Single level cell.
+- Chuẩn bộ nhớ lưu trữ: Các chuẩn công nghệ của ổ cứng SSD hiện tại bao gồm SLC, MLC, TLC, QLC. Trong đó MLC – Multi level cell là dạng ổ cứng SSD cho laptop cá nhân nên dùng còn các doanh nghiệp nên chọn SLC – Single level cell.
 
 - Khả năng tiết kiệm điện: Ví dụ như các ổ cứng SSD (SATA2, SATA3) có mức tiêu thụ điện năng trung bình khoảng 3W. Dựa vào đây người mua có thể so sánh khả năng tiết kiệm điện của các loại ổ cứng.
 
@@ -157,16 +160,16 @@ Sử dụng "stress" để test tải hệ thống trên Centos 7. Đây là 1 c
  - Đối với RAM, stress sẽ yêu cầu cấp phát bộ nhớ liên tục (dung lượng được cấp phát có thể tuỳ chỉnh)
  - 
 
-Chủ yếu stress dùng để test tải cho CPU và RAM. Xem chi tiết tại đây: 
- - [1. Chạy từng lệnh riêng biệt](https://quantrimang.com/cach-kiem-tra-ap-luc-cua-he-thong-linux-173237)
- - [2.hahahha](https://blog.cloud365.vn/linux/huong-dan-su-dung-stress/)
+Chủ yếu stress dùng để test tải cho CPU và RAM. Xem chi tiết tại hướng dẫn dưới đây: 
+ - [1. Hướng dẫn 1](https://quantrimang.com/cach-kiem-tra-ap-luc-cua-he-thong-linux-173237)
+ - [2. Hướng dẫn 2](https://blog.cloud365.vn/linux/huong-dan-su-dung-stress/)
  - 
-Cn đối với disk ta dùng fio: đây cũng là công cụ ngoài cần phải cài đặt thêm. `yum install -y fio`
+Còn đối với disk ta dùng fio: đây cũng là công cụ ngoài cần phải cài đặt thêm. `yum install -y fio`
 
 Câu lệnh để sử dụng fio như sau:
 `fio --randrepeat=0 --ioengine=libaio --direct=1 --gtod_reduce=1 --name=vhost --filename=vhost --bs=4k --iodepth=64 --size=4G --readwrite=randrw --rwmixread=75`
 
-Đây là câu lệnh dùng để test IOPS của ổ cứng. Câu lệnh này sẽ tạo ra file 4GB, có block size 4KB và test theo cơ chế read và write đồng thời với tỉ lệ 75%/25% (cứ 3 requests read thì sẽ có 1 request write) với 64 lần thực hiện đồng thời tại một thời điểm. Tỉ lệ 3:1 rất phổ biến với các dạng database ngày nay. IOPS được viết tắt bởi cụm từ Input – output operation per second được hiểu nôm na là 1 truy cập đọc và viết với mỗi giây. Đối với các thiết bị lưu trữ file thì băng thông chính là thông số quan trọng nhất. 
+Đây là câu lệnh dùng để test IOPS của ổ cứng. Câu lệnh sẽ tạo ra file 4GB, có block size 4KB và test theo cơ chế read và write đồng thời với tỉ lệ 75%/25% (cứ 3 requests read thì sẽ có 1 request write) với 64 lần thực hiện đồng thời tại một thời điểm. Tỉ lệ 3:1 rất phổ biến với các dạng database ngày nay. IOPS được viết tắt bởi cụm từ Input – output operation per second được hiểu nôm na là 1 truy cập đọc và viết với mỗi giây. Đối với các thiết bị lưu trữ file thì băng thông chính là thông số quan trọng nhất. 
 chi tiết [tại đây](https://vhost.vn/lam-the-nao-kiem-tra-hieu-suat-cua-o-cung/)
 
 Test đọc ghi bằng fio thì có 2 trường hợp cần test:
@@ -186,7 +189,11 @@ Kết quả test cá nhân trên 6 ổ HDD 500GB, sử dụng chuẩn giao tiế
 
 Cả 2 trường hợp test đều sử dụng chung 1 câu lệnh fio, chỉ khác môi trường test là test trên 2 vị trí lưu được cấu hình khác nhau.
 
+Ngoài tốc độ đọc/ghi thì độ trễ trong việc truyền tải dữ liệu cũng cần được quan tâm đến. Nó cũng là 1 yếu tố ảnh hưởng đến trải nghiệm người dùng. Ta sử dụng `IOPing` để kiểm tra. Đây cũng là công cụ ngoài cần được cài đặt bằng câu lệnh `yum install -y ioping`.
 
+Cài xong sử dụng câu lệnh `ioping -c 10 .` để kiểm tra độ trễ. Câu lệnh thực hiện gửi 10 request để tính toán độ trễ của việc truyền tải.
+
+<img src="https://user-images.githubusercontent.com/79830542/169762232-8181eb45-0427-4edf-b07b-e9d7ec9567ce.png" width=600>
 
 
 Một số câu lệnh thao tác với hệ thống
