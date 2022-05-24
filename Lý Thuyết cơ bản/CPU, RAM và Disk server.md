@@ -157,7 +157,7 @@ Tuy nhiên, để đạt được hiệu quả cao trong quá trình vận hành
 
 Sử dụng "stress" để test tải hệ thống trên Centos 7. Đây là 1 công cụ ngoài, cần cài đặt thêm nếu muốn sử dụng `yum install -y stress`
  - Đối với CPU, stress sẽ yêu cầu CPU tính căn bậc 2 của một số tự nhiên bất kỳ, tính liên tục cho đến khi có lệnh dừng
- - Đối với RAM, stress sẽ yêu cầu cấp phát bộ nhớ liên tục (dung lượng được cấp phát có thể tuỳ chỉnh)
+ - Đối với RAM, stress sẽ yêu cầu cấp phát bộ nhớ liên tục cho 1 hoặc nhiều tiến trình hoạt động (dung lượng được cấp phát có thể tuỳ chỉnh)
  - 
 
 Chủ yếu stress dùng để test tải cho CPU và RAM. Xem chi tiết tại hướng dẫn dưới đây: 
@@ -179,7 +179,7 @@ _Lưu ý: trong thiết lập phân vùng, khi thiết lập thành công sẽ c
 
 Kết quả test cá nhân trên 6 ổ HDD 500GB, sử dụng chuẩn giao tiếp SAS. Thu được kết quả như sau:
 
-1, Test trên 4 ổ sử dụng RAID 10, cài OS. Tha thu được chỉ số IOPS đọc khoảng 2044, ghi khoảng 719
+1, Test trên 4 ổ sử dụng RAID 10, cài OS. Ta thu được chỉ số IOPS đọc khoảng 2044, ghi khoảng 719
 
 <img src="https://user-images.githubusercontent.com/79830542/169240319-7b0516a2-6aa9-49a2-a6fb-e7c5db36c6c5.png" width=600>
 
@@ -189,9 +189,21 @@ Kết quả test cá nhân trên 6 ổ HDD 500GB, sử dụng chuẩn giao tiế
 
 Cả 2 trường hợp test đều sử dụng chung 1 câu lệnh fio, chỉ khác môi trường test là test trên 2 vị trí lưu được cấu hình khác nhau.
 
+Ngoài việc đọc ghi ngẫu nhiên như trên, ta cũng cần test trường hợp đọc-ghi riêng biệt để đưa ra cái nhìn trực quan nhất về hệ thống mà ta đang quản lý. Ví dụ như ta đang quản lý hệ thống sever dành cho website, thì lúc này việc đọc nhiều hơn việc ghi, ta cần quan tâm đến chỉ số đọc của ổ cứng nhiều hơn là chỉ số ghi, v.v. với nhiều trường hợp khác.
+
+Kiểm tra chỉ số IOPS đọc (read) của hệ thống: 
+`fio --randrepeat=1 --ioengine=libaio --direct=1 --gtod_reduce=1 --name=testR --filename=testR --bs=4k --iodepth=64 --size=4G --readwrite=randread`
+
+<img src="https://user-images.githubusercontent.com/79830542/169936916-6777bf2e-705c-4e89-8bc3-9cdea3e53808.png" width="600">
+
+Kiểm tra chỉ số IOPS ghi (write) của hệ thống:
+`fio --randrepeat=1 --ioengine=libaio --direct=1 --gtod_reduce=1 --name=testW --filename=testW --bs=4k --iodepth=64 --size=4G --readwrite=randwrite`
+
+<img src="https://user-images.githubusercontent.com/79830542/169937150-ec831a3f-d409-4beb-a4e0-e2d5df5b87ba.png" width="600">
+
 Ngoài tốc độ đọc/ghi thì độ trễ trong việc truyền tải dữ liệu cũng cần được quan tâm đến. Nó cũng là 1 yếu tố ảnh hưởng đến trải nghiệm người dùng. Ta sử dụng `IOPing` để kiểm tra. Đây cũng là công cụ ngoài cần được cài đặt bằng câu lệnh `yum install -y ioping`.
 
-Cài xong sử dụng câu lệnh `ioping -c 10 .` để kiểm tra độ trễ. Câu lệnh thực hiện gửi 10 request để tính toán độ trễ của việc truyền tải.
+Cài xong sử dụng câu lệnh `ioping -c 10 .` để kiểm tra độ trễ. Câu lệnh thực hiện gửi 10 request truy xuất dữ liệu ngẫu nhiên để tính toán độ trễ của việc truyền tải.
 
 <img src="https://user-images.githubusercontent.com/79830542/169762232-8181eb45-0427-4edf-b07b-e9d7ec9567ce.png" width=600>
 
