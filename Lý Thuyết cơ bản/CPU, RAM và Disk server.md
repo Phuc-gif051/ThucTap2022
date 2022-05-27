@@ -228,3 +228,5 @@ Một số câu lệnh thao tác với hệ thống
 
 [5. RAM ECC là gì](https://lagihitech.vn/ram-ecc-la-gi-co-cac-loai-nao/#:~:text=%2DRAM%20ECC%3A%20l%C3%A0%20thanh%20RAM,c%C3%B2n%20cao%20h%C6%A1n%20nhi%E1%BB%81u%20l%E1%BA%A7n.)
 
+[6. fiodocx](https://fio.readthedocs.io/en/latest/fio_doc.html)
+
