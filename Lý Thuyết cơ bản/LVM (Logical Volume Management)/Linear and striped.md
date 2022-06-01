@@ -106,3 +106,7 @@ Có thể thấy khi cấu hình `striped` cho 5 ổ đĩa thì cả 5 đều ho
 [1. Cơ chế ghi đĩa Striping - LVM Stripe](https://github.com/hocchudong/thuctap012017/blob/master/TVBO/docs/LVM/docs/lvm-stripping.md)
 
 [2. lvm-linear-striped](https://blog.cloud365.vn/linux%20tutorial/lvm-linear-striped/#thuc-hien)
+
+[3. LVM problem – Logical volume contains a filesystem in use.](https://itsol.biz/lvm-problem-logical-volume-contains-filesystem-use/)
+
+[4. How to unmount a busy device [closed]](https://stackoverflow.com/questions/7878707/how-to-unmount-a-busy-device)
