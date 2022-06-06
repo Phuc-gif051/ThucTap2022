@@ -150,9 +150,9 @@ Thành công cấu hình raid 0 cho trường hợp 2.
 
 # <a name="III" >III. Tài liệu tham khảo 📚 </a>
 
-[1](https://blogd.net/linux/software-raid-toan-tap-tren-linux/)
+[1. soft raid theo phân vùng](https://blogd.net/linux/software-raid-toan-tap-tren-linux/)
 
-[2](https://galaxyz.net/cach-tao-mang-raid-voi-mdadm-tren-ubuntu-1604.1517.anews)
+[2. Soft raid cả ổ cứng và cách xoá](https://galaxyz.net/cach-tao-mang-raid-voi-mdadm-tren-ubuntu-1604.1517.anews)
 
-[3](https://blogd.net/linux/quan-ly-phan-vung-dia-cung-tren-linux/)
+[3. Sử dụng fdisk để quản lý phân vùng](https://blogd.net/linux/quan-ly-phan-vung-dia-cung-tren-linux/)
 
