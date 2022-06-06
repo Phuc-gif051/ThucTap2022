@@ -12,7 +12,9 @@
 # <a name="I">I. Định dạng file phổ biến trên linux</a>
 
 ## <a name="I.1">1. Các định nghĩa cơ bản</a>
- - Filesystem là các phương pháp và các cấu trúc dữ liệu mà một hệ điều hành sử dụng để theo dõi các tập tin trên ổ đĩa hoặc phân vùng. Có thể tạm dịch filesystem là hệ thống tập tin. File system được dùng để quản lý cách dữ liệu được đọc và lưu trên thiết bị. Thuật ngữ này cũng được sử dụng để chỉ một phân vùng hoặc ổ đĩa được sử dụng để lưu trữ các tập tin hoặc loại hệ thống tập tin. Với mỗi OS khác nhau thì ta cũng sẽ phải sử dụng các định dạng filesystem khác nhau:
+ - Filesystem là các phương pháp và các cấu trúc dữ liệu mà một hệ điều hành sử dụng để theo dõi các tập tin trên ổ đĩa hoặc phân vùng. Có thể tạm dịch filesystem là hệ thống tập tin. File system được dùng để quản lý cách dữ liệu được đọc và lưu trên thiết bị. Thuật ngữ này cũng được sử dụng để chỉ một phân vùng hoặc ổ đĩa được sử dụng để lưu trữ các tập tin hoặc loại hệ thống tập tin. Hiểu đơn giản thì filesystem là các quy chuẩn về: cách thức cấp phát không gian lưu trữ cho file, quản lý thuộc tính của file; cách tổ chức, sắp xếp dữ liệu trên thiết bị sao cho việc tìm kiếm, truy cập tới dữ liệu được mau chóng và thuận tiện…
+
+Với mỗi OS khác nhau thì ta cũng sẽ phải sử dụng các định dạng filesystem khác nhau:
     + Trên Window thì là NTFS, FAT..., 
     + Trên MacOS là HFS+,..., 
     + Trên Linux là ext, xfs,...
