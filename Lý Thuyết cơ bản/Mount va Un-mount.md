@@ -127,6 +127,24 @@ Chú ý là lệnh un-mount là `umount` chứ không phải `unmount` đâu nh�
 
 Un-mount thành công, trong trường hợp bạn đã chỉnh sửa trong file `fstab` thì cần xoá trong cả file đó.
 
+## <a name="II.4" >4. Trường hợp mất phân vùng (thiết bị bị hỏng)</a>
+
+🚩 Trường hợp này được thành trên máy ảo nên có thể an toàn hơn trên máy vật lý. Ưu tiên thực hành trường hợp này trên máy ảo để bảo vệ phần cứng của bạn.
+
+Đầu tiên, khi mất 1 phân vùng nào đó mà đã mount thì OS chưa thể nhận ra ngay lập tức. Chỉ khi khởi động lại, ta sẽ dễ dàng nhận thấy qua biểu hiện đầu tiên đó là khởi động chậm hơn bình thường. Sau khi khởi động lên ta sẽ nhận được thông báo như sau:
+
+<img src="https://user-images.githubusercontent.com/79830542/172585821-21edb608-bc53-4097-81af-b9e42dcbada9.png" width="600">
+
+Đây là chế độ dành cho người quản trị (quyền root) truy cập vào hệ thống khi OS khởi động lên và phát hiện lỗi ở ổ cứng của hệ thống. Thông thường ta sẽ phải kiểm tra tất cả các lỗi có thể xảy ra (hệ thống LVM bị lỗi, mount lỗi, có thể cả RAID lỗi,... thường thì 2 trường hợp đầu hay gặp hơn). 
+
+Ở bài lab này ta biết rõ lỗi là do mount bị mất ổ cứng. Để truy cập vào hệ thống ở trường hợp này đầu tiên ta cần nhập mật khẩu cho root use rồi Enter. Truy cập được vào hệ  thống tiến hành sử dụng lệnh `mount -a` để kiểm tra xem bị lỗi ở đâu.
+
+<img src="https://user-images.githubusercontent.com/79830542/172587082-e11c4375-7b9d-4a9b-88f3-df6b001ea05e.png" width="600">
+
+Như trên hình, OS không thể tìm thấy 2 UUID đó. Phân vùng (thiết bị) có 2 ID đó có thể đã hỏng, bị rút ra,... Để khởi động hệ thống lên và chạy các dịch vụ trước khi tiến hành khắc phụ sự cố thì ta sẽ xoá bỏ việc tự mount vào 2 ID đó. Dùng `vi /etc/fstab` để truy cập vào tệp cấu hình và chỉnh sửa nó. Nhanh gọn nhất là nên thêm `#` vào đầu câu khai báo, hoặc bạn có thể xoá bỏ chúng luôn cũng được.
+
+Chỉnh sửa xong lưu lại và thoát khỏi `vi` reboot hệ thống sẽ khởi động lại như bình thường, tiến hành chạy các dịch vụ và tìm cách khắc phục việc mất dữ liệu.
+
 # <a name="III" >III. Tài liệu tham khảo 📚</a>
 
 [1.What Is the Linux fstab File, and How Does It Work?](https://www.howtogeek.com/howto/38125/htg-explains-what-is-the-linux-fstab-and-how-does-it-work/)
