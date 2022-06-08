@@ -5,8 +5,9 @@
  - [1. Mount tạm thời](#II.1)
  - [2. Mount cố định](#II.2)
  - [3. Un-mount](#II.3)
+ - [4. Trường hợp mất phân vùng](#II.4)
 
-[III. Tài liệu tham khảo 📚]()
+[III. Tài liệu tham khảo 📚](#III)
 
 
 
