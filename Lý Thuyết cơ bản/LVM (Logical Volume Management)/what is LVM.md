@@ -179,6 +179,8 @@ Giảm thành công dung lượng của Logical volume test1 và test3 xuống c
 
 <img src="https://user-images.githubusercontent.com/79830542/170436607-9226a662-36e1-47be-8bfb-6b09718aab15.png" width="500">
 
+♨️ _Việc thay đổi kích thước của Logical Volume phụ thuộc vào dạng file system mà nó được cấu hình. Ví dụ với dạng `ext` thì được còn với dạng `xfs` thì hiện tại chỉ tăng không giảm được. Và ta có thể tuỳ ý cấu hình file system theo nhu cầu sử dụng nên có thể tuỳ thuộc vào nhu cầu đểu cấu hình cho phù hợp._
+
 👓 Test tính năng xoá bỏ phân vùng của LVM
 Muốn xoá bỏ 1 phân vùng nào đó, trước tiên ta phải unmount chúng. Ta sử dụng lệnh `umount /dev/Phân_vùng_cần_loại_bor`. Ở đây ta sẽ thử với phân vùng test2, đang chiếm giữ khoảng 620 GiB.
  - B1: `umount /dev/test2`
