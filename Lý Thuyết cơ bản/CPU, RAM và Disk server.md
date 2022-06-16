@@ -9,6 +9,7 @@
 
 
 [II. Thực hành 🖥️ (lab)](#II.Lab)
+Test tải với `fio` và `stress` test.
 
 [Tài liệu tham khảo](#tailieu) 
 
