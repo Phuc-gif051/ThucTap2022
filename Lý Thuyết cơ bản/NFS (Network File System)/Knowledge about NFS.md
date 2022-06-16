@@ -21,20 +21,35 @@
 Cung cấp chức năng bảo mật file và quản lý lưu lượng sử dụng (file system quota).
 Các Client muốn sử dụng các file system được chia sẻ thì sử dụng giao thức NFS để mount các file đó về.
 
- - Khi triển khai hệ thống lớn hoặc chuyên biệt cần áp dụng NFSv3, còn người dùng ngẫu nhiên hoặc nhỏ lẻ thì áp dụng NFSv2, NFSv4. Với NFSv4, yêu cầu hệ thống phải có kernel phiên bản từ 2.6 trở lên
+ - Khi triển khai hệ thống lớn hoặc chuyên biệt cần áp dụng NFSv3, còn người dùng ngẫu nhiên hoặc nhỏ lẻ thì áp dụng NFSv2, NFSv4. Với NFSv4, yêu cầu hệ thống phải có kernel phiên bản từ 2.6 trở lên. Đến thời điểnm hiện tại thì v4 đã đủ "cứng cáp" để sử dụng rộng rãi.
 
  - Để xử lý được những file lớn hơn 2GB, đòi hỏi hệ thống phải có phiên bản kernel lớn hơn hoặc bằng 2.4x và [Glibc](https://www.bing.com/search?q=glibc+l%c3%a0+g%c3%ac&qs=UT&pq=glibc+l%c3%a0&sc=3-8&cvid=73F8D3463B984F38920BFDE1A7B8A52A&FORM=QBRE&sp=1) từ 2.2.x trở lên. Với máy
-Client từ phiên bản kernel 2.2.18 trở đi đều hỗ trợ NFS trên nền TCP
+Client từ phiên bản kernel 2.2.18 trở đi đều hỗ trợ NFS trên nền [TCP](https://viblo.asia/p/tim-hieu-giao-thuc-tcp-va-udp-jvEla11xlkw)
+
+ - Một số vấn đề với NFS
+   + Không bảo mật, mã hóa dữ liệu
+   + Hiệu suất hoạt động trung bình ở mức khá, nhưng không ổn định
+   + Dữ liệu phân tán có thể bị phá vỡ nếu có nhiều phiên sử dụng đồng thời
 
 ## <a name="I.2" >2. Bên trong NFS 🔎</a>
 
-Để sử dụng dịch vụ NFS, cần có các daemon (dịch vụ chạy ngầm trên hệ thống) sau:
+Các dịch vụ cấu thành NFS:
 
-**Portmap**: Quản lý các kết nối, dịch vụ chạy trên port 2049 và 111 ở cả server và client. xem chi tiết dùng lệnh `rpcinfo -p`.
+ - **Portmapper**: Quản lý các kết nối, dịch vụ chạy trên port 2049 và 111 ở cả server và client. xem chi tiết dùng lệnh `rpcinfo -p`.
 
-**NFS**: Khởi động các tiến trình [RPC (Remote Procedure Call)](https://mindovermetal.org/rpc-la-gi-1637533962/) khi được yêu cầu để phục vụ cho chia sẻ file, dịch vụ chỉ chạy trên server.
+ - **NFS**: Khởi động các tiến trình [RPC (Remote Procedure Call)](https://mindovermetal.org/rpc-la-gi-1637533962/) khi được yêu cầu để phục vụ cho chia sẻ file, dịch vụ chỉ chạy trên server.
 
-**NFS lock**: Sử dụng cho client khóa các file trên NFS server thông qua RPC.các dịch vụ ngầm đó sẽ là: các giao thức mạng (tcp, udp), cổng mạng (port), các dịch vụ (service).
+ - **NFS lock**: Sử dụng cho client khóa các file trên NFS server thông qua RPC.
+
+Dịch vụ NFS, cần có các daemon (dịch vụ chạy ngầm trên hệ thống) sau:
+
+ - **nfsd**: thực hiện hầu hết mọi công việc. (quản lý các yêu cầu từ RPC, các tiến trình song song)
+ - **rpc.mountd**: quản lý các yêu cầu gắn kết lúc ban đầu. đúng máy đúng file hay không và thông báo cho khách. Protocols used: rpc.mountd [-d] [-f] [-h] [-v] 
+ - **rpc.rquotad**: quản lý các hạn mức truy cập file của người sử dụng trên server được truy xuất.
+ - **rpc.lockd**: Được cung cấp bởi RPC và được gọi theo yêu cầu của nfsd. Vì thế bạn cũng không cần quan tâm lắm tới việc khởi động nó. Nó sử dụng NFS Lock Manager (NLM) Protocol • Các thủ tục được sử dụng: NLM_NULL, NLM_TEST, NLM_LOCK, NLM_GRANTED NLM_UNLOCK, NLM_FREE
+ - **rpc.statd**: check trạng thái của máy (cả server và client), Rpc.lockd của máy chủ yêu cầu rpc.statd lưu trữ thông tin khóa (trong hệ thống tệp) - Và để theo dõi trạng thái khóa máy • Nếu máy khách gặp sự cố, hãy xóa ổ khóa khỏi máy chủ. Use Network Status Monitor (NSM) Protocol • Procedure used: SM_NULL,SM_STAT,SM_MON,SM_NOTIFY
+ 
+_Các dịch vụ ngầm chủ yếu được cung cấp bởi RPC và NFS chỉ cần quản lý chúng_ 
  
 NFS sẽ cung cấp và quản lý quyền hạn của các máy khách được chia sẻ tệp, các quyền hạn cơ bản như sau:
 
@@ -59,7 +74,7 @@ _Lưu ý: giữa tên máy hoặc địa chỉ IP của client với quyền h�
 
   - Nếu bạn viết lại tập tin /etc/exports như sau: /Share 192.168.1.1/28 (rw)​thì các máy từ 192.168.1.1 đến 192.168.1.80 chỉ có quyền đọc, còn các máy khác (địa chỉ IP không thuộc dải trên) lại có quyền đọc và ghi đầy đủ. Khi cần chia sẻ cho nhiều máy thì tên các máy (hoặc địa chỉ IP) có thể viết trên cùng một dòng nhưng cách nhau bằng khoảng trắng
 
-      + Ví dụ: Bạn muốn chia sẻ thư mục /Share cho các máy tính có địa chỉ IP là 192.168.1.2, 192.168.1.3, có quyền đọc, ghi là: /Share 192.168.1.2(rw) 192.168.1.3(rw) 192.168.1.3(rw)
+      + Ví dụ: Bạn muốn chia sẻ thư mục /Share cho các máy tính có địa chỉ IP là 192.168.1.[2-4] có quyền đọc, ghi là: /Share 192.168.1.2(rw) 192.168.1.3(rw) 192.168.1.4(rw) 
 
 Để xem mình có quyền gì hoặc mình đang chia sẻ thư mục với những quyền gì thì sử dụng câu lệnh `exportfs -v`.
 
@@ -134,6 +149,8 @@ _**b)**_ Cơ bản về server thì ta sẽ config như thế, sau đây sẽ ti
 [4. Link trên github](https://github.com/hocchudong/ghichep-nfs/blob/master/NDChien_Baocao_NFS.md#)
 
 [5. Link trên youtube](https://www.youtube.com/watch?v=CE_xjL_7IqA)
+
+https://www.slideshare.net/udamale/nfsnetwork-file-system
 
 HaNoi, 15/6/2022
  
