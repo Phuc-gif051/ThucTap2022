@@ -1,5 +1,13 @@
+# _Một trong các tính năng của LVM - Thin Provisioning_
 # Mục lục
-# <a name="I">I. LVM Thin Provisioning</a>
+[I. LVM Thin Provisioning](#I)
+
+[II. Thực hành sử dụng LVM Thin Provisioning 🖥️](#II)
+ - [1. Khởi tạo](#II.1)
+ - [2. Tính năng Over Provisioning](#II.2)
+
+___
+# <a name="I">I. LVM Thin Provisioning 🔎</a>
 
  - Về cơ bản thì Thin Provisioning là một tính năng của LVM sử dụng công nghệ storage pool.
  - Storage pool về cơ bản thì cũng là gom nhóm ổ đĩa và quản lý chúng, khá giống với Volume group của LVM. Tuy nhiên, với volume group thì ta chủ yếu là gom nhóm các physical volume, rồi thêm bớt chúng để tăng giảm dung lượng, còn với storage pool ta có thể là thêm 1 phần khá thú vị nữa đó là quản lý cả phần lưu trữ mà còn trống (hay chưa dùng đến)
@@ -11,26 +19,27 @@
 Và LVM Thin Provisioning chủ yếu để giải quyết bài toán thiếu hụt dung lượng trong thời gian ngắn. Ví dụ như sau:
  - Ta cung cấp dịch vụ lưu trữ, với 3 khách hàng, ta hợp đồngg với mỗi khách là sẽ có 1 TiB lưu trữ. Lúc này hệ thống của ta cũng vừa hết dung lượng để có thể bán thêm, và ta cũng cần thời gian để có chi phí nâng cấp hệ thống.
  - Nhưng lúc này ta lại có thêm 1 khách hàng nữa muốn làm hợp đồng với ta để sử dụng dịch vụ lưu trữ với dung lượng 1 TiB. Ơ nhưng mà ta bán vừa hết dung lượng rồi? Lúc này thì LVM Thin Provisioning sẽ phát huy tác dụng.
- - dụng LVM Thin Provisioning giải quyết bài toán như sau: 
+ - Áp dụng LVM Thin Provisioning giải quyết bài toán như sau: 
     + Với 3 khách ở trên, mỗi người 1 TiB => tổng dung lượng của ta là 3 TiB. Và tất nhiên, với 1 TiB như thế, không chỉ 1-2 tuần mà cả 3 khách đều lưu trữ hết được.
     + Lúc này ta thấy dung lượng vẫn còn dư khá nhiều (thậm chí lớn hơn 1 TiB trong tổng 3 TiB), ta áp dụng LVM Thin Provisioning lấy phần dư đó, gom lại thành 1 vùng dung lượng với 1 TiB lưu trữ.
  Như vậy với LVM Thin Provisioning ta đã có thể cam kết với 4 khách mỗi người 1 TiB lưu trữ trong khi ta chỉ có 3 TiB :D. Và trong thời gian chờ ngần đó dung lượng được sử dụng hết, ta sẽ tìm cách để mỗi khách thật sự có 1 TiB lưu trữ 🥰
  
- # <a name= "II">II. Thực hành sử dụng LVM Thin Provisioning</a>
+ # <a name= "II">II. Thực hành sử dụng LVM Thin Provisioning 🖥️</a>
  _Thực hành trên hệ thống chạy CentOS 7, chỉ với 4GiB dung lượng 😄 đã được gom nhóm trong Volume group_
  
  
- ## <a name="II1">1. Khởi tạo</a>
+ ## <a name="II.1">1. Khởi tạo</a>
  
- -  kiểm tra xem hệ thống ta đang như nào. Ở đây ta đã biết hệ thống được cấu hình sẵn lvm với Volume group có dung lượng là 3 GiB. Dùng câu lệnh `vgs` để xem thôn tin chi tiết.
- Nếu kiểm tra hệ thống chưa được cấu hình lvm thì ta cần phải cấu hình như [bài trước].
+ -  kiểm tra xem hệ thống ta đang như nào. Ở đây ta đã biết hệ thống được cấu hình sẵn lvm với Volume group có dung lượng là 4 GiB. Dùng câu lệnh `vgs` để xem thông tin chi tiết.
+ Nếu kiểm tra hệ thống chưa được cấu hình lvm thì ta cần phải cấu hình như bài trước, mục [2 nhỏ](https://github.com/Phuc-gif051/ThucTap2022/blob/main/L%C3%BD%20Thuy%E1%BA%BFt%20c%C6%A1%20b%E1%BA%A3n/LVM%20(Logical%20Volume%20Management)/what%20is%20LVM.md#2.lab) phần II.
  
  Bao gồm 4 Physical Volume:
+ 
             - /dev/sdb: 1Gb
             - /dev/sdc: 1Gb
             - /dev/sdd: 1Gb
             - /dev/sde: 1Gb
-        - Một VolumeGroup tên là LVMVolGroup hình thành từ 4 Physical Volume trên.
+         Một VolumeGroup tên là LVMThinGroup hình thành từ 4 Physical Volume trên.
  
  `Thin Provisioning` ta có dữ liệu như sau:
 
@@ -42,22 +51,24 @@ Và LVM Thin Provisioning chủ yếu để giải quyết bài toán thiếu h�
 
         + Bước 1: Tạo ra một thin pool với câu lệnh như sau:
 
-                # lvcreate -l 1018 --thinpool tp_volume_pool LVMThinGroup
+                # lvcreate -L 4G --thinpool tp_volume_pool LVMThinGroup
 
             trong đó:
 
-                - `-l 1018G`: dùng để khai báo kích thước của thin pool sẽ tạo ra là 3.98Gb tính theo giá trị PE.
+                - `-L 4G`: dùng để khai báo kích thước của thin pool sẽ tạo ra là 3.98Gb.
                 - `--thinpool`: khai báo logical volume tạo ra thuộc kiểu `thin pool`
                 - `tp_volume_pool`: tên của thin pool sẽ tạo ra.
                 - `LVMThinGroup`: tên của Volume Group sẽ được sử dụng để tạo ra thin pool
 
             kết quả sẽ hiển thị tương tự như sau:
 
-                # lvcreate -l 1018 --thinpool tp_volume_pool LVMThinGroup
+                # lvcreate -L 4G --thinpool tp_volume_pool LVMThinGroup
 
                   Using default stripesize 64.00 KiB.
                   Logical volume "tp_volume_pool" created.
-                
+            
+            Dùng `lvs` để kiểm tra lại kết quả
+            
                 # lvs
 
                   LV             VG           Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
@@ -68,11 +79,11 @@ Và LVM Thin Provisioning chủ yếu để giải quyết bài toán thiếu h�
 
         + Bước 2: Ta sẽ tạo ra một thin volume. Cách làm như sau:
 
-                # lvcreate -V 1024 --thin -n tv_client01 LVMThinGroup/tp_volume_pool
+                # lvcreate -V 1G --thin -n tv_client01 LVMThinGroup/tp_volume_pool
 
             trong đó:
 
-                - `-V 1024`: khai báo kích thước của thin volume là 1024Mb
+                - `-V 1G`: khai báo kích thước của thin volume là 1024Mb
                 - `--thin`: Khai báo kiểu tạo ra volume là thin volume
                 - `-n tv_client01`: khai báo tên của thin volume tạo ra là tv_client01
                 - `LVMThinGroup/tp_volume_pool`: khai báo thin pool được sử dụng để tạo ra thin volume.
@@ -103,7 +114,7 @@ Và LVM Thin Provisioning chủ yếu để giải quyết bài toán thiếu h�
 
         + Bước 3: Thực hiện mount các thin pool đã tạo ra vào hệ thống. Ta làm tương tự như khi mount một Logical Volume.
 
-            - Tạo ra các thư mục có chức năng `gắn kết` tương ứng cho các thin pool:
+            - Tạo ra các thư mục có chức năng `mount` tương ứng cho các thin pool:
 
                     # mkdir -p /mnt/{client01,client02,client03}
 
@@ -118,6 +129,7 @@ Và LVM Thin Provisioning chủ yếu để giải quyết bài toán thiếu h�
                     # mount /dev/LVMThinGroup/tv_client01 /mnt/client01/
                     # mount /dev/LVMThinGroup/tv_client02 /mnt/client02/
                     # mount /dev/LVMThinGroup/tv_client03 /mnt/client03/
+              Mount này là mount mềm sẽ phải mount lại khi reboot hệ thống, muốn mount cứng thì phải vào /etc/fstab để khai báo
 
         + Bước 4: Thực hiện kiểm tra dung lượng thực sự đã sử dụng của thin pool:
 
@@ -143,7 +155,7 @@ Và LVM Thin Provisioning chủ yếu để giải quyết bài toán thiếu h�
 
    - Ngay bây giờ, ta sẽ thự hiện quá trình `Over Provisioning` bằng việc tạo thêm một thin volume 2Gb nữa. Vì ta đang có 3 thin volume sử dụng hết 3.16% trong tổng dung lượng của thin pool đã tạo ra.
 
-            # lvcreate -V 2048 --thin -n tv_client04 LVMThinGroup/tp_volume_pool
+            # lvcreate -V 2048M --thin -n tv_client04 LVMThinGroup/tp_volume_pool
 
         kết quả sẽ hiển thị tương tự như sau:
 
@@ -152,7 +164,7 @@ Và LVM Thin Provisioning chủ yếu để giải quyết bài toán thiếu h�
               For thin pool auto extension activation/thin_pool_autoextend_threshold should be below 100.
               Logical volume "tv_client04" created.
 
-    - Khi ta kiểm tra với câu lệnh `lvs` sẽ nhận được kết quả tương tự như sau:
+   - Khi ta kiểm tra với câu lệnh `lvs` sẽ nhận được kết quả tương tự như sau:
 
               LV             VG           Attr       LSize  Pool           Origin Data%  Meta%  Move Log Cpy%Sync Convert
               tp_volume_pool LVMThinGroup twi-aotz--  3.98g                       3.61   3.32
@@ -164,7 +176,7 @@ Và LVM Thin Provisioning chủ yếu để giải quyết bài toán thiếu h�
               swap           cl           -wi-ao----  2.00g
 
 
-    - Tiếp tục thực hiện các bước để có thể sử dụng thin volume vừa tạo ra tương tự như ở trên:
+   - Tiếp tục thực hiện các bước để có thể sử dụng thin volume vừa tạo ra tương tự như ở trên:
 
             # mkdir /mnt/client04
             # mkfs.ext4 /dev/LVMThinGroup/tv_client04
@@ -186,7 +198,7 @@ Và LVM Thin Provisioning chủ yếu để giải quyết bài toán thiếu h�
             /dev/mapper/LVMThinGroup-tv_client03  1.1G  2.7M  951M   1% /mnt/client03
             /dev/mapper/LVMThinGroup-tv_client04  2.1G  6.3M  2.0G   1% /mnt/client04
 
-    - Có một điều cần lưu ý khi ta bắt đầu sử dụng đến `Over Provisioning` đó là khi dữ liệu người dùng tăng đột xuất và sẽ sử dụng đầy đủ hết 5Gb. Thì sẽ xảy ra xung đột trong hệ thống, ta cần phải bổ sung dung lượng bộ nhớ cho thin pool kịp thời để tránh xảy ra xung đột. Hãy thực hiện, thêm dung lượng cho thin pool bằng việc sử dụng câu lệnh `lvextend` và coi thin pool của chúng ra đã tạo như một Logical Volume thông thường. Ví dụ:
+   - Có một điều cần lưu ý khi ta bắt đầu sử dụng đến `Over Provisioning` đó là khi dữ liệu người dùng tăng đột xuất và sẽ sử dụng đầy đủ hết 5Gb. Thì sẽ xảy ra xung đột trong hệ thống, ta cần phải bổ sung dung lượng bộ nhớ cho thin pool kịp thời để tránh xảy ra xung đột. Hãy thực hiện, thêm dung lượng cho thin pool bằng việc sử dụng câu lệnh `lvextend` và coi thin pool của chúng ra đã tạo như một Logical Volume thông thường. Ví dụ:
 
             # lvextend -L +15G /dev/LVMThinGroup/tp_volume_pool
             
