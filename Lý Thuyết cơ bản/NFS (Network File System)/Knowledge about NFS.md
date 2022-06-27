@@ -144,7 +144,7 @@ _**b)**_ Cơ bản về server thì ta sẽ config như thế, sau đây sẽ ti
 
 #### <a name="2.c" >c) Trên Window</a>
 
-  **- Trên windows thì có 3 cách như sau:**
+  **🗒️Trên windows thì có 3 cách như sau:**
   
    - C1: sử dụng NFS client được cài đặt sẵn trong windows 10 pro (trở lên) chỉ cần enable nó lên là được.
    
@@ -172,9 +172,9 @@ mở hộp thoại Run bằng cách Windows + R.
      Ví Dụ:
      - Trên linux:
 
-        - Ta có thư mục chia sẻ NFS là home/cuongnv
-        - IP của máy chia sẻ linux là 192.168.0.10 và chia sẻ tới các máy trong mạng 192.168.0.0/24.
-        - Bạn mở file etc/exports trên NFS server và thêm dòng: /home/cuongnv 192.168.0.0/24(rw,sync,no_subtree_check). Lưu lại
+        - Ta có thư mục chia sẻ NFS là /datachung
+        - IP của máy chia sẻ linux là 66.0.0.199/24 và chia sẻ tới các máy trong mạng 66.0.0.0/24.
+        - Bạn mở file etc/exports trên NFS server và thêm dòng: /datachung 66.0.0.0/24(rw,sync,no_subtree_check). Lưu lại
         - chạy lệnh exports -ra
         - Khởi động lại dịch vụ portmap và nfs
 
@@ -190,7 +190,7 @@ mở hộp thoại Run bằng cách Windows + R.
              
             ![image](https://user-images.githubusercontent.com/79830542/175895360-e29e1122-7e2f-4422-b7a1-5810550dbb37.png)
             
-_♨️ Chú ý: cách này khá là dài dòng vào khó hiểu cho người mới tìm hiểu, tuy nhiên ta có thể can thiệp sâu và quản lý tốt việc mount trên windows. Thường dành cho quản trị viên trên windows.
+_♨️ Chú ý: cách này khá là dài dòng vào khó hiểu cho người mới tìm hiểu, tuy nhiên ta có thể can thiệp sâu và quản lý tốt việc mount trên windows. Thường dành cho quản trị viên trên windows. Nếu có 2 người dùng cũng truy cập và chỉnh sửa 1 file thì sẽ lưu lại chỉnh sửa sau cùng.
 
   - C2: dùng `Map network drive` trình tích hợp sẵn trong File Explorer trên Windows
     - Ví Dụ:
@@ -209,7 +209,7 @@ _♨️ Chú ý: cách này khá là dài dòng vào khó hiểu cho người m�
         - ![image](https://user-images.githubusercontent.com/79830542/175899400-8e82aa3c-e11e-4231-91ad-29505f522ccb.png)
         - Nếu kết nối thành công thì thư mục được chia sẻ cũng sẽ hiển thị như C1.
 
-_♨️ Lưu ý: Cách này cũng khá phổ biến, nhưng trong 1 số trường hợp gây lỗi không xác định, khó kiểm soát. Quyền với file tuỳ thuộc hoàn toàn vào người quản trị trên Linux._
+_♨️ Lưu ý: Cách này cũng khá phổ biến, nhưng trong 1 số trường hợp gây lỗi không xác định (config các port, filewall, dịch vụ TCP/IP,...), khó kiểm soát. Quyền với file tuỳ thuộc hoàn toàn vào người quản trị trên Linux._
 
    - C3: Sử dụng NFSClient Application, đúng như cái tên gọi, ta sử dụng 1 ứng dụng hỗ trợ kết nối NFS trên Window. Có khá nhiều ứng dụng nhưng mình hay sử dụng NFSClient của `Decorawr`. 
       - [Link download](https://sourceforge.net/projects/nfsclient/) 
@@ -217,10 +217,10 @@ _♨️ Lưu ý: Cách này cũng khá phổ biến, nhưng trong 1 số trườ
       - Dừng phát triển từ năm 2013 nên một số module đã cũ cần phải cài đặt lại trên môi trường Windows để có thể cài đặt được ứng dụng. [Link dowload module](https://www.microsoft.com/en-us/download/details.aspx?id=40784). 
       - <img src="https://user-images.githubusercontent.com/79830542/175906486-c9a4c941-b893-4b9f-b61c-4966a0bac32b.PNG" width="500">
       - Thông thường thì sẽ tài và cài gói x64, nếu đã cài gói x64 mà không cài đặt được ứng dụng thì đổi sang gói x86. Hiếm lắm mới gặp trường hợp phải cài gói arm.
-      - Chú ý nhỏ là trong quá trình cài đặt thì sẽ có 1 hộp thoại khác hiện ra dưới Task bar để yêu cầu cài đặt thư viện hỗ trợ. Hãy chú ý và tiến hành cài đặt thư viện đó.
+      - Chú ý nhỏ là trong quá trình cài đặt thì sẽ có 1 hộp thoại khác hiện ra dưới Taskbar để yêu cầu cài đặt thư viện hỗ trợ. Hãy chú ý và tiến hành cài đặt thư viện đó.
       - Ứng dụng rất dễ để sử dụng, ngay khi vừa mở lên bạn chỉ cần nhập IP của server rồi connect là có thể connect được rồi. Nhấn `save` để lưu thông tin, rồi nhấn `Connect` để tiến hành kết nối.
       - ![image](https://user-images.githubusercontent.com/79830542/175907943-8f0df95b-183a-46c2-afdf-2cf9f043e5ae.png)
-      - Ứng dụng còn rất nhiều chức năng hay ho có thể tự khám phá mà không sợ gây lỗi hệ thống hay gây lỗi kết nối mạng.
+      - Ứng dụng còn rất nhiều chức năng hay ho có thể tự khám phá mà không sợ gây lỗi hệ thống hay gây lỗi dịch vụ mạng.
       - ![image](https://user-images.githubusercontent.com/79830542/175908349-76f23b15-6286-46aa-aed1-7060528ccb39.png)
 
 
@@ -247,5 +247,6 @@ https://www.slideshare.net/udamale/nfsnetwork-file-system
 8) [Tài liệu tiếng Anh trên github về NFS và các thứ storage khác](https://github.com/LukeShortCloud/rootpages/blob/main/src/storage/file_systems.rst#nfs)
 
 HaNoi, 15/6/2022
+
 Edit, 27/06/2022
  
