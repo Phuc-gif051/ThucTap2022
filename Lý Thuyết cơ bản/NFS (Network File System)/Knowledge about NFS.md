@@ -11,7 +11,7 @@
     - [2.b) Trên client](#2.b)  
     - [2.c) Trên Windows](#2.c)
 
-
+----
 
 # <a name="I" >I. Giới thiệu 📰</a> 
 
@@ -146,7 +146,7 @@ _**b)**_ Cơ bản về server thì ta sẽ config như thế, sau đây sẽ ti
 
   **🗒️Trên windows thì có 3 cách như sau:**
   
-   - C1: sử dụng NFS client được cài đặt sẵn trong windows 10 pro (trở lên) chỉ cần enable nó lên là được.
+   - ▶️ C1: sử dụng NFS client được cài đặt sẵn trong windows 10 pro (trở lên) chỉ cần enable nó lên là được.
    
       1. Chọn Control Panel.
       2. Chọn Programs.
@@ -192,7 +192,7 @@ mở hộp thoại Run bằng cách Windows + R.
             
 _♨️ Chú ý: cách này khá là dài dòng vào khó hiểu cho người mới tìm hiểu, tuy nhiên ta có thể can thiệp sâu và quản lý tốt việc mount trên windows. Thường dành cho quản trị viên trên windows. Nếu có 2 người dùng cũng truy cập và chỉnh sửa 1 file thì sẽ lưu lại chỉnh sửa sau cùng.
 
-  - C2: dùng `Map network drive` trình tích hợp sẵn trong File Explorer trên Windows
+  - ▶️ C2: dùng `Map network drive` trình tích hợp sẵn trong File Explorer trên Windows
     - Ví Dụ:
       - Trên linux: 
         - Ta có thư mục chia sẻ NFS là home/cuongnv
@@ -211,7 +211,7 @@ _♨️ Chú ý: cách này khá là dài dòng vào khó hiểu cho người m�
 
 _♨️ Lưu ý: Cách này cũng khá phổ biến, nhưng trong 1 số trường hợp gây lỗi không xác định (config các port, filewall, dịch vụ TCP/IP,...), khó kiểm soát. Quyền với file tuỳ thuộc hoàn toàn vào người quản trị trên Linux._
 
-   - C3: Sử dụng NFSClient Application, đúng như cái tên gọi, ta sử dụng 1 ứng dụng hỗ trợ kết nối NFS trên Window. Có khá nhiều ứng dụng nhưng mình hay sử dụng NFSClient của `Decorawr`. 
+   - ▶️ C3: Sử dụng NFSClient Application, đúng như cái tên gọi, ta sử dụng 1 ứng dụng hỗ trợ kết nối NFS trên Window. Có khá nhiều ứng dụng nhưng mình hay sử dụng NFSClient của `Decorawr`. 
       - [Link download](https://sourceforge.net/projects/nfsclient/) 
       - [Linh github](https://github.com/DeCoRawr/NFSClient) của dự án.
       - Dừng phát triển từ năm 2013 nên một số module đã cũ cần phải cài đặt lại trên môi trường Windows để có thể cài đặt được ứng dụng. [Link dowload module](https://www.microsoft.com/en-us/download/details.aspx?id=40784). 
