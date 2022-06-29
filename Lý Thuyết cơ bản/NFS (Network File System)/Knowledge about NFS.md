@@ -64,7 +64,7 @@ NFS sẽ cung cấp và quản lý quyền hạn của các máy khách được
  - subtree_check: kiểm tra các thư mục con của thư mục được chia sẻ xem có những gì ở trong và người được chia sẻ có quyền gì với thư mục con đó hay không. Nếu chia sẻ cả 1 ổ đĩa thì nên tắt đi bằng `no_subtree_check` để tối ưu hiệu năng.
  - wdelay: tạm dừng việc ghi vào đĩa khi NFS nghi ngờ có hành động ghi khác được yêu cầu. Có thể tắt nó đi khi `sync` được bật bằng cách khai báo `no_wdelay`
 
- - 
+ - all_squash: Tất cả các tệp được tạo với tư cách là người dùng ẩn danh (anonymous user). Thích hợp cho việc chia sẻ file cho các hệ thống không phải là UNIX, nổi bật nhất là Windows, để các client có quyền đọc khi tạo file mới trên server khi đã được cấp quyền rw trước đó.
 
 ⚠️ Mặc định các quyền sẽ là tốt nhất cho hệ thống, như: root_squash, no_subtree_check, wdelay,...
 
