@@ -1,7 +1,18 @@
 # Menu 
+[I. SMB-CIFS là gì?](#I)
+ - [1. Lịch sử hình thành và phát triển](#I.1)
+ - [2. Giao thức SMB hoạt động như thế nào?](#I.2)
+
+[II. Dịch vụ Samba trên Linux](#II)
+ - [1. Giới thiệu về Samba](#II.1)
+
+[III. Lưu ý khi sử dụng SMB/CIFS trên Windows](#III)
+
+[IV. Tài liệu tham khảo](#IV)
 ___
 # <a name="I" >I. SMB-CIFS là gì?</a>
 SMB là một giao thức chia sẻ file khá phổ biến khi bạn dùng Windows. Gần như mặc định khi dùng các nền tảng Windows 7/8/10 khi chia sẻ file thì bạn sẽ đụng đến giao thức này. Thế nhưng vẫn còn không ít người cảm thấy xa lạ với thuật ngữ này. Vậy hôm nay hãy tìm hiểu xem SMB-CIFS là gì và sự tiện ích của nó nhé.
+
 ## <a name="I.1" >1. Lịch sử hình thành và phát triển</a>
 1984 IBM đưa ra SMB trong một bản công bố tài liệu kỹ thuật của mình, thiết kế với mục đích ban đầu là thiết kế một giao thức mạng để đặt tên và duyệt. Về sau SMB được kế thừa bởi Microsoft và trở thành một giao thức chia sẻ file phổ biến trong các phiên bản hệ điều hành của Microsoft và IBM. Hiện tại Microsoft đặt lại tên cho SMB là CIFS (Common Internet File Sharing) hệ thống chia sẻ file phổ biến trên Internet. CIFS thiết kế với tiêu chí đơn giản và khả năng đáp ứng số lượng lớn người dùng. Sự phổ biến của CIFS là do nó phù hợp với mô hình một server tập trung, mọi dữ liệu được xử lý từ client đều được khuyến nghị là lưu trữ tại server.
 
@@ -65,4 +76,6 @@ Nếu bạn vẫn có nhu cầu sử dụng giao thức SMB nhưng vẫn muốn 
 2. [Samba là gì?](https://news.cloud365.vn/samba-server/)
 3. [Giao thức SMB là gì](https://thuannhat.com.vn/giao-thuc-smb-la-gi-cach-ngan-cha%CC%A3n-tan-cong/)
 4. [Tài liệu tiếng Anh bản pdf](http://media.server276.com/codefx/CIFS_Explained.pdf)
+
+
 Date access: 11:00 AM, 11/07/2022
