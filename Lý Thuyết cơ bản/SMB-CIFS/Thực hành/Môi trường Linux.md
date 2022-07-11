@@ -134,8 +134,13 @@ Lưu file và thoát
 Trên CentOS cũng có phầm mềm Wireshark hỗ trợ việc bắt gói tin. Cài đặt Wireshark ta dùng: ` yum install wireshark -y`.
 <img src="https://user-images.githubusercontent.com/79830542/178232721-147ccb89-d32f-4a13-a434-5de0a295a1dc.png" width="500">
 
-Ta sử dụng công cụ `tshark` trong `wireshark` để bắt gói tin trên CentOS, chi tiết xem [tại đây](https://opensource.com/article/20/1/wireshark-linux-tshark)
-Tại bài viết này, ta chỉ cần sử dụng câu lệnh `tshark -i <ip máy share> host <ip máy nhận>`
+May mắn, wireshark trên Linux có hỗ trợ GUI, cài thêm GUI cho wireshark bằng câu lệnh `yum install wireshark-gnome -y`
+
+Khởi chạy wireshark với GUI, chạy câu lệnh: `wireshark &` 
+
+Ta dùng bộ lọc trên GUI để dễ dàng bắt các gói tin được vận chuyển qua SMB, như hình dưới ta thu được kết quả 2 máy CentOS (vlan16-172.16.1.4) và Windows (vlan16-172.16.5.5) thực hiện việc chia sẻ file thông qua giao thức SMBv2
+
+<img src="https://user-images.githubusercontent.com/79830542/178244030-6c8c6f97-3d28-4674-8167-05e5b43f476e.png" width="">
 
 # <a name="III" >III. Tài liueej tham khảo</a>
 1. [Clip trên youtube](https://www.youtube.com/watch?v=-zALd9F8r40&t=2s)
