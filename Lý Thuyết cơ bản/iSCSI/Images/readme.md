@@ -1,0 +1,1 @@
+ảnh của phần iSCSI
