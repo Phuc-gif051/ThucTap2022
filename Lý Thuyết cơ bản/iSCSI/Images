@@ -1,0 +1,9 @@
+# Mục lục 
+
+___
+
+# <a name="I" >I. iSCSI là gì?</a>
+iSCSI (đọc là: ai-x-kơ-zi) là từ viết tắt của Internet Small Computer Systems Interface. 
+iSCSI là một giao thức lớp vận chuyển hoạt động trên giao thức TCP (Transport Control Protocol). 
+Nó cho phép truyền dữ liệu SCSI ở block-level giữa iSCSI initiator và storage target trên các mạng TCP / IP. 
+iSCSI hỗ trợ mã hóa các gói mạng và giải mã khi đến đích.
