@@ -152,7 +152,46 @@ thay thế <IP server> bằng IP của Windows server 2016. Bạn sẽ nhận l�
   Tìm kiếm thấy có kết nối khả dụng, ta có thể tiến hành kết nối tới chúng bằng câu lệnh:
 
   ```sh
-sudo iscsiadm --mode node --targetname <iqn name server> --portal <IP server> --login
+sudo iscsiadm --mode node --targetname <iqn name server> --portal <IP server>:<port> --login
   ```
   
+- trong đó:
+  + <iqn name server>: là iqn name của server mà ta đã discover được bằng câu lệnh ở trên, vd: iqn.1991-05.com.microsoft:win-server-2016-centos7-target. iqn này bao gồm
+ >iqn.1991-05.com.microsoft: đây thường dùng để khai báo cơ bản về kernel mà máy chủ dùng, thường để mặc định.
+ 
+ >win-server-2016: tên của máy chủ
+ 
+ >centos7: tên máy khách kết nối đên target
+ 
+ Để chắc chắn sau khi chạy câu lệnh trên thì ta có thể kết nối được đến phân vùng đã chia sẻ thì trên Centos 7 ta dùng câu lệnh `lsblk` để kiểm tra các phân vùng đang có trên máy.
+ 
+ <img src="https://user-images.githubusercontent.com/79830542/179435013-fdedc836-eed2-4602-934b-bb6bab5ea388.png" width="600">
+ 
+Sau đó chạy câu lệnh login
+ 
+ <img src="https://user-images.githubusercontent.com/79830542/179435213-a4a71436-c155-461a-9c3c-e63aced8725b.png" width="600">
+ 
+ Rồi lại dùng câu lệnh `lsblk` để kiểm tra lại, ta thấy phân vùng `sda` mới với dung lượng là 5 GiB
+ 
+ 
+ Kiểm tra trên máy win server
+ 
+ <img src="https://user-images.githubusercontent.com/79830542/179435400-375392a2-8bfd-4237-a317-87bd478914d6.png" width="600">
+ 
+ Thường thì sẽ không thấy ngay lập tức, ta phải reload lại để cập nhật. Nút được khoanh đỏ trên hình.
+ Trên máy centos7 ta có thể định dạng, mount, phân vùng,... đầy đủ các thao tác như với 1 ổ cứng thông thường.
+ 
+ ### <a name="II.4" >4. Kết luận</a>
+ 🌭 _Như vậy về cơ bản ta đã cấu hình thành công iSCSI target trên máy windows server và kết nối thành công trên máy windows 10, centos7 một cách đơn giản nhất.
+ 
+  - Chứng thực, ta vẫn sẽ dùng wireshark.
+ <img src="https://user-images.githubusercontent.com/79830542/179435810-898ec53f-01e0-4a68-8c3b-81264c89178b.png" width="600">
+ 
+ # <a name="III" >III. Tài liệu tham khảo</a>
+ 
+ 1. [Triển khai iSCSI trên Windows Server](https://www.engisv.info/?p=4782)
+ 
+ 2. [How to Install and Configure iSCSI Storage Server on CentOS 7](https://onet.vn/how-to-install-and-configure-iscsi-storage-server-on-centos-7.html)
+ 
+ Date access: 18/07/2022, HN, VN 
 
