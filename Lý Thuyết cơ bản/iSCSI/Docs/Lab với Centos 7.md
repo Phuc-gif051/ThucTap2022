@@ -3,7 +3,11 @@
 
 [II. Thực hành 🖥️](#II)
   - [1. Cấu hình iSCSI target 💻](#II.1)
-  - []()
+  - [2. Kết nối đến target trên máy centos 7](#II.2)
+  - [3. Target là Centos - Initiator là windows](#II.3)
+  - [4. Chứng thực](#II.4)
+
+[III. Tài liệu tham thảo 📚](#III)
 ___
 
 # <a name="I" >I. Chuẩn bị ⏯️</a>
