@@ -1,5 +1,9 @@
 # Mục lục
+[I. Chuẩn bị ⏯️](#I)
 
+[II. Thực hành 🖥️](#II)
+  - [1. Cấu hình iSCSI target 💻](#II.1)
+  - []()
 ___
 
 # <a name="I" >I. Chuẩn bị ⏯️</a>
@@ -106,3 +110,86 @@ B7:
  - reload firewall: `firewall-cmd --reload`
 
 🌭 Vậy là cấu hình cơ bản cho máy target đã xong, sẵn sàng cho kết nối
+
+## <a name="II.2" >2. Kết nối đến target trên máy centos 7</a>
+
+B1: Trên CentOS 7 cần cài thêm các gói Initiator để có thể sử dụng được iSCSI Initiator. Sử dụng câu lệnh:
+
+```sh
+sudo yum install iscsi-initiator-utils* -y
+```
+
+B2: Dùng lệnh `vi /etc/iscsi/initiatorname.iscsi` để vào chỉnh sửa tên IQN theo ý thích của bạn hoặc dùng câu lệnh
+
+```sh
+echo "InitiatorName=iqn.1994-05.com.redhat:kvm03" | sudo tee /etc/iscsi/initiatorname.iscsi
+```
+
+<img src="https://user-images.githubusercontent.com/79830542/179457873-8616c615-062b-4c10-97f2-6c4ff4e290f9.png" width="">
+
+Ta có thể lưu lại iqn này hoặc chỉnh sửa cho trùng khớp với iqn ta đã khai báo ở [mục 1](#II.1).
+
+B3: Tiến hành dò tìm target, dùng câu lệnh:
+
+```sh
+iscsiadm --mode discovery --type sendtargets --portal <IP server> --discover
+```
+
+<img src="https://user-images.githubusercontent.com/79830542/179458504-e82632df-fc1a-4a13-b700-d63ec8c85226.png" width="">
+
+B4: kết nối kết target, dùng câu lệnh 
+```sh
+sudo iscsiadm --mode node --targetname <iqn name server> --portal <IP server>:<port> --login
+```
+<img src="https://user-images.githubusercontent.com/79830542/179458758-00af49c4-2cfb-4c3e-b1e2-6e9c0a4c32b1.png" width="">
+
+## <a name="II.3" >3. Target là Centos - Initiator là windows</a>
+
+B1: Từ windows 7 trở lên đã được cài đặt sẵn initiator. Truy cập iSCSI Initiator trên Windows 10 và Windows Server từ menu Windows:
+<img src="https://user-images.githubusercontent.com/79830542/179171005-b2e60779-4e61-42ca-a94b-29e17196080f.png" width="600">
+
+Mặc định dịch vụ iSCSI Initiator chưa được bật, sau khi chọn mở dịch vụ lần đầu trên hợp thoại Micrsoft iSCSI chọn Yes để start dịch vụ.
+<img src="https://user-images.githubusercontent.com/79830542/179171600-0616cdbb-3d08-4350-8abe-b19a5580d7ec.png" width="600">
+
+B2: Trong iSCSI Initiator Properties chọn tab Configurations, copy Initiator name và lưu lại để sử dụng khi tạo iSCSI Virtual Disk.
+<img src="https://user-images.githubusercontent.com/79830542/179172173-ac9e986c-290e-43cb-8da7-420a034586d0.png" width="600">
+
+B3: Khai báo thêm iqn này vào trong thư mục `acls` trên máy target. rồi lưu lại
+<img src="https://user-images.githubusercontent.com/79830542/179460274-c3043db4-bcf9-483f-87cc-c9f96c1f5723.png" width="600">
+
+B4: Trong cửa sổ iSCSI Initiator Properties chọn tab Discovery, chọn Discover Portal…, điền vào thông tin IP hoặc DNS name của máy đang chạy iSCSI target server.
+<img src="https://user-images.githubusercontent.com/79830542/179176369-a4c55ef5-5659-4d07-a05e-390517ad0405.png" width="600">
+
+B5: Sau khi chỉ dịnh xong iSCSI target server, tiếp tục chuyển qua tab Targets của iSCSI Initiator Properties
+<img src="https://user-images.githubusercontent.com/79830542/179176523-d22b95fe-5db0-48f8-93be-3da86662f369.png" width="600">
+
+B6: Ở tab Target, bạn chọn lên Target name muốn kết nối đến, chọn Conect.
+<img src="https://user-images.githubusercontent.com/79830542/179176635-5cb5def0-efc1-4926-a2cd-173ff057fa20.png" width="600">
+
+B7: Sau khi kết nối thành công đến target, bạn truy cập vào Disk Management của Windows sẽ thấy ổ đĩa iSCSI Virtual Disk. Bạn tiến hành khởi tạo đỉa mới và tạo phân vùng là có thể sử dụng.
+
+<img src="https://user-images.githubusercontent.com/79830542/179176774-da5ee291-318c-47b9-b1ac-44d717a08901.png" width="600">
+
+## <a name="II.4" >4. Chứng thực</a>
+
+Trên CentOS 7 ta cũng dùng wireshark để bắt gói tin chứng thực cho phương thức kết nối được sử dụng. Cài đặt wireshark bằng câu lệnh:
+```sh
+yum install wireshark -y
+```
+
+Cài thêm giao diện cho wireshark cho dễ sử dụng hơn, dùng câu lệnh:
+```sh
+yum install wireshark-gnome -y
+```
+
+Khởi chạy wireshark với giao diện bằng câu lệnh: `wireshark &`
+
+<img src="https://user-images.githubusercontent.com/79830542/179473384-b937433f-af6c-46a6-a68e-45256efc8565.png" width="800">
+
+# <a name="3" >III. Tài liệu tham khảo</a>
+1. [How to Install and Configure iSCSI Storage Server on CentOS](https://onet.vn/how-to-install-and-configure-iscsi-storage-server-on-centos-7.html)
+2. [Hướng dẫn tạo phân vùng ISCSI Storage target trên centos 7](https://www.phamquangloc.vn/2018/11/lpic-system-administrator-huong-dan-tao-iscsi-target-tren-centos-7.html)
+3. [How to configure iscsi target server in centos 7, redhat 7](https://www.youtube.com/watch?v=pIsf18tpySE)
+
+Date access: 18/07/2022
+
