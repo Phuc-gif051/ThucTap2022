@@ -11,12 +11,20 @@
 
 ___
 # <a name="I" >I. Chuẩn bị ⏯️</a>
-ít nhất 3 máy:
+**1. ít nhất 3 máy:**
  - 1 máy chạy windows server 2016
  - 1 máy chạy windows 10 pro
  - 1 máy chạy Linux, ở bài thực hành này là chạy CentOS 7.
 
 Biết được địa chỉ IPv4 của các máy. Các máy có thể ping được cho nhau. 
+
+**2. Topology**
+
+<img src="https://github.com/Phuc-gif051/ThucTap2022/blob/main/L%C3%BD%20Thuy%E1%BA%BFt%20c%C6%A1%20b%E1%BA%A3n/iSCSI/Images/iscsi%20topo.drawio.png" width="500">
+
+**3. IP planning**
+
+<img src="https://user-images.githubusercontent.com/79830542/179896058-76a7ecb3-78ae-41f9-a485-fb40d7ce6d47.png" width="">
 
 # <a name="II" >II. Thực hành 🖥️</a>
 _Ta sẽ dùng máy chạy windows server 2016 làm máy target, tiến hành quản lý và chia sẻ tài nguyên lưu trữ_
