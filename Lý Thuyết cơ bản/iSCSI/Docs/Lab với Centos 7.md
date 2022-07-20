@@ -12,12 +12,20 @@ ___
 
 # <a name="I" >I. Chuẩn bị ⏯️</a>
 
-Chuẩn bị tối thiểu 3 máy:
+**1. Chuẩn bị tối thiểu 3 máy:**
 
  - 2 máy chạy centos 7: 1 làm target, 1 làm initiator
  - 1 máy windows, từ win 7 trở lên để làm initiator
 
 Cả 3 máy đều có kết nối đến internet, biết địa chỉ IPv4, và ping được cho nhau.
+
+**2. Topology**
+
+<img src="https://github.com/Phuc-gif051/ThucTap2022/blob/main/L%C3%BD%20Thuy%E1%BA%BFt%20c%C6%A1%20b%E1%BA%A3n/iSCSI/Images/iscsi%20topo.drawio.png" width="500">
+
+**3. IP planning**
+
+<img src="https://user-images.githubusercontent.com/79830542/179895433-a61b47df-59b1-4a7b-b598-96d0c39251c6.png" width="">
 
 # <a name="II" >II. Thực hành 🖥️</a>
 ## <a name="II.1" >1. Cấu hình iSCSI target 💻</a>
@@ -190,7 +198,7 @@ Khởi chạy wireshark với giao diện bằng câu lệnh: `wireshark &`
 
 <img src="https://user-images.githubusercontent.com/79830542/179473384-b937433f-af6c-46a6-a68e-45256efc8565.png" width="800">
 
-# <a name="3" >III. Tài liệu tham khảo</a>
+# <a name="III" >III. Tài liệu tham khảo</a>
 1. [How to Install and Configure iSCSI Storage Server on CentOS](https://onet.vn/how-to-install-and-configure-iscsi-storage-server-on-centos-7.html)
 2. [Hướng dẫn tạo phân vùng ISCSI Storage target trên centos 7](https://www.phamquangloc.vn/2018/11/lpic-system-administrator-huong-dan-tao-iscsi-target-tren-centos-7.html)
 3. [How to configure iscsi target server in centos 7, redhat 7](https://www.youtube.com/watch?v=pIsf18tpySE)
