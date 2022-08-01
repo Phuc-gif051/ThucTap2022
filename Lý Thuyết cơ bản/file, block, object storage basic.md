@@ -6,7 +6,7 @@ Dữ liệu được lưu trữ dưới dạng tệp, giống như cách thức 
 
 Nó có 1 lượng lớn dung lượng, có thể lưu trữ kể cả với các dữ liệu ít thay đổi hay thay đổi liên tục. Tuy nhiên nó vẫn phù hợp nhất với người dùng cá nhân, dùng để lưu trữ các dữ liệu cá nhân.
 
-Trên môi trường mạng, muốn chia sẻ ở dạng thư cho người dùng khác lưu trữ, chỉnh sửa thì có thể dùng: NFS, CIFS/SMB. Người được chia sẻ có thể dùng toàn bộ dung lượng trống hiện có, tuy nhiên chỉ có thể truy cập và sử dụng duy nhất thư mục được chia sẻ.
+Trên môi trường mạng, muốn chia sẻ ở dạng thư mục cho người dùng khác lưu trữ, chỉnh sửa thì có thể dùng: NFS, CIFS/SMB. Người được chia sẻ có thể dùng toàn bộ dung lượng trống hiện có, tuy nhiên chỉ có thể truy cập và sử dụng duy nhất thư mục được chia sẻ.
 
 ___
 
