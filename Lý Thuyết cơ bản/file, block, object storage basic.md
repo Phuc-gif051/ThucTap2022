@@ -17,13 +17,26 @@ Block storage services cung cấp một thiết bị block storage - giống nh�
 Do đó, bạn sẽ sử dụng nó như một ổ cứng bình thường. Bạn có thể định dạng nó với một hệ thống tập tin và lưu trữ các tập tin trên đó, kết hợp nhiều thiết bị vào một mảng RAID, hoặc cấu hình một cơ sở dữ liệu để ghi trực tiếp vào block device. Ngoài ra, các thiết bị network-attached block storage thường có một số ưu điểm độc đáo so với các ổ đĩa cứng thông thường:
 
  - Các block storage có thể dễ dàng tăng giảm kích thước theo nhu cầu sử dụng.
- - Dễ dàng di chuyển các block từ máy này sang máy khác, mà không phải vận chuyển hay can thiệp vào phần cứng.
+ - Dễ dàng di chuyển các block từ máy này sang máy khác, mà không phải vận chuyển vật lý hay can thiệp vào phần cứng.
  - Các ngôn ngữ lập trình có thể dễ dàng đọc ghi trên các block storage.
  - Có độ trễ IO thấp, phù hợp để lưu trữ các dữ liệu có nhiều trường, thường xuyên thay đổi.
  - Dễ dàng backup dữ liệu.
  - Tuy nhiên khi được phân bổ 1 block storage bạn sẽ phải trả phí cho toàn bộ dung lượng của block đó, cho dùng bạn có dùng tới hay không.
 
-Trên môi trường mạng, khi muốn chia sẻ 1 block storage thì có 2 cách phổ biến nhất đó là: iSCSI và Fiber (hệ thống SAN).
+Trên môi trường mạng, khi muốn chia sẻ 1 block storage thì có 2 cách phổ biến nhất đó là: iSCSI và Fibre (hệ thống SAN).
+
+___
+
+# Object storage
+
+
+
+
+[github](https://github.com/meditechopen/meditech-thuctap/blob/master/Songle/Storage/Object%20Storage%20vs%20Block%20Storage.md)
+
+[tong-quan-object-storage-va-block-storage](https://bizflycloud.vn/tin-tuc/tong-quan-object-storage-va-block-storage-la-gi-20180929092519105.htm)
+
+[file-storage-block-storage-va-object-storage](https://vietnix.vn/file-storage-block-storage-va-object-storage-la-gi/)
 
 
 
