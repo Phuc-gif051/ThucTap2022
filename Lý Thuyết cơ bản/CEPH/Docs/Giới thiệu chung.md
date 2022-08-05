@@ -39,6 +39,10 @@ Ceph được thiết kế để chạy trên các nền tảng phần cứng th
 
 Tham khảo tại: 
 
+[lacoski/khoa-luan/blob/master/Ceph/ceph-overview](https://github.com/lacoski/khoa-luan/blob/master/Ceph/ceph-overview.md)
+
+[notes-storage/blob/master/ceph/theory/overview](https://github.com/thaonv1/notes-storage/blob/master/ceph/theory/overview.md)
+
 [Ceph storage là gì](https://www.xn--st-j9s.vn/2022/03/meo-ceph-storage-la-gi.html#)
 
 [Giải pháp lưu trữ dữ liệu nguồn mở CEPH là gì?](https://taknet.com.vn/giai-phap-luu-tru-du-lieu-nguon-mo-ceph-la-gi/)
