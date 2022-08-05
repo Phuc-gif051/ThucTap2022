@@ -36,3 +36,9 @@ _Thông thường Ceph lưu trữ dữ liệu của client dưới dạng các o
 
 Ceph được thiết kế để chạy trên các nền tảng phần cứng thông thường, với quan điểm thiết kế các hệ thống lưu trữ – mở rộng đến hàng petabyte nhưng với chi phí rẻ, hợp lý. Khi xây dựng hệ thống Ceph, cần lưu ý khuyến cáo xây dựng một hệ thống Ceph riêng, chỉ phục vụ cho vấn đề lưu trữ, để cung cấp dịch vụ lưu trữ cho các hệ thống khác sử dụng.
 
+
+Tham khảo tại: 
+
+[Ceph storage là gì](https://www.xn--st-j9s.vn/2022/03/meo-ceph-storage-la-gi.html#)
+
+[Giải pháp lưu trữ dữ liệu nguồn mở CEPH là gì?](https://taknet.com.vn/giai-phap-luu-tru-du-lieu-nguon-mo-ceph-la-gi/)
