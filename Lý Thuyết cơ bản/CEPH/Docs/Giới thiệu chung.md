@@ -26,6 +26,8 @@ RADOS layer chắc chắn data sẽ luôn chính xác, bảo đảm. Về tính 
 
 Khi app lưu trữ tới Ceph cluster, data sẽ được lưu tại Ceph Object Storage Device (OSD) dưới dạng object. Đây là thành phần duy nhất mà Ceph cluster sử dụng để lữu trữ data và lấy lại. Thông thường, tổng số physical disk trong Ceph cluster sẽ = số lượng OSD daemon chạy lưu trữ data tới mỗi disk.
 
+
+
 ## [Block Device hay RADOS block device (RBD)]()
 
 Thành phần cung cấp block storage, có thể mapped, formmatted, mounted như bất kỳ disk thông thường. Ceph block device hỗ trợ các tính năng provisioning và snapshots (chức năng cần thiết cho doanh nghiệp).
