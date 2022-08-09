@@ -48,6 +48,13 @@ _Thông thường Ceph lưu trữ dữ liệu của client dưới dạng các o
 
 Thành phần cung cấp giao diện RESTful API, tương thích với Amazone S3 (Simple Storage Service) và OpenStack Object Storage API (Swift). RGW cũng hỗ trợ OpenStack Keystone authentication services.
 
+### [Ceph manager:]()
+Bản phát hành Kraken đã mang đến sự ra mắt của trình nền Ceph Manager (ceph-mgr), chạy cùng với MON để cung cấp các dịch vụ toàn cụm thông qua kiến trúc plugin. Mặc dù việc khai thác ceph-mgr vẫn còn non trẻ, nhưng nó có nhiều tiềm năng:
+  - Quản lý trạng thái ổ đĩa
+  - Quản lý tốt hơn các hoạt động tái cấu trúc và tái cân bằng.
+  - Tích hợp với các hệ thống kiểm kê bên ngoài như RackTables, NetBox, HP SIM và Cisco UCS Manager
+  - ..v.vv.
+
 ### [Ceph File System (CephFS):]()
 
 Thành phần cung cấp POSIX-compliant, phân phối filesystem cho mọi kiểu. CephFS dựa trên Ceph MDS để thể hiện tính phân cấp file, metadata.
