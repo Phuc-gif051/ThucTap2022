@@ -1,4 +1,13 @@
-# Ceph là gì?
+# Nội dung chủ yếu của bài viết gồm
+ 1)[Ceph là gì?](#I)
+ 
+ 2)[Ceph được dùng để làm gì?](#II)
+ 
+ 3)[Các thành phần cơ bản của Ceph](#III)
+ 
+ 4)[Yêu cầu phần cứng](#IV)
+
+# <a name="I" >Ceph là gì?</a>
 
 CEPH là một nền tảng phần mềm cho hệ thống lưu trữ miễn phí (free software storage platform), là một giải pháp mã nguồn mở cho phép xây dựng hạ tầng lưu trữ dữ liệu phân tán, ổn định, độ tin cậy và hiệu năng cao, dễ dàng mở rộng trong tương lai.
 
@@ -6,7 +15,7 @@ Với hệ thống lưu trữ được điều khiển bằng phần mềm (soft
 
 CEPH được sử dụng để thay thế việc lưu trữ dữ liệu trên các máy chủ, sao lưu dữ liệu, tạo ra một khu vực lưu trữ dữ liệu an toàn, cho phép triển khai các dịch vụ HA (high availability).
 
-# Ceph được dùng để làm gì?
+# <a name="II" >Ceph được dùng để làm gì?</a>
 
 Ceph được sử dụng với các mục đích lưu trữ khác nhau dưới nhiều hình thức như :
   + Ceph Object Storage, 
@@ -14,7 +23,7 @@ Ceph được sử dụng với các mục đích lưu trữ khác nhau dưới 
   + và Ceph File System.
 > Object và Block của Ceph thường thấy trong các nền tảng điện toán đám mây
 
-# Các thành phần cơ bản của Ceph
+# <a name="III" >Các thành phần cơ bản của Ceph</a>
 
 Về cơ bản, khi triển khai 1 ceph thì ta đều bắt đầu từ việc xây dựng cách ceph riêng lẻ (node). Sau đó kết nối chúng lại với nhau thông qua môi trường mạng, thành 1 lưu trữ sử dụng ceph (Ceph Storage Cluster). Một Ceph storage cluster cần ít nhất 1 Ceph Monitor và 2 Ceph OSD Daemons. Ngoài ra, Ceph metadata server chỉ cần thiết khi trong hệ thống có Ceph File system clients.
 
@@ -59,7 +68,7 @@ Bản phát hành Kraken đã mang đến sự ra mắt của trình nền Ceph 
 
 Thành phần cung cấp POSIX-compliant, phân phối filesystem cho mọi kiểu. CephFS dựa trên Ceph MDS để thể hiện tính phân cấp file, metadata.
 
-# Yêu cầu phần cứng
+# <a name="IV" >Yêu cầu phần cứng</a>
 
 Ceph được thiết kế để chạy trên cả các nền tảng phần cứng thông thường, với quan điểm thiết kế các hệ thống lưu trữ – mở rộng đến hàng petabyte nhưng với chi phí rẻ, hợp lý. Khi xây dựng hệ thống Ceph, cần lưu ý khuyến cáo xây dựng một hệ thống Ceph riêng, chỉ phục vụ cho vấn đề lưu trữ, để cung cấp dịch vụ lưu trữ cho các hệ thống khác sử dụng.
 
