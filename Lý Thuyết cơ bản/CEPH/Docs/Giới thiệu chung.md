@@ -7,6 +7,8 @@
  
  4)[Yêu cầu phần cứng](#IV)
 
+___
+
 # <a name="I" >Ceph là gì?</a>
 
 CEPH là một nền tảng phần mềm cho hệ thống lưu trữ miễn phí (free software storage platform), là một giải pháp mã nguồn mở cho phép xây dựng hạ tầng lưu trữ dữ liệu phân tán, ổn định, độ tin cậy và hiệu năng cao, dễ dàng mở rộng trong tương lai.
