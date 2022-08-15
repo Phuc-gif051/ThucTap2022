@@ -23,6 +23,7 @@ _Phù hợp với các phiên bản cũ (từ Octopus trở xuống)_
 [ceph-deploy](https://docs.ceph.com/projects/ceph-deploy/en/latest/) công cụ để nhanh chóng triển khai 1 cụm Ceph
   - Đã cũ và không còn được hỗ trợ quá nhiều. Chưa được kiểm thử tính tương thích cho các phiên bản Ceph mới hơn Nautilus
   - Không còn hỗ trợ cho các OS RHEL 8 hay CentOS 8 và các OS khác mới hơn.
+  - Tuy nhiên với việc CentOS 8 đã dừng hỗ trợ thì Ceph-deploy vẫn được tin tưởng sử dụng.
 
 [ceph-salt](https://github.com/ceph/ceph-salt) cài đặt Ceph sử dụng công cụ Salt và cephadm
 
