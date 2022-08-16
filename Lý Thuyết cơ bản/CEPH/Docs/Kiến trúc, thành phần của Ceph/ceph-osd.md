@@ -1,11 +1,24 @@
-# OSD (Object Storage Device)
+# Nội dung chính 
+[OSD (Object Storage Device)](#osd)
+
+[1. Ceph OSD File System](#1)
+
+[2. Ceph OSD Journal](#2)
+
+[3. Ceph volume/Ceph disk](#3)
+
+[4. Một vài lệnh cơ bản](#4)
+
+___
+
+# <a name="osd" >OSD (Object Storage Device)</a>
 Đây là thành phần lưu trữ dữ liệu thực sự trên các thiết bị lưu trữ vật lý tại mỗi node dưới dạng các object. Phần lớn hoạt động bên trong Ceph Cluster được thực hiện bởi tiến trình Ceph OSD. Ceph OSD lưu tất cả dữ liệu người dùng dạng đối tượng. Ceph cluster bao gồm nhiều OSD.
 
 Ceph OSD lưu tất cả client data dạng obj, đáp ứng yêu cầu yêu cầu đến data được lưu trữ. Ceph cluster bao gồm nhiều OSD. Trên mỗi hoạt động đọc và ghi, client request tới cluster maps từ monitors, sau đó, họ sẽ tương tác với OSDs với hoạt động đọc ghi, không có sự can thiệp monitors. Điều này kiến tiến trình xử lý dữ liệu nhanh hơn khi ghi tới OSD, lưu trữ data trực tiếp mà không thông qua các lớp xử lý data khác. Cơ chế `data-storage-and-retrieval mechanism` gần như độc nhất khi so sánh ceph với các công cụ khác.
 
 Ceph nhân bản mỗi object nhiều lần trên tất cả các node, nâng cao tính sẵn sàng và khả năng chống chịu lỗi. Mỗi object trong OSD có một primary copy và nhiều secondary copy, được đặt tại các OSD khác. Bởi Ceph là hệ thống phân tán và object được phân tán trên nhiều OSD, mỗi OSD đóng vai trò là primary OSD cho một số object, và là secondary OSD cho các object khác. Khi một ổ đĩa bị lỗi, Ceph OSD daemon tương tác với các OSD khác để thực hiện việc khôi phục. Trong quá trình này, secondary OSD giữ bản copy được đưa lên thành primary, và một secondary object được tạo, tất cả đều xảy ra song song với quá trình sử dụng của người dùng. Điều này làm Ceph Cluster tin cậy và nhất quán. Thông thường, một OSD daemon đặt trên mọt ổ đĩa vật lý , tuy nhiên có thể đặt OSD daemon trên một host, hoặc 1 RAID. Ceph Cluster thường được triển khai trong môi trường JBOD, mỗi OSD daemon trên 1 ổ đĩa.
 
-# 1. Ceph OSD File System
+# <a name="1" >1. Ceph OSD File System</a>
 <p align="center">
   <img src="https://github.com/lacoski/tutorial-ceph/blob/master/images/ceph-osd.png" width="">
 </p>
@@ -16,7 +29,7 @@ Ceph OSD gồm 1 ổ cứng vật lý, Linux filesystem trên nó, và sau đó 
   - `XFS`: Đây là filesystem đã hoàn thiện và rất ổn định, và được khuyến nghị làm filesystem cho Ceph khi production. Tuy nhiên, XFS không thế so sánh về mặt tính năng với Btrfs. XFS có vấn đề về hiệu năng khi mở rộng metadata, và XFS là một journaling filesystem, có nghĩa, mỗi khi client gửi dữ liệu tới Ceph cluster, nó sẽ được ghi vào journal trước rồi sau đó mới tới XFS filesystem. Nó làm tăng khả năng overhead khi dữ liệu được ghi 2 lần, và làm XFS chậm hơn so với Btrfs, filesystem không dùng journal.
   - `Ext4`: Fourth Extended Filesystem - đây cũng là một filesystem dạng journaling và cũng có thể sử dụng cho Ceph khi production; tuy nhiên, nó không phôt biến bằng XFS. Ceph OSD sử dụng extended attribute của filesystem cho các thông tin của object và metadata. XATTRs cho phép lưu các thông tin liên quan tới object dưới dạng xattr_name và xattr_value, do vậy cho phép tagging object với nhiều thông tin metadata hơn. ext4 file system không cung cấp đủ dung lượng cho XATTRs do giới hạn về dung lượng bytes cho XATTRs. XFS có kích thước XATTRs lớn hơn.
 
-# 2. Ceph OSD Journal
+# <a name="2" >2. Ceph OSD Journal</a>
 
 Có thể hiểu đơn giản Journal disk chính là phân vùng cached để lưu trữ dữ liệu, Tăng tốc độ ghi dữ liệu. Sau đó Ceph sẽ flush dần data này xuống lưu trữ dưới HDD
 
@@ -32,7 +45,7 @@ Khuyến nghị, không nên vượt quá tỉ lệ 5 OSD / 1 journal đisk khi 
 
 >Đối với hệ thống lưu trữ dữ liệu [BlueStore]() thì không còn sử dụng Journal disk
 
-# 3. Ceph volume/Ceph disk
+# <a name="3" >3. Ceph volume/Ceph disk</a>
 
 >Ở phiên bản từ 11.x khái niệm ceph-volume được xuất hiện thay thế dần và tiến tới thay thế hoàn toàn cho ceph-disk
 
@@ -41,7 +54,7 @@ Không nên sử dụng RAID cho Ceph Cluster:
   - Phương pháp nhân bản dữ liệu của Ceph khong yêu câu một ổ cứng trống cùng dung lượng ổ hỏng. Nó dùng đường truyền mạng để khôi phục dữ liệu trên ổ cứng lỗi từ nhiều node khác. Trong quá trình khôi phục dữ liệu, dựa vào tỉ lệ nhân bản và số PGs, hầu như toàn bộ các node sẽ tham gia vào quá trình khôi phục, giúp quá trình này diễn ra nhanh hơn.
   - Sẽ có vấn đề về hiệu năng trên Ceph Cluster khi I/O ngẫu nhiên trên RAID 5 và 6 rất chậm.
 
-# 4. Một vài lệnh cơ bản
+# <a name="4" >4. Một vài lệnh cơ bản</a>
 
 Lệnh để kiểm tra tình trạng OSD trên 1 node:
 ```
