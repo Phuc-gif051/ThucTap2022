@@ -5,7 +5,7 @@ RADOS cung cấp rất nhiều tính năng quan trọng cho Ceph, bao gồm phâ
 
 <img src="https://user-images.githubusercontent.com/79830542/184786684-25e61682-ff21-4fcd-b8a2-ece099beade3.png" width="300">
 
-Khi Ceph cluster nhận một yêu cầu ghi từ người dùng, thuật toán [CRUSH (Controlled, Scalable, Decentralized Placement of Replicated Data)](https://docs.ceph.com/en/quincy/rados/operations/crush-map/) tính toán vị trí và thiết bị mà dữ liệu sẽ được ghi vào. Các thông tin này được đưa lên lớp RADOS để xử lý. Dựa vào quy tắc của CRUSH, RADOS phân tán dữ liệu lên tất cả các node dưới dạng các object, phân chia lưu trữ dưới các [PG](). Cuối cùng ,các object này được lưu tại các OSD.
+Khi Ceph cluster nhận một yêu cầu ghi từ người dùng, thuật toán [CRUSH (Controlled, Scalable, Decentralized Placement of Replicated Data)](https://docs.ceph.com/en/quincy/rados/operations/crush-map/) tính toán vị trí và thiết bị mà dữ liệu sẽ được ghi vào. Các thông tin này được đưa lên lớp RADOS để xử lý. Dựa vào quy tắc của CRUSH, RADOS phân tán dữ liệu lên tất cả các node dưới dạng các object, phân chia lưu trữ dưới các [PG](https://github.com/lacoski/ceph-note/blob/master/docs/ceph/ceph-pgs.md). Cuối cùng ,các object này được lưu tại các OSD.
 
 RADOS, khi cấu hình với số nhân bản nhiều hơn hai, sẽ chịu trách nhiệm về độ tin cậy của dữ liệu. Nó sao chép object, tạo các bản sao và lưu trữ tại các node khác nhau, do đó các bản ghi giống nhau không nằm trên cùng 1 node. RADOS đảm bảo có nhiều hơn một bản copy của object trong Ceph cluster. Tuy nhiên để phù hợp nhất với nhu cầu sử dụng và hạ tầng hiện có, ta nên tinh chỉnh lại CRUSH cho phù hợp.
 
