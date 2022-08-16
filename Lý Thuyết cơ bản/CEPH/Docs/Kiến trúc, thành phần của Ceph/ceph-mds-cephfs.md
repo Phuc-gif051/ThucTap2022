@@ -5,7 +5,7 @@ MDS là thành phần duy nhất trong Ceph chưa production, hiện chỉ 1 Cep
 
 # Ceph filesystem (CephFS)
 
-CephFS cung cấp một filesystem tương thích [POSIX]() nằm trên RADOS. Nó dùng MDS daemon để quản lý metadata tách biệt khỏi data. CephFS kế thừa các tính năng từ RADOS và cung cấp cân bằng tải cho dữ liệu.
+CephFS cung cấp một filesystem tương thích [POSIX](https://vi.wikipedia.org/wiki/POSIX) nằm trên RADOS. Nó dùng MDS daemon để quản lý metadata tách biệt khỏi data. CephFS kế thừa các tính năng từ RADOS và cung cấp cân bằng tải cho dữ liệu.
 
 Thư viện `libcephfs` đóng vai trò quan trọng trong việc hỗ trợ nhiều người dùng. Nó hỗ trợ Linux kernel driver, do vậy người dùng có thể dùng phương thức mounting filesystem truyền thống thông qua lệnh `mount`. Nó tích hợp chặt chẽ với SAMBA và hỗ trợ CIFS và SMB. CephFS hỗ trợ filesystem in userspace(FUSE) dùng module `cephfuse`. Nó cũng hỗ trợ ứng dụng tương tác trực tiếpvới RADOS cluster dùng thư viện libcephfs.
 
