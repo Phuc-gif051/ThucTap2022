@@ -8,6 +8,7 @@
 7. [MGR - Manager (ceph-mgr)](ceph-mgr.md)
 8. [PGs - Placement groups](ceph-pg.md)
 9. [Các trạng thái của PG](ceph-pg-status.md)
+10. [Thư viện LibRADOS](librados.md)
 
 
 <img src="https://user-images.githubusercontent.com/79830542/184829596-1841ff3e-deec-4a7c-8c72-f11eefb9fb27.png" width="800">
