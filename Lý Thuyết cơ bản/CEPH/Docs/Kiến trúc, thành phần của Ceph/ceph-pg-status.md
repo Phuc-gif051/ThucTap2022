@@ -1,6 +1,6 @@
 # Ceph PG status
 
-Toàn bộ data của Ceph được lưu trữ dưới dạng Object và được phân bố trong các [Placement Group](Kiến%20trúc%2C%20thành%20phần%20của%20Ceph/ceph-pg.md) hay còn gọi là PG. Bình thường CRUSH sẽ tự động tính toán việc lưu trữ data, khôi phục dữ liệu, nhân bản dữ liệu trên từng PG và từng Object ... Hệ thống sẽ dựa trên các `map` của từng service để kiểm tra trạng thái thay đổi của cụm Ceph, Service monitor sẽ đảm nhiệm vấn đề này. 
+Toàn bộ data của Ceph được lưu trữ dưới dạng Object và được phân bố trong các [Placement Group](ceph-pg.md) hay còn gọi là PG. Bình thường CRUSH sẽ tự động tính toán việc lưu trữ data, khôi phục dữ liệu, nhân bản dữ liệu trên từng PG và từng Object ... Hệ thống sẽ dựa trên các `map` của từng service để kiểm tra trạng thái thay đổi của cụm Ceph, Service monitor sẽ đảm nhiệm vấn đề này. 
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/79830542/184801591-c429d17b-fffb-463f-9cfe-3ab48f990a14.png" width="800">
