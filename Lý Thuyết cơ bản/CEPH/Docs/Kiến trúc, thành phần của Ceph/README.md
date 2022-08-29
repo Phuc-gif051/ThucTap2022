@@ -10,6 +10,7 @@
 9. [Các trạng thái của PG](ceph-pg-status.md)
 10. [Thư viện LibRADOS](librados.md)
 11. [CRUSH map](CRUSH%20map.md)
+12. [Đặt cờ cảnh báo trong Ceph (flag)](ceph-plag.md)
 
 
 <img src="https://user-images.githubusercontent.com/79830542/184829596-1841ff3e-deec-4a7c-8c72-f11eefb9fb27.png" width="700">
