@@ -1,12 +1,13 @@
 # Ceph Monitor (MON)
 
-Ceph monitor chịu trách nhiệm giám sát toàn cluster. Tiến trình này chạy trên toàn cluster, giám sát dựa trên thông tin cluster, trạng thái các node, các cấu hình Cluster. Ceph monitor thực hiện nhiệm vụ bằng cách duy trì master copy trên cluster. Cluster map bao gồm OSD, PG, CRUSH, MDS maps.
+Ceph monitor chịu trách nhiệm giám sát toàn cluster. Tiến trình này chạy trên toàn cluster, giám sát dựa trên thông tin từ các map: trạng thái các node, các cấu hình Cluster. Ceph monitor thực hiện nhiệm vụ bằng cách duy trì việc đọc các map trên cluster. Cluster map bao gồm: monitor map, OSD map, PG map, CRUSH map, MDS maps.
+
 - **Monitor map**: map này lưu giữ thông tin về các node monitor, gồm CEPH Cluster ID, monitor hostname, địa chỉ IP và số port. Nó cũng giữ epoch (phiên bản map tại một thời điểm) hiện tại để tạo map và thông tin về lần thay đổi map cuối cùng. Có thể kiểm tra bằng câu lệnh:
 ```
 ceph mon dump
 ```
 
-- **OSD map**: map này lưu giữ các trường như cluster ID, epoch cho việc tạo map OSD và lần thay đổi cuối., và thông tin liên quan đến pool như tên, ID, loại, mức nhân bản và PG. Nó cũng lưu các thông tin OSD như tình trạng, trọng số, thông tin host OSD. Có thể kiểm tra OSD map bằng câu lệnh:
+- **OSD map**: map này lưu giữ các trường như cluster ID, epoch cho việc tạo map OSD và lần thay đổi cuối, và thông tin liên quan đến pool như: tên, ID, loại, mức nhân bản và PG. Nó cũng lưu các thông tin OSD như tình trạng, trọng số (A weight), thông tin host OSD. Có thể kiểm tra OSD map bằng câu lệnh:
 ```
 ceph osd dump
 ```
