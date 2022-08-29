@@ -28,20 +28,19 @@ Kết quả có thể làm tròn về hàng đơn vị. Thường làm tròn v�
 VD:
 ```
 VD: 1 Cluster bao gồm 10 OSD, 512 PGs, 3 repica pool
-
 CRUSH sẽ phân tích mỗi PGs 3 OSD
 Sau khi phân chia xong, mỗi OSD sẽ chứa (512*3)/10 = 150 PGs => Khi 1 OSD lỗi, kịch bản sẽ khôi phục 150 PGs trên cùng 1 thời điểm => 150 PGs còn lại sẽ nằm trên 9 OSD còn lại.
-VD: Cluster có 10->20 OSDs với 512 PGs, mức nhân bản 3
 
+VD: Cluster có 10->20 OSDs với 512 PGs, mức nhân bản 3
 CRUSH gán mỗi PG 3 OSDs
 Kết thúc, (512*3)/20 = (150 -> 75) PGs
 Mỗi 1 OSD lỗi => 19 OSD sẽ backup lại dữ liêu => OSD lỗi = 1 TB => 10 OSD giữa 100GB (đủ 1 TB OSD lỗi) => càng nhiều OSD tốc độ backup càng cao.
-VD: Cluster 40 OSD, 512 PGs, 3 repical pool
 
+VD: Cluster 40 OSD, 512 PGs, 3 repical pool
 Crush gán 3 OSD mỗi PG
 Sau tính toán, mỗi OSD chứa (512*3)/40 = 35 - 40 PGs => 1 OSD lỗi (1TB data) => 39 OSD còn lại sẽ backup => Dung lượng Backup mỗi OSD = 1000 / 39 ~ 25 GB mỗi OSD => Quá trình backup diễn ra càng nhanh khi có nhiều OSD
-VD: 200 OSD, 512 PGs, 3 repi pool
 
+VD: 200 OSD, 512 PGs, 3 repi pool
 CRUSH gán mỗi PG 3 OSD
 Sau tính toán, mỗi OSD chứa 7 PGs
 Khi 1 OSD lỗi, 7*3 OSD sẽ diễn ra hoạt động backup => Dung lượng backup trên 21 OSD = 1000/21 ~~ 47 GB (nhanh hơn so với 10 PG)
