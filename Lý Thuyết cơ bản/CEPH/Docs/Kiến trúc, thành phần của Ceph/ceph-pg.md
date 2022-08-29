@@ -18,31 +18,34 @@ Giái trị PGP là tổng số PGs cho mục đích tổ chức dữ liệu, gi
 ```
 
 ##	Tính toán số PG cần thiết - Calculating PG numbers
-Xác định số PGs là bước cần thiết khi xây dựng hạ tầng Ceph storage cluster cho doanh nghiệp. PGs sẽ quyết đinh hiệu năng storge. Công thức tính tổng placement group cho Ceph cluster:
+Xác định tổng số PGs là bước cần thiết khi xây dựng hạ tầng Ceph storage cluster cho doanh nghiệp. PGs sẽ quyết đinh hiệu năng storge. Công thức tính tổng placement group cho Ceph cluster:
 ```
-Total PGs = (Total_number_of_OSD * 100) / max_replication_count
+Total PGs = (Total_number_of_OSD * 100) / pool size
 
-Kết quả có thể làm tròn về hàng đơn vị. Thường làm tròn về 0 hoặc 5. VD: 173,2 -> 170; 76,8 -> 75.
+Thường thì pool size chính là số bản nhân bản của 1 pool (đa phần mặc định là 3 hoặc tuỳ vào hệ thống do người quản trị đặt)
+
+Kết quả làm tròn lên đến luỹ thừa gần nhất của 2.
 ```
 
-VD:
-```
-VD: 1 Cluster bao gồm 10 OSD, 512 PGs, 3 repica pool
-CRUSH sẽ phân tích mỗi PGs 3 OSD
-Sau khi phân chia xong, mỗi OSD sẽ chứa (512*3)/10 = 150 PGs => Khi 1 OSD lỗi, kịch bản sẽ khôi phục 150 PGs trên cùng 1 thời điểm => 150 PGs còn lại sẽ nằm trên 9 OSD còn lại.
 
-VD: Cluster có 10->20 OSDs với 512 PGs, mức nhân bản 3
+```
+VD1: 1 Cluster bao gồm 200 OSD, số bản nhân bản của pool là 3. => Tổng PGs = (200*100)/3 = 6667 (2^12 < 6667 < 2^13); làm tròn đến luỹ thừa gần nhất của 2 là 8192 = 2^13
+```
+
+Tính số PGs trên từng OSDs, thường thì chỗ này Ceph sẽ tự tính với công thức (tổng số PGs * pool size)/tổng số OSD
+```
+VD2: Cluster có 20 OSDs với 512 PGs, mức nhân bản 3
 CRUSH gán mỗi PG 3 OSDs
-Kết thúc, (512*3)/20 = (150 -> 75) PGs
+Kết thúc, (512*3)/20 = (70 -> 100) PGs
 Mỗi 1 OSD lỗi => 19 OSD sẽ backup lại dữ liêu => OSD lỗi = 1 TB => 10 OSD giữa 100GB (đủ 1 TB OSD lỗi) => càng nhiều OSD tốc độ backup càng cao.
 
-VD: Cluster 40 OSD, 512 PGs, 3 repical pool
+VD3: Cluster 40 OSD, 512 PGs, 3 repical pool
 Crush gán 3 OSD mỗi PG
-Sau tính toán, mỗi OSD chứa (512*3)/40 = 35 - 40 PGs => 1 OSD lỗi (1TB data) => 39 OSD còn lại sẽ backup => Dung lượng Backup mỗi OSD = 1000 / 39 ~ 25 GB mỗi OSD => Quá trình backup diễn ra càng nhanh khi có nhiều OSD
+Sau tính toán, mỗi OSD chứa (512*3)/40 = 30 -> 45 PGs => 1 OSD lỗi (1TB data) => 39 OSD còn lại sẽ backup => Dung lượng Backup mỗi OSD = 1000 / 39 ~ 25 GB mỗi OSD => Quá trình backup diễn ra càng nhanh khi có nhiều OSD
 
-VD: 200 OSD, 512 PGs, 3 repi pool
+VD4: 200 OSD, 512 PGs, 3 repi pool
 CRUSH gán mỗi PG 3 OSD
-Sau tính toán, mỗi OSD chứa 7 PGs
+Sau tính toán, mỗi OSD chứa 6-8 PGs
 Khi 1 OSD lỗi, 7*3 OSD sẽ diễn ra hoạt động backup => Dung lượng backup trên 21 OSD = 1000/21 ~~ 47 GB (nhanh hơn so với 10 PG)
 ```
 Chọn lựa số PGs:
@@ -57,7 +60,7 @@ ceph osd pool set {pool-name} pg_num
 
 ```
 VD: cluster bao gồm 160 OSD, 3 repli
-=> total PGs = (OSD * 100)/3 = (160*100)/3 = 5333.333 => làm tròn 8192 (2^n > 5333)
+=> total PGs = (OSD * 100)/3 = (160*100)/3 = 5333.333 => làm tròn 8192 (2^13 > 5333)
 ```
 
 ## Quá trình khắc phục lỗi:
@@ -66,3 +69,8 @@ VD: cluster bao gồm 160 OSD, 3 repli
 3. Trường hợp xấu, OSD thứ trong PGs chết (chết 2/3) trước khi OSD được đừa vào cụm => Dữ liệu nguy hiểm (chỉ còn 1 bản backup)
 4. Ceph tiếp tục chọn OSD khác, đưa vào PG, bảo đảm mức nhân bản
 5. Khi OSD (3/3) chết trong cùng PG trước khi quá trình backup diễn ra => dữ liệu mất vĩnh viễn
+
+
+## Tham khảo tại
+1. [Chapter 3. Placement Groups (PGs)](https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html/storage_strategies_guide/placement_groups_pgs#pg_count)
+2. [Vị trí nhóm - Placement groups](https://github.com/lacoski/khoa-luan/blob/master/Ceph/ceph-inside.md#v%E1%BB%8B-tr%C3%AD-nh%C3%B3m---placement-groups)
