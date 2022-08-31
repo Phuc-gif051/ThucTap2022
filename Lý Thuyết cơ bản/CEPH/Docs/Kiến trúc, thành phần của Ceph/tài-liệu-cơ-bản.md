@@ -5,4 +5,4 @@
 3. [MON](ceph-mon.md)
 4. [OSDs](ceph-osd.md)
 5. [CRUSH map](CRUSH-map.md)
-6. [Ceph flag](ceph-plag.md)
+6. [Ceph flag](ceph-flag.md)
