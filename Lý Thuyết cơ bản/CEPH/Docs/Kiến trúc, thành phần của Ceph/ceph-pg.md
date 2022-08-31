@@ -1,12 +1,20 @@
 # Vị trí nhóm - Placement groups (PGs)
+
+
+[Tổng quan](#1)
+
+[Tính toán số PG cần thiết - Calculating PG numbers](#2)
+
+[Quá trình khắc phục lỗi](#3)
+
 ---
-## Tổng quan
+## <a name="1" >Tổng quan</a>
 Về cơ bản Ceph lưu trữ các data dưới dạng object trong các [pool](https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html/storage_strategies_guide/pools-1) - thiết bị lưu trữ ở mức logic.
 > 1 pool có thể là 1 hay nhiều OSDs tạo thành (thường là nhiều OSDs 1 pool), hoặc cũng có trường hợp từ 1 OSD tạo thành nhiều pool.
 
 Số lượng object lưu trữ trong các pool có thể lên đến hàng triệu hoặc hàng tỷ. Một hệ thống có hàng triệu object thì không thể theo dõi vị trí thực tế của từng đối tượng mà vẫn hoạt động trơn tru vì điều này rất tốn kém về mặt tính toán, đặc biệt là trên quy mô ngày càng lớn của mặt lưu trữ. 
 
-Để có thể có hiệu suất lớn trên quy mô lớn, Ceph lại tiếp tục chia nhỏ các pool thành các [Placement groups (PG)](https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html/storage_strategies_guide/placement_groups_pgs), và chỉ định từng object riêng lẻ cho từng PG nhất định, chỉ định từng PG riêng lẻ cho 1 OSD nhất định. Khi xảy ra trường hợp OSD bị lỗi hay cụm cần cân bằng lại, thay vì phải thao tác với từng object riêng lẻ thì Ceph thao tác với các PG. Tức là Ceph có thể sao chép hay di chuyển toàn bộ các PG cùng với các object bên trong các PG đó.
+Để có thể có hiệu suất lớn trên quy mô lớn, Ceph lại tiếp tục chia nhỏ các pool thành các [Placement groups (PG)](https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html/storage_strategies_guide/placement_groups_pgs), và chỉ định từng object riêng lẻ cho từng PG nhất định, chỉ định từng PG riêng lẻ cho 1 [OSD](ceph-osd.md) nhất định. Khi xảy ra trường hợp OSD bị lỗi hay cụm cần cân bằng lại, thay vì phải thao tác với từng object riêng lẻ thì Ceph thao tác với các PG. Tức là Ceph có thể sao chép hay di chuyển toàn bộ các PG cùng với các object bên trong các PG đó.
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/79830542/187576791-b3ea251e-2be9-4d2b-8297-8fe568be077b.png" width="700">
@@ -25,7 +33,7 @@ Khi OSD primary bị lỗi mà được đánh dấu ra khỏi cụm. CRUSH sẽ
 
 Khi ta có thay đổi về số bản sao thì CRUSH cũng sẽ tự động thay đổi thay đổi các PG và các OSD theo yêu cầu.
 
-##	Tính toán số PG cần thiết - Calculating PG numbers
+##	<a name="2" >Tính toán số PG cần thiết - Calculating PG numbers</a>
 
 Số lượng PGs trong cluster cần được tính toán tỉ mỉ. Thông thường, tăng số lượng PGs trong cluster sẽ giảm bớt gánh nặng trên mỗi OSD, nhưng cần xem xét theo quy chuẩn. Khuyến nghị 50-100 PGs trên mỗi OSD. Nó tránh tiêu tốn quá nhiều tài nguyên trên mỗi OSD node, giảm gánh nặng OSD. Khi dữ liệu tăng, ta cần mở rộng cluster cùng với điều chỉnh số lượng PGs. Khi thiếtt bị mới được thêm, xóa bỏ khỏi cluster, các PGs sẽ vẫn tồn tại – CRUSH sẽ quản lý việc tài cấp phát PGs trên toàn cluster.
 
@@ -78,11 +86,11 @@ VD: cluster bao gồm 160 OSD, 3 repli
 => total PGs = (OSD * 100)/3 = (160*100)/3 = 5333.333 => làm tròn 8192 (2^13 > 5333)
 ```
 
-## Quá trình khắc phục lỗi:
-1. Khi OSD lỗi, tất cả bản sao trên OSD bị mất, mức nhân bản PG từ 3-2
-2. Ceph thực hiện quá trình khôi phục, PG sẽ chọn OSD mới, đưa vào PGs, thực hiện quá trình nhân bản
-3. Trường hợp xấu, OSD thứ trong PGs chết (chết 2/3) trước khi OSD được đừa vào cụm => Dữ liệu nguy hiểm (chỉ còn 1 bản backup)
-4. Ceph tiếp tục chọn OSD khác, đưa vào PG, bảo đảm mức nhân bản
+## <a name="3" >Quá trình khắc phục lỗi:</a>
+1. Khi OSD lỗi, tất cả dữ liệu trên OSD bị mất, mức nhân bản PG từ 3 về 2
+2. Ceph thực hiện quá trình khôi phục, PG sẽ được OSD mới, thực hiện quá trình đưa bản sao của PG từ các OSD còn lại vào.
+3. Trường hợp xấu, OSD sao lưu của PGs cũng chết (chết 2/3) trước khi OSD mới được đừa vào cụm => Dữ liệu nguy hiểm (chỉ còn 1 bản backup)
+4. Ceph tiếp tục chọn OSD khác, đưa bản sao của PG vào, bảo đảm mức nhân bản
 5. Khi OSD (3/3) chết trong cùng PG trước khi quá trình backup diễn ra => dữ liệu mất vĩnh viễn
 
 
