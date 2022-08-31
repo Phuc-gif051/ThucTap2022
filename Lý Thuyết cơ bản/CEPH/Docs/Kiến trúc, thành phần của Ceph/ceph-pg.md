@@ -1,15 +1,31 @@
 # Vị trí nhóm - Placement groups (PGs)
 ---
 ## Tổng quan
-Khi Ceph cluster nhận yêu cầu lưu trữ data, nó sẽ lưu trữ các data dưới dạng object và chia object vào các nhóm, các nhóm này được gọi là placement groups (PG). [CRUSH](https://docs.ceph.com/en/latest/rados/operations/crush-map/) sẽ tổ chức dữ liệu thành tập các Object, dựa trên hàm hash (hàm băm) và id object, mức nhân bản, các PGs (placement groups) trong hệ thông sẽ có các PGs ID tương ứng. Placement groups được coi là tập logical (logical collection) các object được nhân bản trên các OSDs khác nhau, qua đó nâng cao tính bảo đảm dữ liệu, tính sẵn sàng cao (HA) tại Ceph storage system. 
+Về cơ bản Ceph lưu trữ các data dưới dạng object trong các [pool](https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html/storage_strategies_guide/pools-1) - thiết bị lưu trữ ở mức logic.
+> 1 pool có thể là 1 hay nhiều OSDs tạo thành (thường là nhiều OSDs 1 pool), hoặc cũng có trường hợp từ 1 OSD tạo thành nhiều pool.
 
-Dựa trên mức replicate của Ceph pool, placement group sẽ được nhân bản, phân tán trên nhiều hơn 1 OSD tại Ceph cluster. Ta có thể cân nhắc placement group như logical container chứa các object. PGs (vị trí nhóm) được thiết kế đáp ứng khả năng mở rộng, hiệu suất cao trong Ceph storage system, đồng thời hỗ trợ việc quản trị Object.
+Số lượng object lưu trữ trong các pool có thể lên đến hàng triệu hoặc hàng tỷ. Một hệ thống có hàng triệu object thì không thể theo dõi vị trí thực tế của từng đối tượng mà vẫn hoạt động trơn tru vì điều này rất tốn kém về mặt tính toán, đặc biệt là trên quy mô ngày càng lớn của mặt lưu trữ. 
+
+Để có thể có hiệu suất lớn trên quy mô lớn, Ceph lại tiếp tục chia nhỏ các pool thành các [Placement groups (PG)](https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html/storage_strategies_guide/placement_groups_pgs), và chỉ định từng object riêng lẻ cho từng PG nhất định, chỉ định từng PG riêng lẻ cho 1 OSD nhất định. Khi xảy ra trường hợp OSD bị lỗi hay cụm cần cân bằng lại, thay vì phải thao tác với từng object riêng lẻ thì Ceph thao tác với các PG. Tức là Ceph có thể sao chép hay di chuyển toàn bộ các PG cùng với các object bên trong các PG đó.
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/79830542/184801375-77cd9888-4e91-4292-be87-8884a0fdcd2d.png" width="500">
+  <img src="https://user-images.githubusercontent.com/79830542/187576791-b3ea251e-2be9-4d2b-8297-8fe568be077b.png" width="700">
 </p>
 
-Nếu không có các PGs, việc quản trị dữ liệu sẽ trở nên rất khó, cùng với đó là khả tổ chức các object đã được nhân bản (hảng triệu object) tới hàng trăm các OSD khác nhau. Qua đó, thay vì quản trị object riêng biệt, hệ thông sẽ sử dụng PGs (chứ số lượng rất nhiều object). PGs sẽ khiến ceph dễ quản trị dữ liệu và giảm bớt sự phức tạp trong khâu quản lý. Mỗi PG sẽ yêu cầu tài nguyên hệ thống nhất đinh (CPU và Memory,... vì chúng quản lý rất nhiều object).
+Chịu trách nhiệm cho việc chỉ định ở trên là [CRUSH](https://docs.ceph.com/en/quincy/rados/operations/crush-map/). Khi chỉ định PG cho OSD, CRUSH sẽ tính toán hàng tất cả các OSD - bắt đầu bằng OSD lưu trữ bản gốc (primary). Khi xác định được OSD lưu bản gốc, CRUSH sẽ tiếp tục xác định các OSD phụ lưu bản sao (secondary) để sao chép các PG. 
+>Ví dụ: bạn có 5 OSDs, CRUSH tự tính toán và chỉ định 1 lượng object nhất định cho PG 5 và PG 5 được chỉ định lưu trữ tại OSD 3, từ đó OSD 3 trở thành primary của PG 5. Sau đó nếu CRUSH tính toán và xác định được OSD 1 và 5 sẽ làm nơi lưu bản sao cho PG 5 thì OSD 3 sẽ sao chép dữ liệu của PG 5 sang OSD 1 và 5.
+
+Ceph hoàn toàn tự động thực hiện các công việc trên, điều đó làm đơn giản hơn cho giao diện và các công việc của khách hàng. Quá trình tương tự khi Ceph tự phục hồi và cân bằng lại.
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/79830542/187582878-92b1db7c-5c8c-48c1-ac5d-d74780ffe24b.png" width="">
+</p>
+
+Khi OSD primary bị lỗi mà được đánh dấu ra khỏi cụm. CRUSH sẽ chỉ định các PG bên trong nó cho một OSD khác. OSD thay thế sẽ nhận các bản sao PG từ các OSD secondary. 1 trong các OSD này sẽ trở thành OSD primary.
+
+Khi ta có thay đổi về số bản sao thì CRUSH cũng sẽ tự động thay đổi thay đổi các PG và các OSD theo yêu cầu.
+
+##	Tính toán số PG cần thiết - Calculating PG numbers
 
 Số lượng PGs trong cluster cần được tính toán tỉ mỉ. Thông thường, tăng số lượng PGs trong cluster sẽ giảm bớt gánh nặng trên mỗi OSD, nhưng cần xem xét theo quy chuẩn. Khuyến nghị 50-100 PGs trên mỗi OSD. Nó tránh tiêu tốn quá nhiều tài nguyên trên mỗi OSD node, giảm gánh nặng OSD. Khi dữ liệu tăng, ta cần mở rộng cluster cùng với điều chỉnh số lượng PGs. Khi thiếtt bị mới được thêm, xóa bỏ khỏi cluster, các PGs sẽ vẫn tồn tại – CRUSH sẽ quản lý việc tài cấp phát PGs trên toàn cluster.
 
@@ -17,7 +33,6 @@ Số lượng PGs trong cluster cần được tính toán tỉ mỉ. Thông th�
 Giái trị PGP là tổng số PGs cho mục đích tổ chức dữ liệu, giá trị này cần bằng PGs
 ```
 
-##	Tính toán số PG cần thiết - Calculating PG numbers
 Xác định tổng số PGs là bước cần thiết khi xây dựng hạ tầng Ceph storage cluster cho doanh nghiệp. PGs sẽ quyết đinh hiệu năng storge. Công thức tính tổng placement group cho Ceph cluster:
 ```
 Total PGs = (Total_number_of_OSD * 100) / pool size
