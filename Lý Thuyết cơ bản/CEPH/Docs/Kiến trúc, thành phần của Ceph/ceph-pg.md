@@ -89,3 +89,5 @@ VD: cluster bao gồm 160 OSD, 3 repli
 ## Tham khảo tại
 1. [Chapter 3. Placement Groups (PGs)](https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html/storage_strategies_guide/placement_groups_pgs#pg_count)
 2. [Vị trí nhóm - Placement groups](https://github.com/lacoski/khoa-luan/blob/master/Ceph/ceph-inside.md#v%E1%BB%8B-tr%C3%AD-nh%C3%B3m---placement-groups)
+
+Date acced: 31/08/2022
