@@ -22,4 +22,4 @@ CRUSH map lưu trữ theo kiểu phân cấp mô tả toàn bộ danh sách các
 
 Khi triển khai OSD hoặc thêm mới, chúng sẽ tự động được thêm vào CRUSH map, ngay bên dưới tên bucket của node mà sở hữu OSD mới đó. 
 
-
+[Fap sư Trung Hoa](https://www.modb.pro/db/50689)
