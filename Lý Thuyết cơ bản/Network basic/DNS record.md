@@ -78,9 +78,11 @@ Ngoài 6 loại trên vẫn còn các loại bản ghi DNS khác ít phổ biế
 
 ## <a name="III" >III. Thực hành</a>
 
-1. [Cách chỉnh sửa file hosts trên Windows 10](https://youtu.be/-4ZREGuGCok)
+1. [Video cách chỉnh sửa file hosts trên Windows 10](https://youtu.be/-4ZREGuGCok)
   - Bạn mở thư mục chứa file hosts theo đường dẫn sau, nếu cài Windows ở ổ khác thì bạn sửa lại đường dẫn cho đúng nhé.
   - `C:\Windows\System32\Drivers\etc\hosts`
+
+2. []()
 
 ## <a name="IV" >IV. Tài liệu tham khảo</a>
 
