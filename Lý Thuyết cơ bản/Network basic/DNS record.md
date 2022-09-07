@@ -74,15 +74,17 @@ Trong ví dụ trên, tên miền bizflycloud.com sẽ được quản lý bởi
 ### 6. PTR record
 PTR (Pointer) record có thể nói là một DNS record ngược lại với A record, cho phép chuyển đổi từ địa chỉ IP sang tên miền. Bản ghi PTR giúp xác thực IP của các hostname gửi tới, giúp hạn chế bị spam mail…
 
-Ngoài 6 loại trên vẫn còn các loại bản ghi DNS khác ít phổ biến như SOA record, SRV record, APL record, CAA record, NAPTR record…Xem chi tiết hơn [tại đây](https://en.wikipedia.org/wiki/List_of_DNS_record_types) Hy vọng bài viết đã đem lại cho bạn những thông tin hữu ích về DNS record.
+Ngoài 6 loại trên vẫn còn các loại bản ghi DNS khác ít phổ biến như SOA record, SRV record, APL record, CAA record, NAPTR record…Xem chi tiết hơn [tại đây.](https://en.wikipedia.org/wiki/List_of_DNS_record_types) Hy vọng bài viết đã đem lại cho bạn những thông tin hữu ích về DNS record.
 
 ## <a name="III" >III. Thực hành</a>
 
 1. [Video cách chỉnh sửa file hosts trên Windows 10](https://youtu.be/-4ZREGuGCok)
   - Bạn mở thư mục chứa file hosts theo đường dẫn sau, nếu cài Windows ở ổ khác thì bạn sửa lại đường dẫn cho đúng nhé.
-  - `C:\Windows\System32\Drivers\etc\hosts`
+  - `C:\Windows\System32\Drivers\etc\`, tiến hành chỉnh sửa ở file `hosts`
 
-2. []()
+2. Trên CentOS 7 thì đường dẫn đến file hosts là: `/etc/hosts`
+
+> trên cả 2 môi trường đều cần quyền quản trị viên để chỉnh sửa được file hosts.
 
 ## <a name="IV" >IV. Tài liệu tham khảo</a>
 
