@@ -6,7 +6,9 @@
 
 [III. Thực hành](#III)
 
-[IV. Tài liệu tham khảo]()
+[IV. Tài liệu tham khảo](#IV)
+
+___
 
 ## <a name="I" >I. Giới thiệu chung</a>
 
