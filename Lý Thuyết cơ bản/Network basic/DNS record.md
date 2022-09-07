@@ -38,7 +38,7 @@ CNAME (Canonical Name) record là một bản ghi DNS record quy định một t
 Trong đó, tên miền chính là tên miền được khai báo trong A record đến IP của máy. Tên bí danh là tên miền khác mà bạn cho phép có thể trỏ đến máy tính (địa chỉ IP) này. Ví dụ:
 
 ```sh
-  www.bizflycloud.com IN CNAME bizflycloud.com
+www.bizflycloud.com IN CNAME bizflycloud.com
 
 tức là khi người dùng gõ www.bizflycloud.com thì hệ thống cũng sẽ đưa về địa chỉ IP của tên miền chính bizflycloud.com.
 ```
@@ -86,6 +86,8 @@ Ngoài 6 loại trên vẫn còn các loại bản ghi DNS khác ít phổ biế
 
 ## <a name="IV" >IV. Tài liệu tham khảo</a>
 
-1. [Giải nghĩa về DNS record, 6 loại DNS record phổ biến nhất]([https://blog.cloud365.vn/linux/dns-record/](https://bizflycloud.vn/tin-tuc/giai-nghia-ve-dns-record-6-loai-dns-record-pho-bien-nhat-20200819112520598.htm)
+1. [Giải nghĩa về DNS record, 6 loại DNS record phổ biến nhất](https://bizflycloud.vn/tin-tuc/giai-nghia-ve-dns-record-6-loai-dns-record-pho-bien-nhat-20200819112520598.htm)
 2. [Các loại bản ghi trên DNS](https://blog.cloud365.vn/linux/dns-record/)
+
+Date acced: 07/09/2022
 
