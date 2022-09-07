@@ -1,3 +1,13 @@
+## Nội dung chính
+
+[I. Giới thiệu chung](#I)
+
+[II. 6 loại DNS record phổ biến nhất](#II)
+
+[III. Thực hành](#III)
+
+[IV. Tài liệu tham khảo]()
+
 ## <a name="I" >I. Giới thiệu chung</a>
 
 **_DNS_:** máy chủ phân giải tên miền, và để máy chủ phân giải tên miền có thể hoạt động được thì ta cần cấu hình các bản ghi (record). Để từ các record đấy ta có thể điều khiển máy chủ phân giản tên miền hoạt động với đúng mục đích của mình đặt ra.
@@ -62,7 +72,16 @@ Trong ví dụ trên, tên miền bizflycloud.com sẽ được quản lý bởi
 ### 6. PTR record
 PTR (Pointer) record có thể nói là một DNS record ngược lại với A record, cho phép chuyển đổi từ địa chỉ IP sang tên miền. Bản ghi PTR giúp xác thực IP của các hostname gửi tới, giúp hạn chế bị spam mail…
 
-Ngoài 6 loại trên vẫn còn các loại bản ghi DNS khác ít phổ biến như SOA record, SRV record, APL record, CAA record, NAPTR record… Hy vọng bài viết đã đem lại cho bạn những thông tin hữu ích về DNS record.
+Ngoài 6 loại trên vẫn còn các loại bản ghi DNS khác ít phổ biến như SOA record, SRV record, APL record, CAA record, NAPTR record…Xem chi tiết hơn [tại đây](https://en.wikipedia.org/wiki/List_of_DNS_record_types) Hy vọng bài viết đã đem lại cho bạn những thông tin hữu ích về DNS record.
 
+## <a name="III" >III. Thực hành</a>
 
+1. [Cách chỉnh sửa file hosts trên Windows 10](https://youtu.be/-4ZREGuGCok)
+  - Bạn mở thư mục chứa file hosts theo đường dẫn sau, nếu cài Windows ở ổ khác thì bạn sửa lại đường dẫn cho đúng nhé.
+  - `C:\Windows\System32\Drivers\etc\hosts`
+
+## <a name="IV" >IV. Tài liệu tham khảo</a>
+
+1. [Giải nghĩa về DNS record, 6 loại DNS record phổ biến nhất]([https://blog.cloud365.vn/linux/dns-record/](https://bizflycloud.vn/tin-tuc/giai-nghia-ve-dns-record-6-loai-dns-record-pho-bien-nhat-20200819112520598.htm)
+2. [Các loại bản ghi trên DNS](https://blog.cloud365.vn/linux/dns-record/)
 
