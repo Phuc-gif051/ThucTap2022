@@ -4,5 +4,6 @@
 
 ## <a name="I.2" >2. Mô hình triển khai</a>
 <p align="center">
-  <img src="Images/Mo%20hinh%20ceph%203%20node.drawio.png" width="750">
+  <img src="https://github.com/Phuc-gif051/ThucTap2022/blob/main/L%C3%BD%20Thuy%E1%BA%BFt%20c%C6%A1%20b%E1%BA%A3n/CEPH/Docs/Images/Mo%20hinh%20ceph%203%20node.drawio.png" width="750">
+</p>
   
