@@ -42,6 +42,7 @@ Giái trị PGP là tổng số PGs cho mục đích tổ chức dữ liệu, gi
 `
 
 Xác định tổng số PGs là bước cần thiết khi xây dựng hạ tầng Ceph storage cluster cho doanh nghiệp. PGs sẽ quyết đinh hiệu năng storge. Công thức tính tổng placement group cho Ceph cluster:
+
 `
 Total PGs = (Total_number_of_OSD * 100) / pool size
 
@@ -51,26 +52,26 @@ Kết quả làm tròn lên đến luỹ thừa gần nhất của 2.
 `
 
 
-`
-VD1: 1 Cluster bao gồm 200 OSD, số bản nhân bản của pool là 3. => Tổng PGs = (200*100)/3 = 6667 (2^12 < 6667 < 2^13); làm tròn đến luỹ thừa gần nhất của 2 là 8192 = 2^13
-`
+
+>VD1: 1 Cluster bao gồm 200 OSD, số bản nhân bản của pool là 3. => Tổng PGs = (200*100)/3 = 6667 (2^12 < 6667 < 2^13); làm tròn đến luỹ thừa gần nhất của 2 là 8192 = 2^13
+
 
 Tính số PGs trên từng OSDs, thường thì chỗ này Ceph sẽ tự tính với công thức (tổng số PGs * pool size)/tổng số OSD
-`
-VD2: Cluster có 20 OSDs với 512 PGs, mức nhân bản 3
+
+>VD2: Cluster có 20 OSDs với 512 PGs, mức nhân bản 3
 CRUSH gán mỗi PG 3 OSDs
 Kết thúc, (512*3)/20 = (70 -> 100) PGs
 Mỗi 1 OSD lỗi => 19 OSD sẽ backup lại dữ liêu => OSD lỗi = 1 TB => 10 OSD giữa 100GB (đủ 1 TB OSD lỗi) => càng nhiều OSD tốc độ backup càng cao.
 
-VD3: Cluster 40 OSD, 512 PGs, 3 repical pool
+>VD3: Cluster 40 OSD, 512 PGs, 3 repical pool
 Crush gán 3 OSD mỗi PG
 Sau tính toán, mỗi OSD chứa (512*3)/40 = 30 -> 45 PGs => 1 OSD lỗi (1TB data) => 39 OSD còn lại sẽ backup => Dung lượng Backup mỗi OSD = 1000 / 39 ~ 25 GB mỗi OSD => Quá trình backup diễn ra càng nhanh khi có nhiều OSD
 
-VD4: 200 OSD, 512 PGs, 3 repi pool
+>VD4: 200 OSD, 512 PGs, 3 repi pool
 CRUSH gán mỗi PG 3 OSD
 Sau tính toán, mỗi OSD chứa 6-8 PGs
 Khi 1 OSD lỗi, 7*3 OSD sẽ diễn ra hoạt động backup => Dung lượng backup trên 21 OSD = 1000/21 ~~ 47 GB (nhanh hơn so với 10 PG)
-`
+
 Chọn lựa số PGs:
 - Nhỏ hơn 5 OSD => set pg_num = 128
 - 5-10 OSD => set pg_num = 512
