@@ -11,4 +11,4 @@ b3: Xoá ổ đĩa bằng phương pháp cũ
  - Xoá khoá xác thực của ổ đĩa trong cụm: `ceph auth del osd.{osd-num}` vd: ceph auth del osd.5
  - Xoá ổ đĩa khỏi cụm: `ceph osd rm {osd-num}` vd ceph osd rm 1
 
-Tham khảo [tại đây](https://docs.ceph.com/en/latest/rados/operations/add-or-rm-osds/)
+Tham khảo [tại đây](https://docs.ceph.com/en/latest/rados/operations/add-or-rm-osds/#removing-osds-manual)
