@@ -35,7 +35,7 @@ B2: Giảm thiểu tối đa việc gây hỏng vật lý cho ổ đĩa, ta cầ
  - `sudo systemctl stop ceph-osd@<id của ổ trong cụm>` vd: systemctl stop ceph-osd@4 
 
 B3: Xoá ổ đĩa bằng phương pháp cũ
- - Xoá ổ crush map: `ceph osd crush remove <tên ổ đĩa>` VD: ceph osd crush remove osd.4
+ - Xoá ổ đĩa bên trong crush map: `ceph osd crush remove <tên ổ đĩa>` VD: ceph osd crush remove osd.4
  - Xoá khoá xác thực của ổ đĩa trong cụm: `ceph auth del osd.{osd-num}` vd: ceph auth del osd.4
  - Xoá ổ đĩa khỏi cụm: `ceph osd rm {osd-num}` vd ceph osd rm 4
 
