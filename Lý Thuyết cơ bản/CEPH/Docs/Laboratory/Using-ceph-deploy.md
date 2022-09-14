@@ -436,7 +436,8 @@ vi /opt/secretkey
   ```
   + Kết quả trả về có dạng
   ```sh
-  {"username": "admin", "lastUpdate": 1567415960, "name": null, "roles": ["administrator"], "password":         "$2b$12$QhFs2Yo9KTICIqT8v5xLC.kRCjzuLyXqyzBQVQ4MwQhDbSLKni6pC", "email": null}
+  {"username": "admin", "lastUpdate": 1567415960, "name": null, "roles": ["administrator"], "password":
+  "$2b$12$QhFs2Yo9KTICIqT8v5xLC.kRCjzuLyXqyzBQVQ4MwQhDbSLKni6pC", "email": null}
   ```
   + Kiểm tra xem ceph-dashboard đã được cài đặt thành công hay chưa
   ```sh
