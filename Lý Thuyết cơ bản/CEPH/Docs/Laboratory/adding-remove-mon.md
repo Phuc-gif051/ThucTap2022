@@ -27,6 +27,8 @@ Kết quả cuối cùng tương tự như hình dưới
 ```sh
 ceph-deploy mon add <ceph-node>
 ```
+VD: ceph-deploy mon add client
+
 Thu được kết quả
 ![image](https://user-images.githubusercontent.com/79830542/190119692-01c370e8-7c9d-47ad-8499-5583ecff31c7.png)
 
