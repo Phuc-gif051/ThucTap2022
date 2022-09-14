@@ -4,7 +4,7 @@
 ceph-deploy install --release <version> <ceph-node>
  ```
  
- vd: ceph-deploy install --release nautilus new-node
+ vd: ceph-deploy install --release nautilus client
  >kết quả cuối khi cài đặt xong tương tự như hình. Để kiểm tra lại sử dụng câu lệnh `ceph -v` trên node mới, nếu trùng phiên bản với node admin tức là cài đặt thành công
  ![image](https://user-images.githubusercontent.com/79830542/190107471-7363bd17-33ef-4ea6-b0ee-bbec30e74bfb.png)
 
