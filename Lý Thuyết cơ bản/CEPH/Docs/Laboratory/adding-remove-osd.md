@@ -49,4 +49,30 @@ B3: Xoá ổ đĩa bằng phương pháp cũ
  - Xoá khoá xác thực của ổ đĩa trong cụm: `ceph auth del osd.{osd-num}` vd: ceph auth del osd.4
  - Xoá ổ đĩa khỏi cụm: `ceph osd rm {osd-num}` vd ceph osd rm 4
 
+B4: Xoá ổ đĩa từ bản luminus trở lên
+_Use ceph-deploy_
+
+- Trước khi bị remove, osd thường ở trạng thái `up and in`, bạn cần phải take out nó ra khỏi cluser trước
+
+`ceph osd out {osd-num}`
+
+- Truy cập vào host và stop osd daemon cho osd đó
+
+`sudo systemctl stop ceph-osd@{osd-num}`
+
+- Remove osd (từ luminous trở lên)
+
+`ceph osd purge {id} --yes-i-really-mean-it`
+
+- Xóa trong file cấu hình nếu có
+
+- Unmount LVM Volume group
+
+`umount /var/lib/ceph/osd/ceph-{osd-num}`
+
+- Xóa bỏ LVM Volume Group của OSD
+
+`vgremove ceph-...`
+
+
 Tham khảo [tại đây](https://docs.ceph.com/en/latest/rados/operations/add-or-rm-osds/#removing-osds-manual)
