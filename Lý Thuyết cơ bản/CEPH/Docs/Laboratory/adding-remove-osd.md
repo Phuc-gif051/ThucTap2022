@@ -1,7 +1,12 @@
 _**Các thao tác thực hiện dưới đây đều trên node admin**_
 
 ### <a name="1" >1. Thêm OSD</a>
-Trong trường hợp đã biết ổ đĩa mới được thêm vào từ node nào.
+
+ - Lấy danh sách ổ đĩa hiện có trong 1 hoặc nhiều node
+ ```sh
+ ceph-deploy disk list <tên hoặc địa chỉ IP của node>
+ ```
+
  - Thực hiện zapdisk:
  ```sh
  ceph-deploy disk zap <tên hoặc IP của node> <đường dẫn đến ổ đĩa>
@@ -18,6 +23,11 @@ Trong trường hợp đã biết ổ đĩa mới được thêm vào từ node 
  VD:
  ceph-deploy osd create --data /dev/vdb ceph01
  ceph-deploy osd create --data /dev/vdc ceph01
+ ```
+ 
+ - Lấy danh sách osd hiện có trong 1 hoặc nhiều node 
+ ```sh
+ ceph-deploy osd list <tên hoặc IP của node>
  ```
  
  _Nếu có cảnh báo osd down and in thì chạy câu lệnh `sudo systemctl start ceph-osd@<id của osd>` để khởi chạy ổ đĩa trong cụm._
