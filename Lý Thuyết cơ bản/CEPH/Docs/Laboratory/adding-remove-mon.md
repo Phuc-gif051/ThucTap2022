@@ -13,8 +13,6 @@ ceph-deploy install --release <version> <ceph-node>
 
 ```sh
 ceph-deploy mon create <ceph-node>
-hoặc
-ceph-deploy --overwrite-conf mon create <ceph-node>
 ```
 
 vd: ceph-deploy mon create client
