@@ -11,10 +11,12 @@
 
 [III. Tài liệu tham khảo](#III)
 
+____
+
+
 # <a name="I" >I. Chuẩn bị</a>
 ## <a name="I.1" >1. IP planning</a>
 ![image](https://user-images.githubusercontent.com/79830542/189559706-f13aaf36-a784-480b-8cfd-7f9676620743.png)
-
 
 ## <a name="I.2" >2. Mô hình triển khai</a>
 <p align="center">
