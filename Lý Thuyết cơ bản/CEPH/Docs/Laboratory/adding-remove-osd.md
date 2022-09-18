@@ -36,6 +36,7 @@ Tham khảo [tại đây](https://github.com/uncelvel/tutorial-ceph/blob/master/
 
 ### <a name="2" >2. Xoá OSD</a>
 
+_Cách 1: Xoá ổ đĩa bằng phương pháp cũ_
 B1: báo với cụm ceph để ngưng hoạt động của ổ đĩa
 `ceph osd out {osd-num}`
 _Cần chờ 1 thời gian nhất định để cụm tái cân bằng. Sử dụng `ceph -w` để theo dõi._
@@ -49,18 +50,19 @@ B3: Xoá ổ đĩa bằng phương pháp cũ
  - Xoá khoá xác thực của ổ đĩa trong cụm: `ceph auth del osd.{osd-num}` vd: ceph auth del osd.4
  - Xoá ổ đĩa khỏi cụm: `ceph osd rm {osd-num}` vd ceph osd rm 4
 
-B4: Xoá ổ đĩa từ bản luminus trở lên
+_Cách 2:_
+B1: Xoá ổ đĩa từ bản luminus trở lên
 _Use ceph-deploy_
 
-- Trước khi bị remove, osd thường ở trạng thái `up and in`, bạn cần phải take out nó ra khỏi cluser trước
+- Trước khi bị remove, osd thường ở trạng thái `up and in`, bạn cần phải take out nó ra khỏi cluser trước. Thực hiện ở node admin
 
 `ceph osd out {osd-num}`
 
-- Truy cập vào host và stop osd daemon cho osd đó
+- B2: Truy cập vào host và stop osd daemon cho osd đó
 
 `sudo systemctl stop ceph-osd@{osd-num}`
 
-- Remove osd (từ luminous trở lên)
+- B3: Remove osd (từ luminous trở lên)
 
 `ceph osd purge {id} --yes-i-really-mean-it`
 
@@ -70,9 +72,9 @@ _Use ceph-deploy_
 
 `umount /var/lib/ceph/osd/ceph-{osd-num}`
 
-- Xóa bỏ LVM Volume Group của OSD
+- Xóa bỏ LVM Volume Group của OSD, sử dụng lệnh `vgs` để lấy ID của LVM Volume Group
 
-`vgremove ceph-...`
+`vgremove ceph-<ID của LVM Volume Group>`
 
 
 Tham khảo [tại đây](https://docs.ceph.com/en/latest/rados/operations/add-or-rm-osds/#removing-osds-manual)
