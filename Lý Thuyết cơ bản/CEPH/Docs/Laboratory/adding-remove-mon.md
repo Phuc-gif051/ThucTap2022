@@ -23,6 +23,7 @@ Kết quả cuối cùng tương tự như hình dưới
  - Khởi tạo thành công, thì thực hiện câu lệnh 
 
 ```sh
+ceph mon add <host-name> {host-ip}
 ceph-deploy mon add <ceph-node>
 ```
 VD: ceph-deploy mon add client
@@ -33,6 +34,7 @@ Thu được kết quả
 ## <a name="2" >2. Destroy monitor</a>
 
 ```sh
+ceph mon remove <host-name>
 ceph-deploy mon destroy <ceph-node>
 ```
 
