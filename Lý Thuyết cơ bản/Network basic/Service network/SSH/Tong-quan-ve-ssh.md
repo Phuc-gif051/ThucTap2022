@@ -96,7 +96,7 @@ Với người dùng linux có thể sử dụng Terminal để ssh tới máy k
 
 Với người dùng Windows, ta sử dụng [PuTTY](http://www.putty.org/)
 
-<img src="[http://i.imgur.com/QfLTwyL.png](https://camo.githubusercontent.com/7dfe6f4eaa88f4698ae62b8fec6aae301447eeceda7710a807772252e8a71d1d/687474703a2f2f692e696d6775722e636f6d2f51664c5477794c2e706e67)">
+<img src="https://camo.githubusercontent.com/7dfe6f4eaa88f4698ae62b8fec6aae301447eeceda7710a807772252e8a71d1d/687474703a2f2f692e696d6775722e636f6d2f51664c5477794c2e706e67">
 
 Nhập `hostname` và `Open`, lưu ý là `Connection type` là `SSH`
 
