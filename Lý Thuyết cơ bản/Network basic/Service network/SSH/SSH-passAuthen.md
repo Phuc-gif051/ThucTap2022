@@ -33,6 +33,26 @@ Cho phép người dùng
 Sau khi sửa file cấu hình, ta phải restart lại dịch vụ 
 
 	# systemctl restart sshd
+	
+Thực hiện tạo key trên máy client hoặc server
+
+	# ssh-keygen -t rsa -b 1024
+Sử dụng đường dẫn mặc định để tạo file. Nếu bạn muốn bảo mật hơn, hãy nhập passphrase còn không thì enter.
+
+<img src="https://user-images.githubusercontent.com/79830542/192147248-3314c759-eeb1-4323-ac43-69c02867f8b9.png">
+
+Cặp key sẽ được tạo trong thư mục /root/.ssh :
+
+<img src="https://user-images.githubusercontent.com/79830542/192147265-6a78ba40-59d3-4b15-bb3b-a766a43c86cf.png">
+
+Private-key là `id_rsa` và public-key là `id_rsa.pub`
+
+Copy key sang máy còn lại 
+	
+	# ssh-copy-id username@<IP-or-hostname>
+	
+Sẽ có yêu cầu nhập mật khẩu của `user name` mà ta muốn copy key. Nhập mật khẩu để xác nhận. 
+	
 
 
 	
