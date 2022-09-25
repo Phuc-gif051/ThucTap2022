@@ -29,6 +29,6 @@ Sau đó lưu và đóng file và restart lại SSH để cập nhật thay đ�
 
 	# systemctl restart sshd
 	
-Để đảm bảo an ninh hơn nữa, chúng ta nên sử dụng xác thực dựa trên [key-based](SSH-KeyAuthem.md). Xác thực khóa cho phép bạn kết nối với máy chủ mà không sử dụng mật khẩu của user trong hệ thống. Thay vào đó sẽ cần key để sử dụng.
+Để đảm bảo an ninh hơn nữa, chúng ta nên sử dụng xác thực dựa trên [key-based](SSH-KeyAuthen.md). Xác thực khóa cho phép bạn kết nối với máy chủ mà không sử dụng mật khẩu của user trong hệ thống. Thay vào đó sẽ cần key để sử dụng.
 
 Giao thức SSH cho phép các hoạt động khác như copy file giữa 2 máy theo hình thức mã hóa an toàn. Bạn có thể sử dụng `scp` hay `sftp`.
