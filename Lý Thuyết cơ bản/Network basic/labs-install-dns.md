@@ -232,6 +232,8 @@ Trên Window 10
 ### <a name="end" >Tổng kết</a>
  - Thành công xây dựng mô hình lab 1 máy chủ DNS
  - Kết nối thành công đến các tên miền đã cấu hình trên 2 nền tảng CentOS 7 và Window 10
+ - Dùng các công cụ theo dõi gói tin trên mạng để kiểm thử. Ở đây sẽ dùng Wireshark, ta thu được kết quả:
+ - <img src="https://user-images.githubusercontent.com/79830542/192194205-5288d140-eb84-400f-a9f5-ec85c7fe491a.png" width="650">
  - Xem thêm chi tiết hơn về cách cấu hình 2 máy chủ DNS tại link sau:
 https://vietnetwork.vn/routers-switches/cai-dat-va-cau-hinh-dns-server-tren-centos-7/
 
