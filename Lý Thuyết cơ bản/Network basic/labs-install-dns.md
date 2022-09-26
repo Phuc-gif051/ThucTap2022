@@ -1,3 +1,22 @@
+## Nội dung chính của bài thực hành
+[1. Mô hình lab](#mo-hinh)
+
+[2. Cài đặt DNS server](#install)
+
+   - [2.1. Chỉnh sửa file config chính](#config)
+	
+   - [2.2. Chỉnh sửa CSDL](#set-database)
+
+[3. Test độ chính xác của CSDL](#check)
+
+[4. Cấu hình cho client](#client)
+
+[5. Kiểm thử](#testing)
+
+[6. Tổng kết](#end)
+
+___
+
 <a name="mo-hinh" ></a>
 ## Mô hình 
 
@@ -18,12 +37,11 @@
 
     ``yum install bind bind-utils -y``
 
-- Chỉnh sửa file conf
+<a name="config" ></a>
+- Chỉnh sửa file conf tại đường dẫn
 
     ``vi /etc/named.conf``
 
-
-<a name="config" ></a>
 - Sửa theo file cấu hình này:
 
 ```
@@ -185,17 +203,36 @@ systemctl stop firewalld
 _Cấu hình trên server cơ bản hoàn tất. Chuyển sang các máy client_    
 
 
-<a name="client" >Trỏ DNS của client về DNS server</a>
+### <a name="client" >Trỏ DNS của client về DNS server</a>
 
 Trên CentOS 7:
 - Sửa trong file config card mạng với câu lệnh: `vi /etc/sysconfig/network-scripts/ifcfg-<tên-card-mạng>`
 - Thêm dòng sau: `DNS1=172.16.5.5`
 - Mở tập tin /etc/resolv.conf: `vi /etc/resolv.conf`
 - Thêm nội dung sau: `nameserver      172.16.5.5`
+- Có thể khởi động lại network service hoặc không.
 
 Trên Window 10:
 - Chỉnh cấu hình mạng về static để có thể chỉ định IP và DNS cho máy.
 - Thêm địa chỉ IP của DNS mà ta vừa cấu hình: 172.16.5.5 
+- <img src="https://user-images.githubusercontent.com/79830542/192187249-b9617172-11f6-43e8-9500-1ffb2699f099.png" width="650">
+
+
+### <a name="testing" >Tiến hành kiểm thử</a>
+Trên CentOS 7
+ - Sử dụng  `nslookup ceph02.lab` (cần cài đặt gói bind: `yum install bind-utils -y`)
+ - ![image](https://user-images.githubusercontent.com/79830542/192189066-98abe125-f26b-4a33-bbd9-6b07a8e2a919.png)
+ - Kết nối thành công đến server DNS và phân giải được tên miền `ceph02.lab` thành IP: 172.16.15.3
+
+Trên Window 10
+ - Sử dụng trình duyệt để truy cập vào `ceph02.lab`
+ - <img src="https://user-images.githubusercontent.com/79830542/192192133-93e7497a-8bc1-4974-8b46-6cb6d006171f.png" width="650">
+ - Thành công truy cập vào ceph dashboard thông qua tên miền trên máy chủ DNS.
+
+### <a name="end" >Tổng kết</a>
+ - Thành công xây dựng mô hình lab 1 máy chủ DNS
+ - Kết nối thành công đến các tên miền đã cấu hình trên 2 nền tảng CentOS 7 và Window 10
+ - Xem thêm chi tiết hơn về cách cấu hình 2 máy chủ DNS tại link sau:
 https://vietnetwork.vn/routers-switches/cai-dat-va-cau-hinh-dns-server-tren-centos-7/
 
 https://github.com/MinhKMA/DNS_note/blob/master/labs/dns_forwarder.md
