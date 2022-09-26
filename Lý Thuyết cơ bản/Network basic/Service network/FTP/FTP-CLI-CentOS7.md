@@ -1,9 +1,32 @@
+## Sử dụng FTP bằng câu lệnh trên CentOS 7
+[1. Tổng quan](#about)
+
+[2. Thiết lập kết nối SFTP](#set-connection)
+
+[3. Xem các lệnh SFTP hỗ trợ](#help)
+
+[4. Điều hướng với SFTP](#control)
+
+[5. Truyền file bằng SFTP](#tranfer)
+      - [1. Upload](#upload)
+      - [2. Download](#download)
+
+[6. Thực hiện các tác vụ trên remote server với SFTP](#action)
+
+[7. Tài liệu tham khảo](#referent)
+
+___
+
+<a name="about"></a>
+### Tổng quan
+
 SFTP (SSH File Transfer Protocol) là một giao thức truyền file an toàn được sử dụng để truy cập, quản lý và truyền file thông qua SSH được mã hóa.
 
 Khi so sánh với giao thức FTP truyền thống, SFTP cung cấp tất cả các chức năng của FTP và được thêm bảo mật từ SSH.
 
 Không giống như lệnh scp, chỉ cho phép truyền file, lệnh sftp cho phép bạn thực hiện một loạt các hoạt động trên các file từ xa.
 
+<a name="set-connection"></a>
 ### Thiết lập kết nối SFTP
 SFTP hoạt động trên mô hình client-server, hỗ trợ tất cả các cơ chế xác thực SSH.
 
@@ -19,8 +42,9 @@ Sau khi kết nối, bạn sẽ thấy dấu nhắc sftp và bạn có thể b�
 Nếu máy chủ SSH từ xa không lắng nghe trên cổng 22, hãy sử dụng tùy chọn -oPort để chỉ định cổng thay thế:
 
       # sftp -oPort=port remote_username@server_ip_or_hostname
-      
-### Các lệnh SFTP
+
+<a name="help"></a>
+### Xem các lệnh SFTP hỗ trợ
 Hầu hết các lệnh SFTP tương tự hoặc giống hệt với các lệnh bạn sẽ sử dụng trong dấu nhắc shell của Linux.
 
 Bạn có thể nhận được danh sách tất cả các lệnh SFTP có sẵn bằng cách nhập `help` hoặc `?`
@@ -36,6 +60,7 @@ Bạn có thể nhận được danh sách tất cả các lệnh SFTP có sẵn
           !                                  Escape to local shell
           ?                                  Synonym for help
 
+<a name="control" ></a>
 ### Điều hướng với SFTP
 
 - Khi bạn đăng nhập vào remote server, thư mục làm việc hiện tại của bạn là thư mục home của remote user. Bạn có thể kiểm tra bằng cách gõ:
@@ -57,11 +82,13 @@ Các lệnh trên được sử dụng để điều hướng và làm việc tr
 
         # sfpt>cd lpwd
         # Local working directory: /home/local_username
-        
+ 
+ <a name="tranfer" ></a>
  ### Truyền file bằng SFTP
  
  Với SFTP, bạn có thể chuyển tập tin an toàn giữa hai máy. Lệnh sftp rất hữu ích khi bạn làm việc trên máy chủ không có giao diện GUI và bạn muốn chuyển file hoặc thực hiện các thao tác khác trên các tệp từ xa.
  
+ <a name="upload" ></a>
  #### Upload file bằng lệnh SFTP
  
 - Để upload một file từ local lên remote SFTP server, sử dụng lệnh put:
@@ -81,6 +108,7 @@ Các lệnh trên được sử dụng để điều hướng và làm việc tr
 
          # sftp>reput filename.zip
 
+<a name="download" ></a>
 #### Tải file bằng lệnh SFTP
 
 - Khi tải xuống file bằng lệnh sftp, các file được tải xuống thư mục mà bạn đã nhập lệnh sftp. Để tải xuống một file từ remote server, hãy sử dụng lệnh get:
@@ -99,7 +127,8 @@ Các lệnh trên được sử dụng để điều hướng và làm việc tr
 - Nếu quá trình truyền file không thành công hoặc bị gián đoạn, bạn có thể tiếp tục lại bằng lệnh reget. Cú pháp của reget giống với cú pháp của get:
 
             sftp>reget filename.zip
-            
+
+<a name="action" ></a>
 ### Thực hiện các tác vụ trên remote server với SFTP
 
 Thông thường khi kết nối với server thông qua SSH ta cũng có quyền điều khiển các file hay thư mục như một người dùng local (với các quyền mà quản trị cấp). Tuy nhiên, với một số trường hợp thì ta chỉ có thể dùng SFTP để kết nối đến server, và chỉ được thực hiện các thao tác lưu trữ.
@@ -122,14 +151,32 @@ SFTP cho phép bạn thực hiện một số lệnh thao tác trên file cơ b�
 
             sftp>rename file_name new_file_name
 
-Xóa một tập tin trên remote server:
-sftp>rm file_name
-Xóa một thư mục trên remote server:
-sftp>rmdir directory_name
-Thay đổi quyền của file trên remote server:
-sftp>chmod 644 file_name
-Thay đổi chủ sở hữu của một file trên remote server:
-sftp>chown user_id file_name
-Thay đổi chủ sở hữu nhóm của một file trên remote server:
-sftp>chgrp group_id file_name
-Khi bạn đã hoàn thành công việc của mình, hãy đóng kết nối bằng cách gõ bye hoặc quit.
+ - Xóa một tập tin trên remote server:
+                  
+            sftp>rm file_name
+
+ - Xóa một thư mục trên remote server:
+
+            sftp>rmdir directory_name
+
+ - Thay đổi quyền của file trên remote server:
+
+            sftp>chmod 644 file_name
+
+ - Thay đổi chủ sở hữu của một file trên remote server:
+
+            sftp>chown user_id file_name
+
+ - Thay đổi chủ sở hữu nhóm của một file trên remote server:
+
+            sftp>chgrp group_id file_name
+
+**Khi bạn đã hoàn thành công việc của mình, hãy đóng kết nối bằng cách gõ `bye` hoặc `quit`.
+
+
+<a name="referent" ></a>
+### Tài liệu tham khảo
+
+https://huudoanh.com/huong-dan-su-dung-lenh-sftp-tren-linux/
+
+https://www.digitalocean.com/community/tutorials/how-to-use-sftp-to-securely-transfer-files-with-a-remote-server
