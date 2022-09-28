@@ -208,6 +208,7 @@ _Cấu hình trên server cơ bản hoàn tất. Chuyển sang các máy client_
 Trên CentOS 7:
 - Sửa trong file config card mạng với câu lệnh: `vi /etc/sysconfig/network-scripts/ifcfg-<tên-card-mạng>`
 - Thêm dòng sau: `DNS1=172.16.5.5`
+- Hoặc
 - Mở tập tin /etc/resolv.conf: `vi /etc/resolv.conf`
 - Thêm nội dung sau: `nameserver      172.16.5.5`
 - Có thể khởi động lại network service hoặc không.
