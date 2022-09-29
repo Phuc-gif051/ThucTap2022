@@ -1,3 +1,12 @@
+## <a name="" >Nội dung chính</a>
+[1. Tổng quan](#1)
+
+[2. Cách hoạt động cơ bản](#2)
+
+[3. Các yêu cầu để trở thành 1 web server](#3)
+
+___
+
 ## <a name="1" >1. Tổng quan</a>
 
 Web server là máy chủ cài đặt các chương trình phục vụ các ứng dụng web. Web server có khả năng tiếp nhận yêu cầu (request) từ các trình duyệt web của client và gửi phản hồi (reponsive) đến client thông qua giao thức HTTP hoặc các giao thức khác. Có nhiều các ứng dụng web server khác nhau như: Apache, Nginx, IIS,… 
