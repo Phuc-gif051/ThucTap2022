@@ -55,7 +55,7 @@ Trên máy 2 tiến hành cài đặt và cấu hình Web server với đăng nh
  - ⏯️ Tiến hành cấu hình: 
     - Trong Nginx thì Virtual Host là file cấu hình cho phép nhiều domain cùng chạy trên một máy chủ. Tất cả các file vhost sẽ nằm trong thư mục /etc/nginx/conf.d/. Để tiện quản lý mỗi website nên có một vhost riêng.
     - Trong ví dụ này sẽ tạo website test.lab với vhost tương ứng là /etc/nginx/conf.d/test.lab.conf
-    - Tạo thư mục để chứa mã nguồn website: `mfdir -pv /var/www/test.lab.com/html`
+    - Tạo thư mục để chứa mã nguồn website: `mkdir -pv /var/www/test.lab/html`
     - Thay đổi chủ sở hữu cho các thư mục
       ```sh 
       chown –R nginx:nginx /var/www/test.lab
@@ -76,16 +76,16 @@ Trên máy 2 tiến hành cài đặt và cấu hình Web server với đăng nh
 
       ```sh
       server {
-          listen 80; # port sử dụng cho website
+          listen 80; # port mặc định sử dụng cho giao thức HTTP
           listen [::]:80;
 
           root /var/www/test.lab/html; # đường dẫn đến nơi lưu trữ mã nguồn 
 
           index index.html; # trang html hiển thị cho người dùng
 
-          server_name test.lab www.test.lab; 
+          server_name test.lab www.test.lab; # danh sách các tên miền có thể dùng để truy cập trang web của bạn
 
-          access_log /var/log/nginx/test.lab.access.log; # nơi lưu trữ các truy cập.
+          access_log /var/log/nginx/test.lab.access.log; # nơi lưu trữ các yêu cầu tới website của bạn.
           error_log /var/log/nginx/test.lab.error.log; # nơi lưu trữ lỗi.
 
           location / {
@@ -108,6 +108,8 @@ Trên máy 2 tiến hành cài đặt và cấu hình Web server với đăng nh
 https://123host.vn/community/tutorial/huong-dan-cai-dat-nginx-tren-centos-7.html#buoc-4-quan-ly-dich-vu-nginx
 
 https://blog.hostvn.net/chia-se/huong-dan-cai-dat-nginx-tren-centos-7.html#4_Cac_file_cau_hinh
+
+https://www.interserver.net/tips/kb/create-manage-virtual-hosts-nginx/
 
 Date acced: 28/09/2022
 
