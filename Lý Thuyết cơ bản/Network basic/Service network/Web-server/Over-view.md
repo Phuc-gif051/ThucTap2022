@@ -74,8 +74,15 @@ Nếu là tín đồ của Windows thì có lẽ chúng ta cũng không lạ l�
 
 >Phần mềm máy chủ đóng vai trò không nhỏ với hiệu suất thực thi của các ứng dụng Web cũng như cung cấp nhiều tính năng đa dạng giúp website đáp ứng nhiều nhu cầu sử dụng khác nhau. Vì vậy, nếu là một nhà quản trị web, bạn cũng nên cân nhắc lựa chọn phần mềm máy chủ bên cạnh các yếu tố về thiết bị phần mềm, công nghệ phát triển web để ứng dụng web có thể chạy tốt nhất có thể.
 
+### <a name="" >Tài liệu tham khảo</a>
 
+https://vietnix.vn/web-server-la-gi/
 
+https://viettelidc.com.vn/tin-tuc/web-server-la-gi-cach-thuc-hoat-dong-va-luu-y-khi-su-dung-web-server
+
+https://viblo.asia/p/tim-hieu-ve-web-server-maGK7zyx5j2
+
+https://bizfly.vn/techblog/web-server-la-gi.html
 
 
 
