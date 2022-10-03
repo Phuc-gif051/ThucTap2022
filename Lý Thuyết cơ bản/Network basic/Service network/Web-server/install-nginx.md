@@ -88,7 +88,7 @@ Trên máy 2 tiến hành cài đặt và cấu hình Web server với đăng nh
           access_log /var/log/nginx/test.lab.access.log; # nơi lưu trữ các yêu cầu tới website của bạn.
           error_log /var/log/nginx/test.lab.error.log; # nơi lưu trữ lỗi.
           
-          # nơi đặt các cấu hình (các chỉ thị) cho website. Ví dụ như time out, reverse proxy,....
+          # nơi đặt các cấu hình (các chỉ thị) cho website. Ví dụ như thêm bớt các header, configure module, reverse proxy,...
 
           location / {
               try_files $uri $uri/ =404;
