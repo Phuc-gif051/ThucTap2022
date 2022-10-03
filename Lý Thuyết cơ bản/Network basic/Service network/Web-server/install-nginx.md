@@ -88,7 +88,7 @@ Trên máy 2 tiến hành cài đặt và cấu hình Web server với đăng nh
           access_log /var/log/nginx/test.lab.access.log; # nơi lưu trữ các yêu cầu tới website của bạn.
           error_log /var/log/nginx/test.lab.error.log; # nơi lưu trữ lỗi.
           
-          # nơi đặt các cấu hình (các chỉ thị) cho website. Ví dụ như thêm bớt các header, configure module, reverse proxy,...
+          # nơi đặt các cấu hình (các chỉ thị) cho website. Ví dụ như thêm bớt các header, configure module, reverse proxy,... Để trả về tài nguyên trên máy chủ, khi có request tới 1 URL
 
           location / {
               try_files $uri $uri/ =404;
@@ -112,6 +112,8 @@ https://123host.vn/community/tutorial/huong-dan-cai-dat-nginx-tren-centos-7.html
 https://blog.hostvn.net/chia-se/huong-dan-cai-dat-nginx-tren-centos-7.html#4_Cac_file_cau_hinh
 
 https://www.interserver.net/tips/kb/create-manage-virtual-hosts-nginx/
+
+https://zhost.vn/docs/cau-hinh-virtual-host-cho-nginx-centos-ubuntu/
 
 Date acced: 28/09/2022
 
