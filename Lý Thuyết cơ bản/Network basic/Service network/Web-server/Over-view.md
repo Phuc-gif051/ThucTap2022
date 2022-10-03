@@ -9,7 +9,7 @@ ___
 
 ## <a name="1" >1. Tổng quan</a>
 
-Web server là máy chủ cài đặt các chương trình phục vụ các ứng dụng web. Web server có khả năng tiếp nhận yêu cầu (request) từ các trình duyệt web của client và gửi phản hồi (reponsive) đến client thông qua giao thức HTTP hoặc các giao thức khác. Có nhiều các ứng dụng web server khác nhau như: Apache, Nginx, IIS,… 
+Web server là máy chủ cài đặt các chương trình phục vụ các công việc như: quản trị, triển khai, vận hành website,... Web server có khả năng tiếp nhận yêu cầu (request) từ các trình duyệt web của client và gửi phản hồi (reponsive) đến client thông qua giao thức HTTP hoặc các giao thức khác. Có nhiều các ứng dụng web server khác nhau như: Apache, Nginx, IIS,… 
 
 Web server là máy chủ có dung lượng lớn, tốc độ xử lý cũng như truyền tải cao. Tất cả các web server đều có một địa chỉ IP (IP Address) hoặc có một domain name. Ví dụ, khi bạn gõ: https://viettelidc.com.vn vào thanh trình duyệt và gõ phím Enter, tức là bạn đang gửi yêu cầu truy cập đến trang web có domain name là www.viettelidc.com.vn. Khi đó, máy chủ web này sẽ tìm đến website có tên mà bạn muốn truy cập rồi gửi đến trình duyệt của bạn.
 
@@ -84,5 +84,9 @@ https://viblo.asia/p/tim-hieu-ve-web-server-maGK7zyx5j2
 
 https://bizfly.vn/techblog/web-server-la-gi.html
 
+https://www.dammio.com/2019/07/05/danh-sach-phan-mem-web-server-pho-bien-nhat-nam-2019
+
+https://vncoder.vn/bai-viet/danh-gia-chi-tiet-nginx-va-apache-web-server-nao-la-tot-nhat-
 
 
+Date acced: 30/09/2022
