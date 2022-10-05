@@ -23,7 +23,7 @@ Web server phải đảm bảo hoạt động liên tục 24/7. Bởi vậy máy
 
 Khi bạn thực hiện truy cập vào một website ở môi trường internet, đồng nghĩa với việc bạn đang yêu cầu trang đó từ một web server. Dưới đây là 4 bước cơ bản khi ta truy cập đến 1 trang web nào đó:
 
-  - **B1:** Đầu tiên trình duyệt mà bạn đang dùng sẽ tiến hành xác định địa chỉ IP mà tên miền bạn vừa nhập trỏ về. Nếu trong bộ nhớ cache không chứa sẵn thông tin này, thông qua internet trình duyệt gửi yêu cầu phân giải tên miền đến một hoặc là nhiều máy chủ DNS. Máy chủ DNS thông báo cho trình duyệt biết địa chỉ IP nào mà tên miền sẽ trỏ đến. 
+  - **B1:** Đầu tiên trình duyệt mà bạn đang dùng sẽ tiến hành xác định địa chỉ IP mà tên miền bạn vừa nhập trỏ về. Nếu trong bộ nhớ cache không chứa sẵn thông tin này, trình duyệt sẽ tìm đến file `hosts` để tìm thông tin (với người dùng thông thường thì file hosts sẽ không có bất kỳ cấu hình nào). Sau đó mới thông qua internet trình duyệt gửi yêu cầu phân giải tên miền đến một hoặc là nhiều máy chủ DNS. Máy chủ DNS thông báo cho trình duyệt biết địa chỉ IP nào mà tên miền sẽ trỏ đến. 
 
   - **B2:** Nhận được địa chỉ IP của trang web, trình duyệt sẽ gửi yêu cầu của người dùng đến địa chỉ IP đó thông qua giao thức http (https)
 
