@@ -58,8 +58,8 @@ Trên máy 1 tiến hành cài đặt và cấu hình Web server với đăng nh
     - Tạo thư mục để chứa mã nguồn website: `mkdir -pv /var/www/test.lab/html`
     - Thay đổi chủ sở hữu cho các thư mục
       ```sh 
-      chown –R nginx:nginx /var/www/test.lab
-      chmod –R 775 /var/www
+      chown -R nginx:nginx /var/www/test.lab
+      chmod -R 775 /var/www
       ``` 
     - dùng trình soạn thảo vi để tạo file 1 file html cơ bản như sau: `vi /var/www/test.lab/html/index.html`
       ```sh
