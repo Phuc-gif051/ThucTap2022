@@ -20,7 +20,7 @@
 
 ## <a name="2" >2. Tiến hành cài đặt</a>
 
-Trên máy 2 tiến hành cài đặt và cấu hình Web server với đăng nhập là người dùng `root` hoặc người dùng có quền `sudo`
+Trên máy 1 tiến hành cài đặt và cấu hình Web server với đăng nhập là người dùng `root` hoặc người dùng có quền `sudo`
 
 ### <a name="2.1" >2.1 Cài đặt dịch vụ Nginx</a>
 - B1: cài đặt nginx `yum install nginx -y`
