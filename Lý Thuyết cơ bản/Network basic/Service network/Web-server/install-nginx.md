@@ -53,8 +53,8 @@ Trên máy 1 tiến hành cài đặt và cấu hình Web server với đăng nh
 >- Các file log của Nginx (access.log và error.log) nằm trong thư mục /var/log/nginx/.
 
  - ⏯️ Tiến hành cấu hình: 
-    - Trong Nginx thì Virtual Host là file cấu hình cho phép nhiều domain cùng chạy trên một máy chủ. Tất cả các file vhost sẽ nằm trong thư mục /etc/nginx/conf.d/. Để tiện quản lý mỗi website nên có một vhost riêng.
-    - Trong ví dụ này sẽ tạo website test.lab với vhost tương ứng là /etc/nginx/conf.d/test.lab.conf
+    - Trong Nginx thì Server Blocks là file cấu hình cho website chạy trên một máy chủ. Tất cả các Server Blocks sẽ nằm trong thư mục /etc/nginx/conf.d/. Để tiện quản lý mỗi website nên có một Server Blocks riêng.
+    - Trong ví dụ này sẽ tạo website test.lab với Server Blocks tương ứng là /etc/nginx/conf.d/test.lab.conf
     - Tạo thư mục để chứa mã nguồn website: `mkdir -pv /var/www/test.lab/html`
     - Thay đổi chủ sở hữu cho các thư mục
       ```sh 
