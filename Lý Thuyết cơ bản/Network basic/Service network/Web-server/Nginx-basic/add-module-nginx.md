@@ -99,6 +99,45 @@ location ~ "^/ngx_pagespeed_static/" { }
 location ~ "^/ngx_pagespeed_beacon" { }
 ```
 
+Vi du nhu sau:
+
+```sh
+server {
+    listen 80;
+
+    server_name pet.com;
+
+
+#    return 301 https://$server_name$request_uri;
+    root /var/www/pet.lab/Site3;
+
+#    index index.html;
+
+    access_log /var/log/nginx/pet.lab.access.log;
+    error_log /var/log/nginx/pet.lab.error.log;
+
+        ##
+        # Pagespeed main settings
+
+        pagespeed on;
+        pagespeed FileCachePath /var/ngx_pagespeed_cache;
+
+        # Ensure requests for pagespeed optimized resources go to the pagespeed
+        # handler and no extraneous headers get set.
+
+        location ~ "\.pagespeed\.([a-z]\.)?[a-z]{2}\.[^.]{10}\.[^.]+" { add_header "" ""; }
+        location ~ "^/ngx_pagespeed_static/" { }
+        location ~ "^/ngx_pagespeed_beacon" { }
+
+     location / {
+        index index.html index.php;
+        try_files $uri $uri/ =404;
+     }
+}
+
+
+```
+
 ## <a name="2" >2. Cai them module RTMP phuc vu cho viec truyen tai da phuong tien</a>
 
 tai xuong ma nguon tu github, hay nho duong dan den ma nguon nay khi tai ve. Thuong la luu chung voi cac tep da tai xuong de cai nginx
