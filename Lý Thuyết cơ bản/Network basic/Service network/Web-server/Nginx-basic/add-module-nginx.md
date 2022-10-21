@@ -97,7 +97,7 @@ pagespeed FileCachePath /var/ngx_pagespeed_cache;
 location ~ "\.pagespeed\.([a-z]\.)?[a-z]{2}\.[^.]{10}\.[^.]+" { add_header "" ""; }
 location ~ "^/ngx_pagespeed_static/" { }
 location ~ "^/ngx_pagespeed_beacon" { }
-```sh```
+```
 
 ## <a name="2" >2. Cai them module RTMP phuc vu cho viec truyen tai da phuong tien</a>
 
