@@ -5,6 +5,8 @@
 [2. Cai dat](#2)
 
 [3. Tai lieu tham khao](#IV)
+
+___
 ## <a name="1" >1. Chuan bi</a>
 
 Cai dat cac goi can thiet, tat firewalld
