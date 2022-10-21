@@ -1,8 +1,13 @@
 
 ## <a name="" >Install-nginx-from-source</a>
+[1. Chuan bi](#1)
+
+[2. Cai dat](#2)
+
+[3. Tai lieu tham khao](#IV)
 ## <a name="1" >1. Chuan bi</a>
 
-Cai dat cac goi can thiet
+Cai dat cac goi can thiet, tat firewalld
 
 ```sh
 systemctl stop firewalld
@@ -161,7 +166,7 @@ Khởi động dịch vụ Nginx
 
 ```sh
 systemctl start nginx
-```sh```
+```
 
 Kiem tra trang thai
 
