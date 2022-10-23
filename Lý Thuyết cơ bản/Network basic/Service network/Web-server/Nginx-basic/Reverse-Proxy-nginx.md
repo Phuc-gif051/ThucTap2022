@@ -5,7 +5,8 @@ Cùng với Apache, Tomcat, Nginx là một web server phổ biến trên HDH Li
 - Reverse Proxy là gì?
 Reverse Proxy được hiểu là một proxy server trung gian giữa Client (máy khách) và Server (máy chủ). Mội yêu cầu (request) từ client tới máy chủ và ngược lại phản hồi (reponse) từ máy chủ về client đều bắt buộc phải đi qua proxy server. Vì vậy máy chủ hoàn toàn được ẩn danh trước Client. Các client chỉ có thể biết được thông tin của Proxy Server.
 
-https://vinasupport.com/uploads/2021/09/Nginx-Reverse-Proxy-Architect.png
+<img src=https://user-images.githubusercontent.com/79830542/197379320-f315542b-23e0-451e-8825-a0b8f508291f.png width=650>
+
 
 - Tại sao cần sử dụng Reverse Proxy?
   
@@ -14,8 +15,30 @@ https://vinasupport.com/uploads/2021/09/Nginx-Reverse-Proxy-Architect.png
    + Tường lửa và ẩn danh: Vì là một proxy server nên nó có thể lọc các request nhanh chóng, đồng thời che giấu địa chỉ IP của máy chủ.
 
 ## <a name="2" >2. Cấu hình Reverse Proxy trên Nginx</a>
+_Đây là cấu hình reverse cơ bản để reverse sang 1 web-server khác_
 ### <a name="2.1" >2.1 Mô hình triển khai</a>
+- Máy client: sử dụng windows 10, có thể khai báo cấu hình tại file host.
+- Máy server 1: sử dụng CentOS 7, đã cài đặt Nginx để làm máy reverse.
+- Máy server 2: sử dụng CentOS 7, đã cài đặt Nginx để làm máy web server, và cài đặt 1 website cơ bản.
+<img src= >
 
+### <a name="2.2">2.2 Cấu hình</a>
 
+⏯️
+B1: Khai báo 1 file cấu hình mới trên máy reverse. `vi /etc/nginx/conf/pet.lab.conf`
+B2: Khai báo cơ bản như sau:
+
+    ```sh
+    
+    ```
+B3: lưu lại và thoát, sử dụng `nginx -t` để kiểm tra cấu hình. Không gặp lỗi thì khởi động lại dịch vụ Nginx
+
+    ```sh
+    systemctl restart nginx
+    ```
+    
+B4: trên máy client, đã cấu hình file hosts hoặc sử dụng trình duyệt truy cập vào địa chỉ của máy server 1. Nhận được website đã cài đặt trên máy 2 là thành công.
+
+#### <a name="3">Tài liệu tham khảo</a>
 
 https://vinasupport.com/cau-hinh-reverse-proxy-proxy_pass-tren-nginx/
