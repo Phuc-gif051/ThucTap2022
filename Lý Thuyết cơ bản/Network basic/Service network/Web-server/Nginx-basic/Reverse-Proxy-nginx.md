@@ -1,6 +1,18 @@
+## Nội dung chính
+[1. Tổng quan reverse proxy](#1)
+
+[2. Cấu hình Reverse Proxy trên Nginx](#2)
+
+    [2.1 Mô hình triển khai](#2.1)
+    [2.2 Triển khai](#2.2)
+    
+[Tài liệu tham khảo](#3)
+
 Cùng với Apache, Tomcat, Nginx là một web server phổ biến trên HDH Linux. Nó có một tính năng Reverse Proxy được sử dụng như một chương trình cân bằng tải (Load Balancing). Trong bài viết này, chusng ta se hiểu qua về Reverse Proxy trên Nginx nhé!
 
 ## <a name="1" >1. Tổng quan Reverse Proxy</a>
+
+Cùng với Apache, Tomcat, Nginx là một web server phổ biến trên HDH Linux. Nó có một tính năng Reverse Proxy được sử dụng như một chương trình cân bằng tải (Load Balancing). Trong bài viết này, chusng ta se hiểu qua về Reverse Proxy trên Nginx nhé!
 
 - Reverse Proxy là gì?
 Reverse Proxy được hiểu là một proxy server trung gian giữa Client (máy khách) và Server (máy chủ). Mội yêu cầu (request) từ client tới máy chủ và ngược lại phản hồi (reponse) từ máy chủ về client đều bắt buộc phải đi qua proxy server. Vì vậy máy chủ hoàn toàn được ẩn danh trước Client. Các client chỉ có thể biết được thông tin của Proxy Server.
@@ -39,6 +51,10 @@ B3: lưu lại và thoát, sử dụng `nginx -t` để kiểm tra cấu hình. 
     
 B4: trên máy client, đã cấu hình file hosts hoặc sử dụng trình duyệt truy cập vào địa chỉ của máy server 1. Nhận được website đã cài đặt trên máy 2 là thành công.
 
+**Ngoài việc điều hướng đến web site khác, reverse còn có khả năng điều hướng đến các ứng dụng chạy treen nền web**
 #### <a name="3">Tài liệu tham khảo</a>
 
 https://vinasupport.com/cau-hinh-reverse-proxy-proxy_pass-tren-nginx/
+https://viblo.asia/p/cach-cau-hinh-nginx-thanh-reverse-proxy-aWj53jkQl6m
+
+Date acced: 21/10/2022
