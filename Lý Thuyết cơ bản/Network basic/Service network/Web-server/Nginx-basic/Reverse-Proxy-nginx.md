@@ -3,8 +3,8 @@
 
 [2. Cấu hình Reverse Proxy trên Nginx](#2)
 
-    [2.1 Mô hình triển khai](#2.1)
-    [2.2 Triển khai](#2.2)
+   - [2.1 Mô hình triển khai](#2.1)
+   - [2.2 Triển khai](#2.2)
     
 [Tài liệu tham khảo](#3)
 
@@ -34,7 +34,7 @@ _Đây là cấu hình reverse cơ bản để reverse sang 1 web-server khác_
 - Máy server 2: sử dụng CentOS 7, đã cài đặt Nginx để làm máy web server, và cài đặt 1 website cơ bản.
 <img src= >
 
-### <a name="2.2">2.2 Cấu hình</a>
+### <a name="2.2">2.2 Triển khai</a>
 
 ⏯️
 B1: Khai báo 1 file cấu hình mới trên máy reverse. `vi /etc/nginx/conf/pet.lab.conf`
