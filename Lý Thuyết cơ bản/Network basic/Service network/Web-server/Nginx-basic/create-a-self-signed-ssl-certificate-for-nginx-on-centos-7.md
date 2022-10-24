@@ -143,3 +143,6 @@ Bạn sẽ được đưa đến trang web của bạn. Nếu bạn nhìn vào t
 </p>
 
 
+### <a name="4" >Tài liệu tham khảo</a>
+
+https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-on-centos-7
