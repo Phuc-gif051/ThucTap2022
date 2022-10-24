@@ -112,3 +112,28 @@ sudo systemctl restart nginx
 
 ## <a name="3" >3. Kiểm thử</a>
 
+- Mở trình duyệt web của bạn và nhập https://tên miền hoặc IP của máy chủ vào thanh địa chỉ:
+
+```sh
+https://server_domain_or_IP
+```
+
+Bởi vì chứng chỉ bạn đã tạo không được ký bởi một trong những tổ chức phát hành chứng chỉ đáng tin cậy của trình duyệt của bạn, bạn có thể sẽ thấy một cảnh báo trông như hình dưới đây:
+
+<p align="center">
+	<img src="https://user-images.githubusercontent.com/79830542/197441613-6326a684-44cf-4e25-a9cb-ef5a36f87420.png" width="700">
+</p>
+
+Điều này được mong đợi và bình thường. Bạn chỉ quan tâm đến khía cạnh mã hóa của chứng chỉ, chứ không phải sự xác nhận của bên thứ ba về tính xác thực của máy chủ của bạn. Nhấp vào `ADVANCED` và sau đó nhấp vào liên kết được cung cấp để tiếp tục với website của bạn:
+
+<p align="center">
+	<img src="https://user-images.githubusercontent.com/79830542/197441823-c116eedd-1e49-499b-bf3e-31dd744dadbc.png" width="700">
+</p>
+
+Bạn sẽ được đưa đến trang web của bạn. Nếu bạn nhìn vào thanh địa chỉ của trình duyệt, bạn sẽ thấy một số dấu hiệu về bảo mật một phần. Đây có thể là ổ khóa có dấu “x” trên đó hoặc hình tam giác với dấu chấm than. Trong trường hợp này, điều này chỉ có nghĩa là chứng chỉ không thể được xác thực. Nó vẫn đang mã hóa kết nối của bạn.
+
+<p align="center">
+	<img src="https://user-images.githubusercontent.com/79830542/197442111-f108d31a-d682-4a1f-b700-245e7b2ea219.png" width="">
+</p>
+
+
