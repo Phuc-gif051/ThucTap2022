@@ -14,38 +14,45 @@ ___
 ___
 
 
-
-
 ## <a name="1" >1. add module ngx_pagespeed</a>
 
+Cai dat cac goi can thiet
+```sh
 yum install -y perl perl-devel perl-ExtUtils-Embed libxslt libxslt-devel libxml2 libxml2-devel gd gd-devel GeoIP GeoIP-devel pcre-devel wget
+```
 
 khai bao cac phien ban can cai dat
+```sh
 NPS_VERSION=1.13.35.2-stable
 NGINX_VERSION=1.22.0
+```
 
 tai ve
-
+```sh
 wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
 wget https://github.com/pagespeed/ngx_pagespeed/archive/v${NPS_VERSION}.zip
+```
 
 giai nen
-
+```sh
 tar -xvzf nginx-${NGINX_VERSION}.tar.gz
 unzip v${NPS_VERSION}.zip
+```
 
 di chuyển vào thư mục page speed vừa giải nén:
 ```sh
 cd incubator-pagespeed-ngx-1.13.35.2-stable/
-```sh```
+```
+
+
 
 tải về thư viện cần thiết, thực hiện từng câu lệnh theo thứ tự:
 ```sh
- - psol_url=https://dl.google.com/dl/page-speed/psol/${NPS_VERSION}.tar.gz
+  - psol_url=https://dl.google.com/dl/page-speed/psol/${NPS_VERSION}.tar.gz
 
- - [ -e scripts/format_binary_url.sh ] && psol_url=$(scripts/format_binary_url.sh PSOL_BINARY_URL)
+  - [ -e scripts/format_binary_url.sh ] && psol_url=$(scripts/format_binary_url.sh PSOL_BINARY_URL)
 
- - wget ${psol_url}
+  - wget ${psol_url}
 
  - tar -xzvf $(basename ${psol_url})
 ```
@@ -172,6 +179,8 @@ Add them module cho nginx
 ./auto/configure --add-module=../nginx-rtmp-module --with-pcre=../pcre-8.45 --with-openssl=../openssl-1.1.1o
 ```
 
+Co the su dung VLC media tren Windown de kiem thu. Theo huong dan tai video sau: [Using NGINX Open Source for Video Streaming and Storage](https://www.youtube.com/watch?v=Js1OlvRNsdI)
+
 ## <a name="3" >3. Install</a>
 Sau khi thêm các module vào mã nguồn, ta cần tiến hành cài đặt lại Nginx:
 
@@ -205,6 +214,7 @@ mkdir -p /var/cache/nginx
 ```sh
 nginx -t
 ```
+- Cài đặt thành công: <img src="https://user-images.githubusercontent.com/79830542/197447145-c42ff043-5cca-4302-9c15-dee380dad232.png" width="650">
 
 Thiết lập dịch vụ nginx cho máy Centos 7
 
@@ -239,7 +249,7 @@ Khởi động dịch vụ Nginx
 
 ```sh
 systemctl start nginx
-```sh```
+```
 
 Kiem tra trang thai
 
@@ -267,7 +277,9 @@ systemctl restart nginx
 ```
 
 Test:
+```sh
 curl -I -p http://localhost | grep X-Page-Speed
+```
 
 thaasy dich vu X-Page-Speed la thanh cong
 
@@ -282,3 +294,6 @@ https://viblo.asia/p/streaming-videos-server-su-dung-nginx-rtmp-va-hls-maGK7q4Ll
 https://www.youtube.com/watch?v=Js1OlvRNsdI
 
 https://www.youtube.com/watch?v=eyEHPbQdqnY
+
+
+Date acced: 14/10/2022
