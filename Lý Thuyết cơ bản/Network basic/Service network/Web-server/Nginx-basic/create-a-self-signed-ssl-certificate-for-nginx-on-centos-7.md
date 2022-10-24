@@ -48,7 +48,7 @@ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/privat
 	- -nodes: bỏ qua việc tạo mật khẩu bảo mật cho khoá, thông thường thì OpenSSL sẽ yêu cầu tạo mật khẩu cho khoá mới, và mỗi khi sử dụng đến ta sẽ phải nhập mật khẩu để Nginx có thể truy cập và sử dụng khoá. Đây là lựa chọn bỏ qua việc tạo mật khẩu.
 	- -days: khoảng thời gian mà khoá có hiệu lực, tính bằng ngày.
 	- -newkey: xác nhận đây là tạo ra khoá mới và cả chứng chỉ mới cùng 1 lúc.
-	- rsa: 2048 : sử dụng toạn toán mã hoá RSA, với khoá dài 2048 bit.
+	- rsa: 2048 : sử dụng thuật toán mã hoá RSA, với khoá dài 2048 bit.
 	- -keyout : Dòng này cho OpenSSL biết nơi đặt tệp khóa riêng đã tạo mà bạn đang tạo.
 	- -out : Điều này cho OpenSSL biết nơi đặt chứng chỉ mà bạn đang tạo.
 
@@ -67,19 +67,20 @@ Email Address []:webmaster@example.com
 
 Thông tin quan trọng nhất cần nhập chính xác là dòng `Common Name (eg, your name or your server's hostname) []`
 
-- Cả hai tệp bạn đã tạo sẽ được đặt trong các thư mục con thích hợp của thư mục /etc/ssl.
+- Cả hai tệp bạn đã tạo sẽ được đặt trong các thư mục con thích hợp của thư mục /etc/ssl/certs.
 
 _Gợi ý thêm:_
 
 >Nếu bạn muốn tạo khoá cá nhân và sử dụng trên môi trường internet thì nên tạo thêm 1 lớp bảo mật nữa cho khoá, để tránh bị xâm phạm.
->sử dụng câu lênh `sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048` sẽ mất 1 vài phút để tạo.
+>sử dụng câu lênh `sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048` sẽ mất 1 vài phút để tạo. 
+>Một nhóm Diffie-Hellman mạnh mẽ sẽ được tạo ra, được sử dụng để đàm phán [Perfect Forward Secrecy](https://en.wikipedia.org/wiki/Forward_secrecy) với khách hàng
 >Nó sẽ được lưu tại `/etc/ssl/certs/dhparam.pem`
 
 
 
 ### <a name="2.2" >Bước 2: cấu hình cho web-site muốn áp dụng khoá</a>
 
-- Tạo hoặc mở tệp config SSL: 
+- Tạo hoặc mở tệp config của website: 
 
 ```sh
 sudo vi /etc/nginx/conf.d/test.lab.conf
@@ -92,7 +93,7 @@ server {
     listen 443 http2 ssl;
     listen [::]:443 http2 ssl;
 
-    server_name your_server_name_or_ip;
+    server_name [your_server_name_or_ip];
 
     ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
     ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
@@ -142,6 +143,7 @@ Bạn sẽ được đưa đến trang web của bạn. Nếu bạn nhìn vào t
 	<img src="https://user-images.githubusercontent.com/79830542/197442111-f108d31a-d682-4a1f-b700-245e7b2ea219.png" width="">
 </p>
 
+Để có thể chắc chắn hơn, hãy dùng bất kỳ công cụ bắt gói tin nào để kiểm tra. Khuyên dùng: WireShark.
 
 ### <a name="4" >Tài liệu tham khảo</a>
 
