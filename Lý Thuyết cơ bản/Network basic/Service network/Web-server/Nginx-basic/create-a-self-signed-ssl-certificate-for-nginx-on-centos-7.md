@@ -118,10 +118,10 @@ sudo systemctl restart nginx
 
 ## <a name="3" >3. Kiểm thử</a>
 
-- Mở trình duyệt web của bạn và nhập https://tên miền hoặc IP của máy chủ vào thanh địa chỉ:
+- Mở trình duyệt web của bạn và nhập https://tên_miền_hoặc_IP_của_website vào thanh địa chỉ:
 
 ```sh
-https://server_domain_or_IP
+https://website_domain_or_IP
 ```
 
 Bởi vì chứng chỉ bạn đã tạo không được ký bởi một trong những tổ chức phát hành chứng chỉ đáng tin cậy của trình duyệt của bạn, bạn có thể sẽ thấy một cảnh báo trông như hình dưới đây:
