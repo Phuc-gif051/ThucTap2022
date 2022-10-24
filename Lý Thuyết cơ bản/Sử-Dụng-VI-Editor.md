@@ -33,3 +33,13 @@ mode
 - Xóa từ dòng thứ 1 —> dòng thứ 10, vào command mode, nhập vào
 `1,10d`
 - Chuyen 1 loat dong thanh comment: [dong_bat_dau],[dong_ket_thuc]s/^/#
+- Bỏ chú thích hàng loạt khi chú thích ở đầu dòng: 
+  - Đặt con trỏ của bạn vào #ký tự đầu tiên , nhấn Ctrl+V (hoặc Ctrl+Q cho gVim) và đi xuống cho đến dòng nhận xét cuối cùng và nhấn x, sẽ xóa tất cả các ký tự # theo chiều dọc.
+
+- Để bình luận một khối văn bản gần như giống nhau:
+
+  - Đầu tiên, đi đến dòng đầu tiên bạn muốn bình luận, nhấn CtrlV. Điều này sẽ đặt trình soạn thảo trong VISUAL BLOCKchế độ.
+  - Sau đó, sử dụng phím mũi tên và chọn cho đến dòng cuối cùng
+  - Bây giờ nhấn ShiftI, sẽ đưa trình chỉnh sửa vào INSERTchế độ và sau đó nhấn #. Điều này sẽ thêm một hàm băm vào dòng đầu tiên.
+  - Sau đó nhấn Esc(cho nó một giây) và nó sẽ chèn một #ký tự trên tất cả các dòng được chọn khác.
+  - Đối với phiên bản rút gọn của vim được vận chuyển với debian / ubfox theo mặc định, hãy nhập : s/^/# bước thứ ba để thay thế.  
