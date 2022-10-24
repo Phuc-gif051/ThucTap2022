@@ -164,3 +164,5 @@ Bạn sẽ được đưa đến trang web của bạn. Nếu bạn nhìn vào t
 https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-on-centos-7
 
 https://phoenixnap.com/kb/redirect-http-to-https-nginx#:~:text=1%20Nginx%20Redirect%20all%20HTTP%20traffic%20to%20HTTPS.,non-www%20website%204%20Reasons%20to%20Redirect%20Traffic.%20
+
+Chi tiết hơn về redirect: https://phoenixnap.com/kb/redirect-http-to-https-nginx#:~:text=1%20Nginx%20Redirect%20all%20HTTP%20traffic%20to%20HTTPS.,non-www%20website%204%20Reasons%20to%20Redirect%20Traffic.%20
