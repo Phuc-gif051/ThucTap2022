@@ -117,6 +117,20 @@ nginx: [warn] "ssl_stapling" ignored, issuer certificate not found
 sudo systemctl restart nginx
 ```
 
+### <a name="2.3" >2.3 Create a Redirect from HTTP to HTTPS</a>
+
+Thêm vào file config khối lệnh sau
+```sh
+server {
+    listen 80;
+    listen [::]:80;
+    server_name your_server_ip;
+    return 301 https://$host$request_uri;
+}
+```
+
+Trong đó:
+- return 301 https://$host$request_uri: là câu lệnh để chuyển hướng từ http sang https.
 ## <a name="3" >3. Kiểm thử</a>
 
 - Mở trình duyệt web của bạn và nhập https://tên_miền_hoặc_IP_của_website vào thanh địa chỉ:
@@ -148,3 +162,5 @@ Bạn sẽ được đưa đến trang web của bạn. Nếu bạn nhìn vào t
 ### <a name="4" >Tài liệu tham khảo</a>
 
 https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-on-centos-7
+
+https://phoenixnap.com/kb/redirect-http-to-https-nginx#:~:text=1%20Nginx%20Redirect%20all%20HTTP%20traffic%20to%20HTTPS.,non-www%20website%204%20Reasons%20to%20Redirect%20Traffic.%20
