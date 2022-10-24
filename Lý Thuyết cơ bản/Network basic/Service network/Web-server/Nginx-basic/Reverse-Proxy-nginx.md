@@ -39,9 +39,10 @@ _Đây là cấu hình reverse cơ bản để reverse sang 1 web-server khác_
 
 ⏯️
 B1: Khai báo 1 file cấu hình mới trên máy reverse. `vi /etc/nginx/conf/pet.lab.conf`
+
 B2: Khai báo cơ bản như sau:
 
-    ```sh
+    
     server {
     listen 172.16.15.6:8080;
 
@@ -61,7 +62,7 @@ B2: Khai báo cơ bản như sau:
            proxy_connect_timeout 300s;
          }
      }
-    ```
+    
     
   Trong đó:
   
@@ -76,9 +77,9 @@ B2: Khai báo cơ bản như sau:
     
 B3: lưu lại và thoát, sử dụng `nginx -t` để kiểm tra cấu hình. Không gặp lỗi thì khởi động lại dịch vụ Nginx
 
-    ```sh
-    systemctl restart nginx
-    ```
+  ```sh
+   systemctl restart nginx
+  ```
     
 B4: trên máy client, đã cấu hình file hosts hoặc sử dụng trình duyệt truy cập vào địa chỉ của máy server 1. Nhận được website đã cài đặt trên máy 2 là thành công.
 
