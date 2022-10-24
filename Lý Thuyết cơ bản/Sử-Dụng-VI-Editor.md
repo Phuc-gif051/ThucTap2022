@@ -32,3 +32,4 @@ mode
 - Xóa đi dòng thứ 50, vào command mode, nhập vào `50d`
 - Xóa từ dòng thứ 1 —> dòng thứ 10, vào command mode, nhập vào
 `1,10d`
+- Chuyen 1 loat dong thanh comment: [dong_bat_dau],[dong_ket_thuc]s/^/#
