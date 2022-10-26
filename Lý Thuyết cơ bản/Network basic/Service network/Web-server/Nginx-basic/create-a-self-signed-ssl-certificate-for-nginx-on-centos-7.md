@@ -8,6 +8,8 @@
  - [Tuỳ chọn - bắt buộc chuyển hướng sang https](#2.3)
 
 [3. Kiểm thử](#3)
+
+[Tài liệu tham khảo](#4)
 ___
 
 ## <a name="1" >1. Tổng quan về bảo mật duyệt web</a>
