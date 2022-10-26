@@ -5,6 +5,7 @@
 
  - [Bước 1: tạo chứng chỉ SSL](#2.1)
  - [Bước 2: cấu hình cho web-site muốn áp dụng khoá](#2.2)
+ - [Tuỳ chọn - bắt buộc chuyển hướng sang https](#2.3)
 
 [3. Kiểm thử](#3)
 ___
@@ -93,7 +94,7 @@ server {
     listen 443 http2 ssl;
     listen [::]:443 http2 ssl;
 
-    server_name [your_server_name_or_ip];
+    server_name your_server_name_or_ip;
 
     ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
     ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
@@ -124,7 +125,7 @@ Thêm vào file config khối lệnh sau
 server {
     listen 80;
     listen [::]:80;
-    server_name your_server_ip;
+    server_name your_server_name_or_ip;
     return 301 https://$host$request_uri;
 }
 ```
@@ -165,4 +166,11 @@ https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl
 
 https://phoenixnap.com/kb/redirect-http-to-https-nginx#:~:text=1%20Nginx%20Redirect%20all%20HTTP%20traffic%20to%20HTTPS.,non-www%20website%204%20Reasons%20to%20Redirect%20Traffic.%20
 
-Chi tiết hơn về redirect: https://phoenixnap.com/kb/redirect-http-to-https-nginx#:~:text=1%20Nginx%20Redirect%20all%20HTTP%20traffic%20to%20HTTPS.,non-www%20website%204%20Reasons%20to%20Redirect%20Traffic.%20
+Chi tiết hơn về redirect: 
+
+https://phoenixnap.com/kb/redirect-http-to-https-nginx#:~:text=1%20Nginx%20Redirect%20all%20HTTP%20traffic%20to%20HTTPS.,non-www%20website%204%20Reasons%20to%20Redirect%20Traffic.%20
+
+https://www.semtek.com.vn/redirect-301-la-gi/
+
+
+Date acced: 24/10/2022
