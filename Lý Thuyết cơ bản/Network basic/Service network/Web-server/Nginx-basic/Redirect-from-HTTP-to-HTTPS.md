@@ -12,11 +12,17 @@ Bài viết này cung cấp 1 số cách để chuyển hướng yêu cầu từ
 
 Trong bài viết này website đã được cấp TLS/SSL bằng việc tự tạo chứng chỉ bảo mật, ta sẽ chuyển hướng các yêu cầu của người dùng đến website đang sử dụng HTTP sang website sử dụng HTTPS.
 
+Lợi ích nhất định của việc chuyển hướng này:
+
+    - Bẳ buộc có kết nối an toàn đảm bảo cho cả người sử dụng và người cung cấp webstie.
+    - Có 1 cái nhìn tốt cho website trong thế giới SEO trên internet.
+    - Đơn giản là chỉ để thông báo tình trạng của trang web.
+    - Đồng bộ giữa các website mà không mất quá nhiều chi phí: mua bán, sang nhượng,...
+
 Ta sẽ sử dụng khối code 30x - khối code liên quan đến việc thay đổi địa chỉ của trang web. Thường thì nó sẽ trả về trong phần header chủ yếu là để thông báo cho trình duyệt hoặc các công cụ tìm kiếm. Cơ bản 1 số thông tin như sau:
 
 - 301 Redirect (Moved permanently) là một mã trạng thái HTTP ( response code HTTP) để thông báo rằng các trang web hoặc URL đã chuyển hướng vĩnh viễn sang một trang web hoặc URL khác, có nghĩa là tất cả những giá trị của trang web hoặc URL gốc sẽ chuyển hết sang URL mới.
 - 302 Redirect (Moved temporarily) là một mã trạng thái HTTP ( response code HTTP) thể thông báo rằng trang web hoặc URL đã chuyển hướng tạm thời sang địa chỉ mới nhưng vẫn phải dựa trên URL cũ. Vì một lý do nào đó, ví dụ như bảo trì trang web chính.
-
 - Mã 303 (See Other Location): Mã phản hồi này xuất hiện khi người dùng gửi yêu cầu truy cập cho một vị trí khác. Máy chủ sẽ chuyển yêu cầu truy cập đến vị trí đó.
 - Mã 304 (Not Modified): Mã phản hồi này cho biết không cần truyền lại các tài nguyên được yêu cầu. Đây là một loại chuyển hướng ngầm đến các tài nguyên được lưu trữ
 - Mã 305 (Use proxy): Tài nguyên mà bạn yêu cầu truy cập chỉ có thể truy cập được khi có sử dụng máy chủ proxy.
@@ -24,9 +30,36 @@ Ta sẽ sử dụng khối code 30x - khối code liên quan đến việc thay 
 
 ## <a name="2" >2. Thực hành</a>
 
+_Thực hành trên CentOS 7, Nginx 1.22.0_
+
 ### <a name="2.1" >2.1 Chuẩn bị</a>
 
 - 01 máy client: sử dụng windows 10
 - 01 máy webserver: sử dụng CentOS 7, đã cài Nginx, và triển khai thành công website với HTTP, đồng thời đã cung cấp chứng chỉ TLS/SSL tự ký cho website.
 
 ### <a name="2.2" >2.2 </a>
+
+Truy cập vào file config của website cần điều hướng. Thường là được lưu tại `/etc/nginx/conf.d/`. Sử dụng trình soạn thảo `vi` để chỉnh sửa.
+
+- chuyển hướng toàn bộ trang web sang HTTPS, thêm vào đoạn mã sau trong file config:
+
+```sh
+server {
+
+    listen 80 default_server;
+
+    server_name your_servername_or_ip;
+
+    return 301 https://$host$request_uri;
+
+}
+```
+
+Trong đó:
+
+    - Listen 80: lắng nghe trên cổng mặc định của HTTP
+    - Server_name: tên niềm của website hoặc địa chỉ IP
+    - return 301: mã code để thông báo với trình duyệt (công cụ tìm kiếm) website đã chuyển sang tên miền mới vĩnh viễn.
+    - https://$host$request_uri: đoạn mã ngắn để chỉ định phiên bản HTTPS cho tên miền mà người dùng nhập vào.
+
+- Chỉ định 1 website nhất định 
