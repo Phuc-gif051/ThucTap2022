@@ -131,12 +131,10 @@ server {
 - Chuyển hướng cho page:
 
 ```sh
-server {
-    ....
-    Location /index.html {
+Location /index.html {
 
-        rewrite ^/oldURL$ https://www.test.com/newURL redirect;
-        }
+       rewrite ^/oldURL$ https://www.test.com/newURL redirect;
+
 }
 ```
 
