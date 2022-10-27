@@ -41,7 +41,7 @@ _Thực hành trên CentOS 7, Nginx 1.22.0_
 
 Truy cập vào file config của website cần điều hướng. Thường là được lưu tại `/etc/nginx/conf.d/`. Sử dụng trình soạn thảo `vi` để chỉnh sửa.
 
-- chuyển hướng toàn bộ trang web sang HTTPS, thêm vào đoạn mã sau trong file config:
+- chuyển hướng toàn bộ các yêu cầu đến trang web cũ sử dụng HTTP sang trang web mới sử dụng HTTPS, thêm vào đoạn mã sau trong file config:
 
 ```sh
 server {
@@ -62,4 +62,106 @@ Trong đó:
     - return 301: mã code để thông báo với trình duyệt (công cụ tìm kiếm) website đã chuyển sang tên miền mới vĩnh viễn.
     - https://$host$request_uri: đoạn mã ngắn để chỉ định phiên bản HTTPS cho tên miền mà người dùng nhập vào.
 
-- Chỉ định 1 website nhất định 
+- Chỉ định chuyển hướng cho 1 website nhất định:
+
+```sh
+server {
+
+    listen 80 default_server;
+
+    server_name test.com;
+
+    return 301 https://test.com$request_uri;
+
+}
+```
+
+- Chỉ chấp nhận kết nối TLS/SSL: đơn giản là xoá bỏ đoạn code lắng nghe port 80, và để lắng nghe mặc định trên port 443. Ví dụ như:
+  
+  - Đoạn cấu hình trước khi thay đổi, chấp nhận cả kết nối HTTP và HTTPS:
+
+
+            server {
+
+                listen 80 default_server;
+
+                server_name test.com;
+
+                location {
+                    ...
+                }
+                
+            }
+
+            server {
+
+                listen 443;
+
+                server_name test.com;
+
+                location {
+                    ...
+                }
+
+            }
+
+
+
+  - Đoạn cấu hình sau khi thay đổi, chỉ chấp nhận kết nối HTTPS:
+
+
+            server {
+
+                    listen 443 ssl default_server;
+
+                    server_name test.com;
+
+            }
+
+- Chuyển hướng cho page:
+
+```sh
+Location /index.html {
+
+       rewrite ^/oldURL$ https://www.test.com/newURL redirect;
+
+}
+```
+
+- Chuyển từ domain cũ sang domain mới:
+
+```sh
+server {
+
+    listen 80;
+
+    listen 443 ssl;
+
+    server_name www.old_domain.com;
+
+    return 301 $scheme://www.new_domain.com$request_uri;
+
+}
+```
+
+- Chuyển từ `www` sang `non-www` hoặc ngược lại:
+
+```sh
+server {
+
+    server_name www.new_domain.com;
+
+    return 301 $scheme://new_domain.com$request_uri;
+
+}
+```
+
+## <a name="3" >Tài liệu tham khảo</a>
+
+[redirect-http-to-https-nginx](https://phoenixnap.com/kb/redirect-http-to-https-nginx#:~:text=1%20Nginx%20Redirect%20all%20HTTP%20traffic%20to%20HTTPS.,non-www%20website%204%20Reasons%20to%20Redirect%20Traffic.%20)
+
+
+[Create a Redirect from HTTP to HTTPS (Optional)](https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-on-centos-7)
+
+Date acced: 24/10/2022
+
