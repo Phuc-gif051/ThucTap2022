@@ -177,7 +177,7 @@ Có thể thấy trên thanh địa chỉ hiện cảnh báo `Không bảo mật
 - Truy cập trang web như trên nhưng đã được chuyển hướng sang sử dụng phương thức HTTPS đã được mã hoá:
 
 <p align="center">
-    <img src="../../Images/nginx-https.png" width="650">
+    <img src="../../Images/nginx-https.png" width="">
 </p>
 
 Có thể thấy trên thanh địa chỉ vẫn hiện cảnh báo, click vào cảnh bảo để xem chi tiết thì thấy `Chứng chỉ không hợp lệ` vì đây là chứng chỉ ta tự ký. Đồng thời đầu tên miền đã có `https`.
