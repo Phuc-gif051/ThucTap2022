@@ -125,6 +125,10 @@ server {
                     listen 443 ssl default_server;
 
                     server_name test.com;
+                 
+                    location {
+                    ...
+                }
 
             }
 
