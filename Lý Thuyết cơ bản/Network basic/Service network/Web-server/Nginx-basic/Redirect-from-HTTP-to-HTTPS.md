@@ -1,5 +1,15 @@
 ## Nội dung chính
 
+[1. Tổng quan](#1)
+
+[2. Thực hành](#2)
+
+- [2.1 Chuẩn bị](#2.1)
+- [2.2 Các câu lệnh cấu hình cơ bản](#2.2)
+
+[3. Kiểm thử](#3)
+
+[Tài liệu tham khảo](#4)
 
 ___
 
@@ -37,7 +47,7 @@ _Thực hành trên CentOS 7, Nginx 1.22.0_
 - 01 máy client: sử dụng windows 10
 - 01 máy webserver: sử dụng CentOS 7, đã cài Nginx, và triển khai thành công website với HTTP, đồng thời đã cung cấp chứng chỉ TLS/SSL tự ký cho website.
 
-### <a name="2.2" >2.2 </a>
+### <a name="2.2" >2.2 Các câu lệnh cấu hình cơ bản</a>
 
 Truy cập vào file config của website cần điều hướng. Thường là được lưu tại `/etc/nginx/conf.d/`. Sử dụng trình soạn thảo `vi` để chỉnh sửa.
 
@@ -156,7 +166,26 @@ server {
 }
 ```
 
-## <a name="3" >Tài liệu tham khảo</a>
+## <a name="3" >3. Kiểm thử</a>
+
+- truy cập trang web với phương thức HTTP không được mã hoá:
+
+![HTTP](../../Images/nginx-http.png)
+
+Có thể thấy trên thanh địa chỉ hiện cảnh báo `Không bảo mật`
+
+- Truy cập trang web như trên nhưng đã được chuyển hướng sang sử dụng phương thức HTTPS đã được mã hoá:
+
+<p align="center">
+    <img src="../../Images/nginx-https.png" width="650">
+</p>
+
+Có thể thấy trên thanh địa chỉ vẫn hiện cảnh báo, click vào cảnh bảo để xem chi tiết thì thấy `Chứng chỉ không hợp lệ` vì đây là chứng chỉ ta tự ký. Đồng thời đầu tên miền đã có `https`.
+
+Có thể dùng các ứng dụng bắt gói tin qua mạng để xem chi tiết quá trình truyền tin. Gợi ý dùng `WireShark`
+
+
+## <a name="4" >Tài liệu tham khảo</a>
 
 [redirect-http-to-https-nginx](https://phoenixnap.com/kb/redirect-http-to-https-nginx#:~:text=1%20Nginx%20Redirect%20all%20HTTP%20traffic%20to%20HTTPS.,non-www%20website%204%20Reasons%20to%20Redirect%20Traffic.%20)
 
