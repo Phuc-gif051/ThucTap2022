@@ -36,7 +36,7 @@ B2: cài đặt Nginx (E)
 
 - Để tránh gây quá nhiều lỗi trong quá trình tự cài đặt, ta sẽ sử dụng cách cài đặt từ câu lệnh `yum`
 
-- Xem chi tiết cách cài đặt và kiểm thử tại bài biết sau: [install-nginx-from-EPEL](../Nginx-basic/install-nginx-from-EPEL.md)
+- Xem chi tiết cách cài đặt và kiểm thử tại bài viết sau: [install-nginx-from-EPEL](../Nginx-basic/install-nginx-from-EPEL.md)
 
 <a name="b3"></a>
 B3: cài đặt M - database, ở bài viết này sẽ cài đặt MariaDB. Về cơ bản các câu lệnh của MariaDB cũng là các câu lệnh MySQL.
