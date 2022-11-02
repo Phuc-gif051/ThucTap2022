@@ -63,14 +63,21 @@ Trên máy 1 tiến hành cài đặt và cấu hình Web server với đăng nh
       ``` 
     - dùng trình soạn thảo vi để tạo file 1 file html cơ bản như sau: `vi /var/www/test.lab/html/index.html`
       ```sh
-      <html>
-          <head>
-              <title>Server cua toi</title>
-          </head>
-          <body>
-              <h1>Xin chao the gioi</h1>
-          </body>
-      </html>
+        <html>
+            <head>
+                <title>Server cua toi</title>
+            </head>
+            <body>
+                <h1>Xin chao!!! day la server 1</h1>
+                <title>Welcome to nginx!</title>
+                <style>
+                    html { color-scheme: light dark; }
+                    body { width: 35em; margin: 0 auto;
+                    font-family: Tahoma, Verdana, Arial, sans-serif; }
+                </style>
+            </body>
+        </html>
+
       ```
      - tiếp tục sử dụng trình soạn thảo vi để tạo file config và chỉnh sửa: `vi /etc/nginx/conf.d/test.lab.conf`
 
