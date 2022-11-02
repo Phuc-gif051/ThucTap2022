@@ -24,18 +24,21 @@ _Sau đây thực hiện với tài khoản root. Với tài khoản có quyền
 
 ### <a name="2.1" >2.1. Thực hiện trên máy cài LEMP </a>
 
-▶ B1: chuẩn bị môi trường (L).
+<a name="b1"></a>
+▶ B1: chuẩn bị môi trường (L)
 
 - Thực hiện trên môi trường CentOS 7, có thể tắt Selunix (Security Linux) và Firewall.
 - Có quyền đăng nhập `root` hoặc có quyền `sudo` (ưu tiên quyền `sudo` nếu thực hiện trên máy vật lý).
 - Có ít nhất một địa chỉ IPv4 và có kết nối đến internet.
 
+<a name="b2"></a>
 B2: cài đặt Nginx (E)
 
 - Để tránh gây quá nhiều lỗi trong quá trình tự cài đặt, ta sẽ sử dụng cách cài đặt từ câu lệnh `yum`
 
 - Xem chi tiết cách cài đặt và kiểm thử tại bài biết sau: [install-nginx-from-EPEL](../Nginx-basic/install-nginx-from-EPEL.md)
 
+<a name="b3"></a>
 B3: cài đặt M - database, ở bài viết này sẽ cài đặt MariaDB. Về cơ bản các câu lệnh của MariaDB cũng là các câu lệnh MySQL.
 
 - cài đặt bằng câu lệnh `yum`:
@@ -137,7 +140,7 @@ Nhập mật khẩu của `root` mà bạn vừa tạo ở bước trên. Hiện
 
 ![login-mariadb](../../Images/login-mariadb.PNG)
 
-_Tiến hành tạo thử 1 database (có thể thực hiện hoặc chuyển sang B4)_
+_Tiến hành tạo thử 1 database (có thể thực hiện hoặc chuyển sang [B4](#b4))_
 
 - Tạo 1 database mới:
 
@@ -182,6 +185,7 @@ DESCRIBE books;
 
 🕊 Thành công tạo 1 database mới với MariaDB.
 
+<a name="b4"></a>
 B4: Cài đặt PHP (P)
 
 - Trình biên dịch mã nguồn PHP, thường sử dụng cách chỉ định nguồn cài đặt để có thể cài được phiên bản mới nhất.
@@ -277,6 +281,8 @@ systemctl start php-fpm
 - Cấu hình website có sử dụng `php` cho nội dung động. Thêm đoạn cấu hình sau vào khối `server` của website đó:
 
 ```sh
+server {
+    #another_config  
     error_page 404 /404.html;
     error_page 500 502 503 504 /50x.html;
     
@@ -291,6 +297,7 @@ systemctl start php-fpm
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         include fastcgi_params;
     }
+}
 ```
 
 - Kiểm thử trên nền website (có thể làm hoặc không):
@@ -305,21 +312,27 @@ systemctl start php-fpm
 
   ```sh
   <?php
-
       phpinfo();
+  ?>    
   ```
 
   - lưu lại và thoát.
 
-- Trên trình duyệt của máy client, truy cập với đường dẫn 
+⏹
+
+- Trên trình duyệt của máy client, truy cập với đường dẫn
 
 ```sh
 http://<server_name_or_IP>:IP_PORT/info.php
 ```
 
+>Nếu bạn chỉnh sửa port trong config thì mới cần nhập vào chỉ số port đã chỉnh sửa.
+
 - Trả về kết quả tương tự như sau là thành công:
 
 ![infophp](../../Images/phpinfo.png)
+
+**Cơ bản đã cài đặt thành công LEMP stack trên môi trường CentOS 7**
 
 # <a name="3" >Tài liệu tham khảo</a>
 
@@ -328,3 +341,6 @@ http://<server_name_or_IP>:IP_PORT/info.php
 <https://mariadb.com/kb/en/mariadb-basics/#minor-items>
 
 <https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-centos-7>
+
+
+Date acced: 30/10/2022
