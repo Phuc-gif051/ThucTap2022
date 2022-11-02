@@ -317,6 +317,11 @@ server {
   ```
 
   - lưu lại và thoát.
+  - Khởi động lại Nginx để áp dụng config
+
+  ```sh
+  systemctl reload nginx
+  ```
 
 ⏹
 
