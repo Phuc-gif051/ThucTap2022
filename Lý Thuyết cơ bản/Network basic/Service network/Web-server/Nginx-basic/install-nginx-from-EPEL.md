@@ -1,5 +1,16 @@
 ## <a name="" >Cài đặt Nginx trên môi trường CentOS 7</a>
 
+[1. Mô hình triển khai](#1)
+
+[2. Tiến hành cài đặt](#2)
+
+   - [2.1 Cài đặt dịch vụ Nginx](#2.1)
+   - [2.2 Cấu hình cho web site của bạn trên web server](#2.2)
+
+[Tài liệu tham khảo](#3)
+
+___
+
 ## <a name="1" >1. Mô hình triển khai</a>
 - Máy 1: CentOS 7
     - Cài đặt nginx để làm Web server.
@@ -23,8 +34,18 @@
 Trên máy 1 tiến hành cài đặt và cấu hình Web server với đăng nhập là người dùng `root` hoặc người dùng có quền `sudo`
 
 ### <a name="2.1" >2.1 Cài đặt dịch vụ Nginx</a>
-- B1: cài đặt nginx `yum install nginx -y`
-- B2: Khởi động dịch vụ `systemctl start nginx`
+- B1: cài đặt nginx:
+
+```sh
+yum install nginx -y
+```
+
+- B2: Khởi động dịch vụ:
+
+```sh
+systemctl start nginx
+```
+
 - B3: cấu hình firewall
     - Mở port cho dịch vụ của nginx. Nếu không chỉ định port thì mặc định là 443 và 80 sẽ được sử dụng
     ```sh
