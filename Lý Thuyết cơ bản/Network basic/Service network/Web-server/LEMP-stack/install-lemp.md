@@ -65,6 +65,12 @@ systemctl status mariadb     (Xem trạng thái dịch vụ mariadb)
 ```sh
 mysql_secure_installation
 ```
+  
+  Hoac 
+   
+   ```sh
+   mariadb-secure-installation
+   ```
 
 - Thiết lập cơ bản như sau:
 
