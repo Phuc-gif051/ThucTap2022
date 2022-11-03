@@ -2,7 +2,7 @@
 
 [1. Over view](Over-view.md)
 
-[2.Install LEMP stack](install-lemp.md)
+[2. Install LEMP stack](install-lemp.md)
 
 [3. Cài đặt PhpMyAdmin quản lý database](c%C3%A0i-%C4%91%E1%BA%B7t-phpmyadmin-qu%E1%BA%A3n-l%C3%BD-database.md)
 
