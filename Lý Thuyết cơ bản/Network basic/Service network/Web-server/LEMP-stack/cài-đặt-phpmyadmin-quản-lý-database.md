@@ -101,7 +101,7 @@ systemctl restart nginx
 ```
 
 - Không có bất kỳ thông báo lỗi nào tức là đã thành công.
-- Trên máy windows 10 sử dụng trình duyệt để truy cập vào database. Với đường dẫn `http://<ip_or_name_server>:<IP_PORT>/phpmyadmin`
+- Trên máy windows 10 sử dụng trình duyệt để truy cập vào database. Với đường dẫn `http://<ip_or_name_website>:<IP_PORT>/phpmyadmin`
 
 >trong trường hợp bạn đã đổi port trong file config thì mới cần nhập chỉ số port đó vào đường dẫn.
 
