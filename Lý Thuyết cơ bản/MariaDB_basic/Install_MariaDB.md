@@ -159,3 +159,8 @@ ___
 <https://news.cloud365.vn/huong-dan-cai-dat-mariadb-server-phien-ban-10-4-7-tren-centos-7/>
 
 <https://mariadb.com/kb/en/authentication-plugin-unix-socket/>
+
+
+_Công cụ dbforge mạnh mẽ trong quản trị database: [dbForge Studio for MySQL](https://www.devart.com/dbforge/mysql/studio/)_
+
+Date accessed: 10/11/2022
