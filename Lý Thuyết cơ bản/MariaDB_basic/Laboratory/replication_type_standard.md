@@ -2,7 +2,14 @@
 
 _Bài thực hành triển khai MariaDB Standard Replication trên môi trường CentOS 7_
 
+[1. Mở đầu](#1)
 
+[2. Tiến hành triển khai](#2)
+
+- [2.1 Trên máy master](#2.1)
+- [2.2 Trên máy slave](#2.2)
+
+[#0](Tài liệu tham khảo)
 ___
 
 ## <a name="1" >1. Mở đầu</a>
@@ -53,10 +60,10 @@ ___
 
   - Trong đó:
 
-    - server_id là tùy chọn được sử dụng trong replication cho phép master server và slave server có thể nhận dạng lẫn nhau. Server_id với mỗi server là khác nhau, nhận giá trị từ 1 đến 4294967295 (mariadb >=10.2.2) và 0 đến 4294967295 (mariadb =<10.2.1)
+    - server_id là tùy chọn được sử dụng trong replication cho phép master server và slave server có thể nhận dạng lẫn nhau. Server_id với mỗi server là khác nhau, nhận giá trị từ 1 to (2^32)-1
     - log-bin hay log-basename là tên cơ sở để tạo tên tệp nhật ký nhị phân. Các tệp binary log sẽ có tên bắt đầu như thế.
-    - binlog-format là định dạng dữ liệu được lưu trong file bin log.
-    - binlog-do-db là tùy chọn để nhận biết cơ sở dữ liệu nào sẽ được replication. Nếu muốn replication nhiều CSDL, bạn phải viết lại tùy chọn binlog-do-db nhiều lần. Hiện tại không có option cho phép chọn toàn bộ CSDL để replica mà bạn phải ghi tất cả CSDL muốn replica ra theo option này.
+    - binlog-format là định dạng dữ liệu được lưu trong file bin log. Có 3 dạng chính: Statement-Based Logging/Row-Based Logging/Mixed Logging
+    - binlog-do-db là tùy chọn để nhận biết cơ sở dữ liệu nào sẽ được replication. Nếu muốn replication nhiều CSDL, bạn phải viết lại tùy chọn binlog-do-db nhiều lần ở cả máy master và máy slave. Hiện tại không có option cho phép chọn toàn bộ CSDL để replica mà bạn phải ghi tất cả CSDL muốn replica ra theo option này.
 
 - Restart lại dịch vụ để nhận cấu hình mới:
 
@@ -112,36 +119,42 @@ ___
 
     >Nhập password của user root khi được yêu cầu
 
+  - Hoặc có thể dump 1 database nhất định, sử dụng cho việc replica:
+
+  ```sh
+  mysqldump -u root -p database_name > database_name.sql
+  ```
+
 - Sử dụng câu lệnh `scp` để copy file vừa dump sang máy slave:
 
     ```sh
-    scp masterdatabase.sql root@<IP_slave_machine>:/root/masterdatabase.sql
+    scp masterdatabase.sql root@<IP_slave_machine>:/root
     ```
 
 - Truy cập trở lại Mariadb để unlock tables và lấy thông tin cần thiết của master
   
   - Unlock tables để có thể thao tác lại với database:
 
-  ```sh
-  UNLOCK TABLES;
-  ```
+    ```sh
+    UNLOCK TABLES;
+    ```
 
   - Lấy thông tin cần thiết của master:
 
-  ```sh
-  SHOW MASTER STATUS:
-  ```
+    ```sh
+    SHOW MASTER STATUS:
+    ```
 
   - Thông tin trả về cơ bản như sau:
 
-  ```sh
-    +----------------+----------+--------------+------------------+
-    | File           | Position | Binlog_Do_DB | Binlog_Ignore_DB |
-    +----------------+----------+--------------+------------------+
-    | master.000001  |      326 | replica_db   |                  |
-    +----------------+----------+--------------+------------------+
-    1 row in set (0.001 sec)
-  ```
+    ```sh
+      +----------------+----------+--------------+------------------+
+      | File           | Position | Binlog_Do_DB | Binlog_Ignore_DB |
+      +----------------+----------+--------------+------------------+
+      | master.000001  |      326 | replica_db   |                  |
+      +----------------+----------+--------------+------------------+
+      1 row in set (0.001 sec)
+    ```
 
   >Hãy lưu lại các thông tin này để cấu hình cho máy slave.
 
@@ -159,7 +172,90 @@ ___
     firewall-cmd --reload
     ```
 
-- Sử dụng `vi` để truy cập và chỉnh sửa file config:
+- Sử dụng `vi` để truy cập và chỉnh sửa file config, thêm vào nội dung cơ bản sau:
+
+  ```sh
+  [mariadb]
+    server-id = 2
+    replicate-do-db=replica_db
+  ```
+
+- Tiến hành import database đã dump ở master vào máy slave:
+
+  ```sh
+  mysql -u root -p < /root/masterdatabase.sql
+  ```
+
+  >Nhập password cho user nếu có yêu cầu
+
+- Restart Mariadb để nhận các thay đổi:
+
+  ```sh
+  systemctl restart mariadb
+  ```
+
+- Truy cập vào Mariadb để hướng dẫn máy slave tìm file Master log và master log position
+
+  >Tạm dừng slave
+
+  ```sh
+  STOP SLAVE;
+  ```
+  
+  >Chỉ ra các thông số cho slave biết để kết nối đến master
+
+  ```sh
+  CHANGE MASTER TO 
+    MASTER_HOST='IP_or_Hostname', 
+    MASTER_USER='slave_user', 
+    MASTER_PASSWORD='abc@123', 
+    MASTER_PORT=3306,
+    MASTER_LOG_FILE='master.000001', 
+    MASTER_LOG_POS=326;
+  ```
+
+  >Nếu không có bất kỳ lỗi nào có thể tiến hành khởi chạy slave.
+
+  ```sh
+  START SLAVE;
+  ```
+
+  >Để chắc chắn hệ thống hoạt động trơn chu hãy kiểm tra lại trạng thái hoạt động của slave
+
+  ```sh
+  SHOW SLAVE STATUS\G;
+  ```
+
+  - Nhận được output tương tự như sau tức là hệ thống đã kết nối thành công.
+
+  <img src="../Images/show_slave_status_G.PNG" width="">
+
+- Để thêm nhiều hơn 1 mấy slave vào hệ thống thì ta chỉ cần:
+
+  - B1: tạm dừng các hành động có ảnh hưởng đến database
+
+    ```sh
+    stop slave;
+    flush table with read lock;  
+    ```
+
+  - B2: dump database ở máy master và copy vào máy slave
+  - B3: Cấu hình máy slave tương tự như ở máy đầu tiên, lưu ý ở phần server-id phải khác với các máy đã có trong hệ thống.
+  - B4: Mở khoá cho các thao tác ảnh hưởng đến database
+
+    ```sh
+    UNLOCK TABLES;
+    ```
+
+## <a name="0" >Tài liệu tham khảo</a>
+
+<https://mariadb.com/kb/en/setting-up-replication/>
+
+<https://mariadb.com/kb/en/replication-commands/>
+
+<https://news.cloud365.vn/mariadb-huong-dan-cau-hinh-mariadb-replication/>
+
+Date accessed: 14/11/2022
 
 
 

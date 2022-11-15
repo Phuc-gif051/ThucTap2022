@@ -56,7 +56,7 @@ Xem chi tiết các `options`: <https://mariadb.com/kb/en/mariadb-dumpmysqldump/
 - Restoring a MySQL dump
 
     ```sh
-    mysql  database_name < file.sql
+    mysql -u <user_name> -p <password> database_name < file.sql
     ```
 
     >Đổ dữ liệu vào 1 database đã có sẵn

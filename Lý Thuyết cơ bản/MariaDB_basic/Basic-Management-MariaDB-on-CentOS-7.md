@@ -193,7 +193,7 @@ _Thường thì việc thay đổi các cấu hình này phục vụ cho việc 
 
 _Ta sẽ dùng luôn file mặc định là `/etc/my.cnf`_
 
-- Đổi port mặc định 3306.
+- **Đổi port mặc định 3306.**
   - Chỉ cần thêm khai báo số port vào bên dưới đối tượng bạn muốn áp dụng là được. Sử dụng trình duyệt `vi` để truy cập và thay đổi.
 
     ```sh
@@ -225,7 +225,7 @@ _Ta sẽ dùng luôn file mặc định là `/etc/my.cnf`_
 
     <img src="Images/changed_port.PNG" width="">
 
-- Bind-address
+- **Bind-address**
   - Khai báo về cách thức mà client có thể kết nối đến MariaDB server thông qua các NIC (Network Interface Card) có trên máy server.
   - Thường thì có 3 kiểu chủ đạo:
     - bind-address=0.0.0.0 : cho phép client truy cập vào bằng bất kỳ NIC nào có trên máy

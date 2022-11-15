@@ -172,6 +172,8 @@ show master status;
 
 <https://mariadb.com/kb/en/replication-cluster-multi-master/>
 
+<https://mariadb.com/kb/en/replication-threads/>
+
 <https://news.cloud365.vn/gioi-thieu-ve-mariadb-replication-master-slave/>
 
 <https://mariadb.com/kb/en/overview-of-the-binary-log/>
