@@ -142,7 +142,7 @@ _Thực hiện tương tự_
   - <img src="../Images/file_etc_my_cnf.PNG" width="">
   - Lúc này file binlog sẽ có định dạng là: `master1.<number>` (với number bất đầu từ 000001)
 
-  - Trên máy slave file relay được lưu với định dạng: `hostname-relay-bin.<number>`
+  - Trên máy slave file relay được lưu với định dạng: `<hostname>-relay-bin.<number>`
   - <img src="../Images/slave_relay_bin.PNG" width="">
 
   - Với mỗi lần thiết lập kết nối mới sẽ sinh ra file binlog/relay log mới.
@@ -151,7 +151,7 @@ _Thực hiện tương tự_
 
 <https://news.cloud365.vn/mariadb-replication-cac-test-case-cho-mariadb-master-slave/>
 
-_Đôi khi xảy ra lỗi bị trùng khoá chính trong bảng dữ liệu tại tham khảo cách xử lý sau: <https://stackoverflow.com/questions/64658401/duplicate-key-error-after-mariadb-replication-setup>_
+_Đôi khi xảy ra lỗi bị trùng khoá chính trong bảng dữ liệu tại máy slave, tham khảo cách xử lý sau: <https://stackoverflow.com/questions/64658401/duplicate-key-error-after-mariadb-replication-setup>_
 
 <https://mariadb.com/kb/en/show/>
 
