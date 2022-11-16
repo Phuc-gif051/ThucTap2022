@@ -1,6 +1,6 @@
 ## Nội dung chính
 
-_Một vài trường hợp đơn giản có thể xảy ta trong quá trình vận hành replica._
+_Thử nghiệm một vài trường hợp đơn giản có thể xảy ta trong quá trình vận hành replica._
 
 ## <a name="1" >I. Các máy bị mất kết nối</a>
 
@@ -50,3 +50,57 @@ _Thực hiện tương tự_
 
 ## <a name="2" >II. Chuyển máy slave thành máy master</a>
 
+- Trong trường hợp cần nâng cấp máy slave thành máy master: vì bảo mật, hiệu suất, sự cố ở máy master,...
+- Đăng nhập vào máy slave tiến hành chuyển đổi.
+- Xoá cấu hình chỉ định làm slave cho máy:
+
+    ```sh
+    stop slave;
+    reset slave all;
+    ```
+
+- Khởi động lại dịch vụ để nhận cấu hình mới:
+
+    ```sh
+    systemctl restart mariadb
+    ```
+
+- Khai báo cấu hình mới để máy trở thành new master với các bước thực hiện của việc cấu hình 1 master.
+
+- Chỉnh sửa các kết nối cần thiết đến máy master mới để hệ thống có thể hoạt động bình thường.
+
+- Sau khi hệ thống mới hoạt động bình thường, nếu sử dụng máy master cũ ta cần dump database từ new master về old master và cấu hình lại các máy trong hệ thống.
+
+## <a name="3" >III. Máy master bị lỗi</a>
+
+- Trường hợp máy master bị lỗi, gây mất mát, hỏng dữ liệu. Đồng thời các lỗi đó cũng được truyền đến các máy slave gây ra hỏng dữ liệu cho toàn hệ thống.
+- Lúc này ta cần restore lại database mà trước đây đã back-up trên máy master. Cần kiểm tra xem các restore có được áp dụng trên các máy slave để đảm bảo tính toàn vẹn của dữ liệu hay không.
+
+**Tiến hành thử nghiệm**
+
+- Tạo 1 file backup đơn giản với mysqldump:
+
+    ```sh
+    mysqldump -u [user_name] -p [dbname] > [backupfile.sql]
+    ```
+
+    Trong đó:
+  - [user_name] : tên tài khoản sở hữu database.
+  - p : yêu cầu nhập password cho user để xác thực và thực thi câu lệnh.
+  - [dbname] : Tên của database.
+  - [backupfile.sql] : Tên file backup muốn lưu.
+
+- Tiến hành chỉnh sửa dữ liệu bất kỳ, để giả định trường hợp cần thử nghiệm.
+- Chuyển sang máy slave, kiểm tra và nhận thấy dữ liệu được thêm vẫn xuất hiện trong máy slave.
+- Tiến hành import lại database để restore database trước khi được thêm dữ liệu.
+
+    ```sh
+    mysql -u [user_name] -p [dbname] < [backupfile.sql]
+    ```
+
+- Dễ dàng nhận thấy các dữ liệu từ việc back-up đã được ghi lại trên máy master. Chuyển sang máy slave để kiểm tra việc replicate.
+- Nếu không có bất kỳ sai sót nào trong quá trình thao tác hay hệ thống mạng lỗi thì ta sẽ nhận thấy database đã restore trên máy master được đồng bộ tại máy slave.
+
+## <a name="0" >Tài liệu tham khảo</a>
+
+<https://news.cloud365.vn/mariadb-replication-cac-test-case-cho-mariadb-master-slave/>
