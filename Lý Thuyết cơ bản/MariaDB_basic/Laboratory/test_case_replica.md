@@ -2,6 +2,17 @@
 
 _Thử nghiệm một vài trường hợp đơn giản có thể xảy ta trong quá trình vận hành replica._
 
+[I. Các máy bị mất kết nối](#1)
+
+- [1. Máy master mất kết nối](#1.1)
+- [2. Máy slave mất kết nối](#1.2)
+
+[II. Chuyển máy slave thành máy master](#2)
+
+[III. Máy master bị lỗi](#3)
+
+[Tài liệu tham khảo](#0)
+
 ## <a name="1" >I. Các máy bị mất kết nối</a>
 
 ### <a name="1.1" >1. Máy master mất kết nối</a>
@@ -101,6 +112,48 @@ _Thực hiện tương tự_
 - Dễ dàng nhận thấy các dữ liệu từ việc back-up đã được ghi lại trên máy master. Chuyển sang máy slave để kiểm tra việc replicate.
 - Nếu không có bất kỳ sai sót nào trong quá trình thao tác hay hệ thống mạng lỗi thì ta sẽ nhận thấy database đã restore trên máy master được đồng bộ tại máy slave.
 
+## <a name="4" >4. Một số cách kiểm tra việc đồng bộ</a>
+
+- Ngoài cách select dữ liệu trong bảng, thì còn 1 cách nữa mà mình biết để xem tính đúng đắn của việc đồng bộ. Đó là xem file binlog/relay log.
+- Trên máy master, để xem file binlog thực hiện câu lệnh
+
+    ```sh
+    show binlog events in 'name_binlog'\G;
+    ```
+
+    Trong trường hợp không xác định được binlog mà slave đang đọc thì trên máy slave, hãy chạy câu lệnh
+
+    ```sh
+    show slave status\G;
+    ```
+
+    Ta sẽ thu được tên của binlog tại dòng: `Master_Log_File` và tên của file relay tại dòng: `Relay_Log_File`
+
+- Trên máy slave chạy câu lệnh:
+
+    ```sh
+    show relaylog events in 'name_relay_log'\G;
+    ```
+
+- Sau khi hiện thông tin, trên cả 2 máy ta hãy so sánh chỉ số tại dòng: `End_log_pos` của các row xuất hiện. Chỉ số bằng nhau nghĩa là máy slave đọc đúng và áp dụng đủ các thay đổi từ máy master.
+
+- Các file binlog và relay log được lưu tại: /var/lib/mysql
+  - Trên máy master được lưu với định dạng được khai báo trong file cấu hình tại file `/etc/my.cnf`, tại dòng `log-bin=`
+  - <img src="../Images/file_etc_my_cnf.PNG" width="">
+  - Lúc này file binlog sẽ có định dạng là: `master1.<number>` (với number bất đầu từ 000001)
+
+  - Trên máy slave file relay được lưu với định dạng: `hostname-relay-bin.<number>`
+  - <img src="../Images/slave_relay_bin.PNG" width="">
+
+  - Với mỗi lần thiết lập kết nối mới sẽ sinh ra file binlog/relay log mới.
+
 ## <a name="0" >Tài liệu tham khảo</a>
 
 <https://news.cloud365.vn/mariadb-replication-cac-test-case-cho-mariadb-master-slave/>
+
+_Đôi khi xảy ra lỗi bị trùng khoá chính trong bảng dữ liệu tại tham khảo cách xử lý sau: <https://stackoverflow.com/questions/64658401/duplicate-key-error-after-mariadb-replication-setup>_
+
+<https://mariadb.com/kb/en/show/>
+
+<http://code.openark.org/blog/mysql/on-show-binlogrelaylog-events>
+
