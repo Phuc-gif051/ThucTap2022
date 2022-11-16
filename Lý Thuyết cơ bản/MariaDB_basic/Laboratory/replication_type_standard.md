@@ -9,7 +9,7 @@ _Bài thực hành triển khai MariaDB Standard Replication trên môi trườn
 - [2.1 Trên máy master](#2.1)
 - [2.2 Trên máy slave](#2.2)
 
-[#0](Tài liệu tham khảo)
+[Tài liệu tham khảo](#0)
 ___
 
 ## <a name="1" >1. Mở đầu</a>

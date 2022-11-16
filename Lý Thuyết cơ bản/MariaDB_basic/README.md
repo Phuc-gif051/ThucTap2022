@@ -11,3 +11,9 @@
 [5. Basic Management Database on CentOS 7](Basic-Management-Database-on-CentOS-7.md)
 
 [6. Giới thiệu về lưu trữ phân tán trong MariaDB](Begin-MariaDB-Relication-Master-Slave.md)
+
+**[Thực hành](../../Lý%20Thuyết%20cơ%20bản/MariaDB_basic/Laboratory)**
+
+[7. Triển khai replication dạng Standard](../../Lý%20Thuyết%20cơ%20bản/MariaDB_basic/Laboratory/replication_type_standard.md)
+
+[8. Một vài trường hợp cơ bản trong quá trình vận hành Replicate Standard](../../Lý%20Thuyết%20cơ%20bản/MariaDB_basic/Laboratory/test_case_replica.md)
