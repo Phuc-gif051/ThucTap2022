@@ -265,6 +265,20 @@ _Ta sẽ dùng luôn file mặc định là `/etc/my.cnf`_
   yum info mariadb-server
   ```
 
+**Gỡ bỏ quyền của 1 user**
+
+- Sử dụng lệnh sql revoke để gỡ bỏ quyền:
+
+  ```sh
+  REVOKE <permission> ON <database name>.<table name> FROM <user name>@<host name>;
+  ```
+
+  VD:
+
+  ```sh
+  REVOKE ALL PRIVILEGES ON *.* TO 'root'@'%';
+  ```
+
 ### <a name="0" >Tài liệu tham khảo</a>
 
 <https://news.cloud365.vn/thao-tac-quan-tri-mariadb-tren-centos-7/>
