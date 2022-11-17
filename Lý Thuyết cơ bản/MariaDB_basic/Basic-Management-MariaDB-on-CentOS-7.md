@@ -2,6 +2,18 @@
 
 _Các điều khiển MariaDB cơ bản trên môi trường CentOS 7_
 
+[Chuẩn bị](#1)
+
+[Các câu lệnh quản lý cơ bản](#2)
+
+[File cấu hình trên CentOS 7](#3)
+
+[Đổi port, bind-address](#4)
+
+[Tài liệu tham khảo](#0)
+
+
+
 
 ___
 
