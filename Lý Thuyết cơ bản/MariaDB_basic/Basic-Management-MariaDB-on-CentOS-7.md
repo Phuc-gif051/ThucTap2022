@@ -276,7 +276,7 @@ _Ta sẽ dùng luôn file mặc định là `/etc/my.cnf`_
   VD:
 
   ```sh
-  REVOKE ALL PRIVILEGES ON *.* TO 'root'@'%';
+  REVOKE ALL PRIVILEGES ON *.* FROM 'root'@'%';
   ```
 
 ### <a name="0" >Tài liệu tham khảo</a>
@@ -284,4 +284,6 @@ _Ta sẽ dùng luôn file mặc định là `/etc/my.cnf`_
 <https://news.cloud365.vn/thao-tac-quan-tri-mariadb-tren-centos-7/>
 
 <https://mariadb.com/kb/en/configuring-mariadb-for-remote-client-access/>
+
+<https://mariadb.com/kb/en/revoke/>
 
