@@ -13,6 +13,7 @@ _Thử nghiệm một vài trường hợp đơn giản có thể xảy ta trong
 
 [Tài liệu tham khảo](#0)
 
+___
 ## <a name="1" >I. Các máy bị mất kết nối</a>
 
 ### <a name="1.1" >1. Máy master mất kết nối</a>
@@ -78,7 +79,7 @@ _Thực hiện tương tự_
 
 - Khai báo cấu hình mới để máy trở thành new master với các bước thực hiện của việc cấu hình 1 master.
 
-- Chỉnh sửa các kết nối cần thiết đến máy master mới để hệ thống có thể hoạt động bình thường.
+- **Chỉnh sửa các kết nối cần thiết đến máy master mới để hệ thống có thể hoạt động bình thường. Đây là chỉnh sửa mà cho phép các kết nối từ bên ngoài được phép truy cập vào database server, trên MariaDB có thể tham khảo tính năng [MariaDB for Remote Client Access.](https://mariadb.com/kb/en/configuring-mariadb-for-remote-client-access/)**
 
 - Sau khi hệ thống mới hoạt động bình thường, nếu sử dụng máy master cũ ta cần dump database từ new master về old master và cấu hình lại các máy trong hệ thống.
 
