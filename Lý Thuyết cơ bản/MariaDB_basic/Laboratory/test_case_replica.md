@@ -112,6 +112,7 @@ _Thực hiện tương tự_
 
 - Dễ dàng nhận thấy các dữ liệu từ việc back-up đã được ghi lại trên máy master. Chuyển sang máy slave để kiểm tra việc replicate.
 - Nếu không có bất kỳ sai sót nào trong quá trình thao tác hay hệ thống mạng lỗi thì ta sẽ nhận thấy database đã restore trên máy master được đồng bộ tại máy slave.
+- Trong quá trình restore, có thể xảy ra khả năng master bị reboot không mong muốn, khi này quá trình restore sẽ bị dừng lại, cần phải restore lại đồng thời trên cả máy master và slave. Sau đó để hệ thống replica có thể hoạt động bình thường thì ta cần cấu hình lại trên máy slave về các thông số kết nối mới được sinh ra trên máy master.
 
 ## <a name="4" >4. Một số cách kiểm tra việc đồng bộ</a>
 
