@@ -56,12 +56,17 @@ Zabbix Proxy là một giải pháp lý tưởng cho việc giám sát tập tru
 Zabbix Proxy cũng được sử dụng để phân phối tải của một Zabbix Server
 
 c. Zabbix Agent
-Để giám sát chủ động các thiết bị cục bộ và các ứng dụng (ổ cứng, bộ nhớ, …) trên hệ thống mạng. Zabbix Agent sẽ được cài lên trên thiết bị đó và từ đó Agent sẽ thu thập thông tin hoạt động từ thiết bị mà nó đang chạy và báo cáo dữ liệu này đến Zabbix Server để xử lý.
+Để giám sát chủ động các thiết bị cục bộ và các ứng dụng (ổ cứng, bộ nhớ, …) trên hệ thống mạng. Zabbix Agent sẽ được cài lên trên thiết bị đó và từ đó Agent sẽ thu thập thông tin hoạt động từ thiết bị mà nó đang chạy và báo cáo dữ liệu này đến Zabbix Server để xử lý. Đã được phát triển lên [Agent 2](https://www.zabbix.com/documentation/5.0/en/manual/concepts/agent2)
 
 d. Web interface
 Để dễ dàng truy cập dữ liệu theo dõi và sau đó cấu hình từ giao diện web cung cấp. Giao diện là một phần của Zabbix Server, và thường chạy trên các Zabbix Server.
 
+e. Database
+Database sử dụng MariaDB, MySQL, PostgresSQL để lưu trữ dữ liệu thu thập được.
+
 ## <a name="0" >Tài liệu tham khảo</a>
+
+<https://www.zabbix.com/documentation/5.0/en/manual/introduction/overview>
 
 <https://cuongquach.com/zabbix-la-gi-tim-hieu-he-thong-zabbix.html>
 
