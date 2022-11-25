@@ -18,9 +18,11 @@ ___
 
 ## <a name="1" >I. Zabbix là gì?</a>
 
-Zabbix là một giải pháp giám sát dịch vụ hệ thống mạng phân tán mã nguồn mở nổi tiếng, có nhiều tính năng độc đáo và khả năng tùy biến cao. Zabbix có khả năng phục vụ cho hệ thống mạng tầm trung và lớn của các doanh nghiệp hiện tại với mức chi phí đầu tư vừa phải.
+Zabbix là một giải pháp giám sát dịch vụ hệ thống phân tán mã nguồn mở nổi tiếng, có nhiều tính năng độc đáo và khả năng tùy biến cao. Zabbix có khả năng phục vụ cho hệ thống tầm trung và lớn của các doanh nghiệp hiện tại với mức chi phí đầu tư vừa phải.
 
-Được sáng lập bởi Alexei Vladishev và hiện tại được phát triển cũng như hỗ trợ bởi tổ chức Zabbix SIA. Zabbix được viết và phát hành dưới bản quyền General Public License (GPL) phiên bản 2. Zabbix sử dụng các cơ chế cảnh báo linh hoạt cho quản trị viên như email, sms, OTT App,...Và các báo cáo cực chính xác dựa trên các dữ liệu thu thập được từ các thiết bị trong hệ thống.
+Zabbix có khả năng giám sát hệ thống mạng, hiệu năng và tính toàn vẹn của các thiết bị trong hệ thống được giám sát. Kể cả các thiết bị phần cứng, các hệ thống ảo hoá, website, cloud,...
+
+Được sáng lập bởi Alexei Vladishev và hiện tại được phát triển cũng như hỗ trợ bởi tổ chức Zabbix SIA. Zabbix được viết và phát hành dưới giấy phép GPL General Public License phiên bản 2. Zabbix sử dụng các cơ chế cảnh báo linh hoạt cho quản trị viên như email, sms, OTT App,...Và các báo cáo cực chính xác dựa trên các dữ liệu thu thập được từ các thiết bị trong hệ thống.
 
 Tất cả các báo cáo, thống kê, dữ liệu thu thập được đều có thể được hiển thị trên giao diện web rất trực quan.
 
