@@ -100,6 +100,12 @@ ___
     mysql_secure_installation
     ```
 
+    Nếu gặp lỗi tương tự như: `-bash: /usr/bin/mysql_secure_installation: No such file or directory` hãy thử câu lệnh
+
+    ```sh
+    mariadb-secure-installation
+    ```
+
 - <img src="Images/root_pass.png" width="">
 
 - Chú thích:
