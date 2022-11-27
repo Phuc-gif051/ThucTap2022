@@ -158,6 +158,13 @@ http://<IP_server>:<port>
 
 - Nhận được giao diện như sau là thành công cài đặt, tiếp tục click vào next để tiến hành cấu hình
 - <img src="Images/zabbix-server-5-install.png" width="">
+- Tiếp tục click next, để tiến hành cài đặt giao diện web. Thông thường các chỉ số trạng thái báo xanh tức là cài đặt bình thường.
+- <img src="Images/zabbix-server-5-install_step2.png" width="">
+- <img src="Images/zabbix-server-5-install_step3.png" width="">
+- <img src="Images/zabbix-server-5-install_step4.png" width="">
+- Tài khoản dashboard mặc định khi khởi tạo Zabbix server là: Admin/zabbix
+- <img src="Images/login.png" width="">
+- <img src="Images/zabbix-server-5-install_step5.png" width="">
 
 
 
