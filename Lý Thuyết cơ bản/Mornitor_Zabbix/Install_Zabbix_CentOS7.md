@@ -2,6 +2,15 @@
 
 _Cài đặt Zabbix trên môi trường CentOS 7_
 
+[I. Chuẩn bị](#1)
+
+[II. Tiến hành cài đặt triển khai](#2)
+
+- [1. Cài đặt trên máy 1](#2.1)
+- [2. Truy cập vào giao diện web của Zabbix](#2.2)
+
+
+[Tài liệu tham khảo](#0)
 
 
 ___
@@ -30,7 +39,7 @@ Mô hình triển khai:
 
 >Dùng để cài đặt Zabbix server nên sẽ yêu cầu:
 >
->- đã cài đặt 1 ứng dụng quản lý database. Có thể dùng MySQL, PostgreSQL.
+>- đã cài đặt 1 ứng dụng quản lý database. Có thể dùng MySQL, PostgreSQL. Trong bài sử dụng MariaDB 10.6.
 >- Sử dụng ít nhất 1 web server để có thể chạy giao diện web của zabbix. Ở bài viết này sử dụng Nginx, sẽ cài đặt song song với zabbix trong quá trình cài đặt.
 
 - B1: cài đặt Zabbix repository
@@ -111,7 +120,7 @@ B5: cấu hình xử lý PHP cho zabbix frontend
 
     ```sh
     # listen 80; -> chỉ định port có thể dùng để truy cập vào giao diện web
-    # server_name zabbix.lab; -> tên miền để nginx có thể chỉ phân biệt yêu cầu truy cập khi có yêu cầu đến
+    # server_name zabbix.lab; -> tên miền để nginx có thể phân biệt khi máy khách yêu cầu truy cập bằng tên miền.
     ```
 
     Khai báo thêm các file log cho giao diện web để có thể nắm bắt các lỗi xảy ra khi truy cập và fix chúng:
@@ -121,11 +130,17 @@ B5: cấu hình xử lý PHP cho zabbix frontend
     error_log /var/log/nginx/zabbix.lab.error.log;
     ```
 
-- Truy cập vào file config của PHP72 và:
+- Truy cập vào file config của PHP72
+
+  ```sh
+  vi /etc/opt/rh/rh-php72/php-fpm.d/zabbix.conf
+  ```
+
+  và:
   - Khai báo thêm việc sử dụng web server nào. Ở đây sử dụng `Nginx`
 
     ```sh
-    listen.acl_users = nginx
+    listen.acl_users = apache,nginx
     ```
 
   - Huỷ comment bằng cách xoá dấu `;` ở đầu dòng, rồi Khai báo timezone:
@@ -166,11 +181,17 @@ http://<IP_server>:<port>
 - <img src="Images/login.png" width="">
 - <img src="Images/zabbix-server-5-install_step5.png" width="">
 
+## <a name="0" >Tài liệu tham khảo</a>
+
+<https://www.zabbix.com/download?zabbix=5.0&os_distribution=centos&os_version=7&components=server_frontend_agent&db=mysql&ws=nginx>
+
+<https://news.cloud365.vn/tag/zabbix/>
+
 
 
 # Nháp
 
-yum auto remove zabbix-agent.x86_64 zabbix-agent2.x86_64 zabbix-agent2-plugin-mongodb.x86_64 zabbix-agent2-plugin-postgresql.x86_64 zabbix-java-gateway.x86_64 zabbix-proxy-mysql.x86_64 zabbix-release.noarch
+yum autoremove zabbix-agent.x86_64 zabbix-agent2.x86_64 zabbix-agent2-plugin-mongodb.x86_64 zabbix-agent2-plugin-postgresql.x86_64 zabbix-java-gateway.x86_64 zabbix-proxy-mysql.x86_64 zabbix-release.noarch
 zabbix-selinux-policy.x86_64 zabbix-sql-scripts.noarch -y
 
 
