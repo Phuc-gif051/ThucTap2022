@@ -207,25 +207,6 @@ cấu hình chính của nginx phục vụ cho zabbix nằm tại
 
 systemctl restart rh-nginx116-nginx nginx
 
-/var/opt/rh/rh-php72/
-
-cấp quyền đọc ghi cho các thư mục trên với nginx:nginx
-
-Tạo mới thư mục này rồi cấp quyền đọc ghi zabbix:zabbix
-/etc/zabbix/web
-/var/opt/rh/rh-php72/lib/php/session/
-
-Cấu hình nhận diện database cho zabbix-server tại file:
-
-/etc/zabbix/zabbix_server.conf
-
-với các cấu hình cơ bản sau:
-
-DBHost=localhost
-DBName=zabbix
-DBUser=zabbix
-DBPassword=passla123
-
 Kiểm tra kết nối đến máy agent từ máy server, cần phải cài đặt gói zabbit-get:
 
 yum install zabbix-get

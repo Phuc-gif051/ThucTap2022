@@ -87,4 +87,103 @@ _Thêm 1 số thiết bị vào trong hệ thống giám sát_
   B7.1: Chọn Configuration -> Host
   - <img src="Images/configuration_hosts.PNG" width="750">
 
-  B7.2: 
+  B7.2: Trong màn Configuration, ta chọn Create Host
+  - <img src="Images/configuration_Create_Host.PNG" width="750">
+  B7.3: Trong màn Create Host, điền các thông số của host. Tối thiểu sẽ có Hostname, Group, địa chỉ IP.
+  - <img src="Images/fill_hosts_configuration.PNG" width="750">
+  B7.4: Trong tab Template, ta chọn template để gán cho host cần giám sát. Ở đây CentOS do vậy sẽ chọn Template OS Linux. Các bước thực hiện như sau:
+  - <img src="Images/choese_template.PNG" width="750">
+  B7.5: Sau đó chọn add để hoàn thành.
+  - <img src="Images/add_Host.PNG" width="750">
+  B7.5: chờ 1 vài giây để có thể hiển thị lên dashboard.
+  - <img src="Images/done_add_host.PNG" width="750">
+
+### <a name="2.2" >2. Cài SNMP trên máy 3</a>
+
+_Giao thức SNMP là một trong những giao thức mạng được chấp nhận rộng rãi để quản lý và giám sát các phần tử mạng._
+
+<https://en.wikipedia.org/wiki/Simple_Network_Management_Protocol>
+
+B1: Cài đặt SNMP trên windows server 2016.
+
+- Trong Server Manager ta chọn Add Roles and Features
+- <img src="Images/add_roles_2016.png" width="750">
+
+B2: Click next cho đến khi chuyển đến mục `Features`
+
+- <img src="Images/click_next.png" width="750">
+
+B3: tìm và tích chọn vào `SNMP Service`
+
+- <img src="Images/tick_snmp_service.png" width="750">
+- Click vào `Install` và chờ đợi cài đặt hoàn tất.
+
+B4: Sau khi cài đặt thành công, ta mở `Windows Services`. Tìm đến `SNMP Service`, chuột phải chọn `Properties` để tiến hành cấu hình.
+
+- <img src="Images/service_snmp_2016.png" width="750">
+
+B5: trong thẻ `Agent` khai bao 1 số thông tin cơ bản và tích chọn các service cần thiết.
+
+- <img src="Images/tab_agent.png" width="750">
+
+B6: Chuyển sang thẻ `Security`
+
+- <img src="Images/tab_security.png" width="750">
+
+- Trong mục `Accepted community names` chọn `Add` thể thêm các kết nối được cho phép. Khai báo theo yêu cầu cá nhân rồi chọn `Add` để thêm
+
+- <img src="Images/add_accepted.png" width="750">
+
+- Vẫn trong thẻ `Security` 2 tuỳ chọn bên dưới để
+
+  - `Accept SNMP packets from any host`: cho phép tất cả các host bên ngoài sử dụng các gói tin SNMP để giao tiếp với máy.
+  - `Accept SNMP packets from thses hosts`: chỉ cho phép các máy có địa chỉ IP trong danh sách bên dưới được phép giao tiếp. Click `Add` để thêm địa chỉ IP.
+
+  >Trong bài lab này cho phép tất cả các host bên ngoài giao tiếp với máy.
+
+_Cấu hình cơ bản xong, chọn `Restart` để nhận các cấu hình_
+
+B7: Chuyển sang máy Zabbix server, kiểm thử kết nối bằng câu lệnh
+
+    snmpwalk -v2c -c <CONTACT_NAME> <IP_WINDOWS_SERVER>
+
+- Nếu giá trị trả về là 1 loạt các thông số kết nối và giá trị = true thì tức là đã cấu hình và kết nối thành công.
+
+- Đăng nhập vào Zabbix server dashboard tiến hành cấu hình thêm host mới.
+- B7.1: Vào mục `Configuration` chọn `Hosts`
+  - <img src="Images\configuration_hosts.PNG" width="750">
+
+- B7.2: trong mục `Host` tìm đến `Create host`
+  - <img src="Images\configuration_Create_Host.PNG" width="750">
+
+- B7.3: Trong mục `Interfaces` chon `Add` để thêm kiểu giám sát mới là `SNMP` để tiến hành cấu hình.
+  - <img src="Images\configuration_host_add_type.png" width="750">
+
+- B7.4: Thêm thành công thì có thể xoá kiểu `Agent` bằng nút `Remove`. Tiến hành khai báo cấu hình cơ bản của kết nối SNMP, với port mặc định là `161`.
+  - <img src="Images\snmp_config.png" width="750">
+
+- B7.5: Sau khi khai báo xong, chuyển sang thẻ `Templates` để chọn các mẫu áp dụng cho kết nối này. 
+  - <img src="Images\tab_template.png" width="">
+  - Chọn `Add`
+  - Chọn Template OS Windows SNMPv2 sau đó Select
+  - <img src="Images\snmp_templates.png" width="">
+
+- B7.6: Chuyển sang thẻ `Macros`. Tại mục:
+  - `Macros` nhập giá trị: {$SNMP_COMMUNITY}
+  - `Value` nhập giá trị là tên của `Community` mà ta cài đặt khi nãy ở WinServer 2016.
+  - <img src="Images\tab_macros.png" width="">
+
+- Sau khi xong ở thẻ `Macros`, nhấn `Add` để thêm host mới. Chờ 1 vài giây để có thể hiển thị lên giao diện. Nếu đèn báo xanh tức là kết nối thành công.
+- <img src="Images\snmp_done.png" width="">
+
+## <a name="0" >Tài liệu tham khảo</a>
+
+<https://news.cloud365.vn/zabbix-giam-sat-server-centos-7-bang-zabbix-agent/>
+
+<https://news.cloud365.vn/zabbix-giam-sat-windows-server-su-dung-smnp/>
+
+<https://community.spiceworks.com/how_to/160256-how-install-zabbix-agent-for-windows-servers-basic>
+
+<https://news.cloud365.vn/zabbix-giam-sat-windows-server-bang-zabbix-agent/>
+
+
