@@ -2,6 +2,15 @@
 
 _Thêm 1 số thiết bị vào trong hệ thống giám sát_
 
+[I. Chuẩn bị](#1)
+
+[II. Tiến hành](#2)
+
+- [1. Cài Zabbix agent trên CentOS 7](#2.1)
+- [2. Cài SNMP trên windows server](#2.2)
+
+[III. Tài liệu tham khảo](#0)
+
 ## <a name="1" >I. Chuẩn bị</a>
 
 - Máy 1: đã cài thành công Zabbix server, có thể tham khảo bài cài đặt sau: [Cài đặt Zabbix server trên CentOS 7](Install_Zabbix_CentOS7.md)
