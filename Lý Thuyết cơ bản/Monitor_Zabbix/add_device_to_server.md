@@ -162,7 +162,7 @@ B7: Chuyển sang máy Zabbix server, kiểm thử kết nối bằng câu lện
 - B7.4: Thêm thành công thì có thể xoá kiểu `Agent` bằng nút `Remove`. Tiến hành khai báo cấu hình cơ bản của kết nối SNMP, với port mặc định là `161`.
   - <img src="Images\snmp_config.png" width="750">
 
-- B7.5: Sau khi khai báo xong, chuyển sang thẻ `Templates` để chọn các mẫu áp dụng cho kết nối này. 
+- B7.5: Sau khi khai báo xong, chuyển sang thẻ `Templates` để chọn các mẫu áp dụng cho kết nối này.
   - <img src="Images\tab_template.png" width="">
   - Chọn `Add`
   - Chọn Template OS Windows SNMPv2 sau đó Select
