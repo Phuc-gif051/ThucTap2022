@@ -86,16 +86,56 @@ ___
 
 Date accessed: 30/11/2020
 
+___
+
 ## <a name="2" >2. Cảnh báo qua email</a>
 
 - Mô hình triển khai, gần đúng với hầu hết các trường hợp muốn cài đặt thông báo thông qua các nguồn bên ngoài. Chỉ cần thay đối tượng nguồn bên ngoài trong sơ đồ.
 - <img src="Images\how_email_notifications_work_on_zabbix.png" width="">
 
+**B1: chuẩn bị gmail và thiết lập cơ bản trên zabbix**
 
+- Đăng nhập vào google với tài khoản định sử dụng để gửi mail, truy cập vào đường dẫn sau <https://myaccount.google.com/lesssecureapps> bật tính năng cho phép các ứng dụng có bảo mật thấp truy cập vào gmail.
+- <img src="Images\how_to_enable_option_less_secure_apps_on_google_account.png" width="750">
+- Khi đã bật tính năng này, ta cần tạo 1 mật khẩu cho phép các ứng dụng truy cập vào sử dụng tính năng mail của tài khoản google (đây không phải là mật khẩu của tài khoản google.)
+- Theo hướng dẫn sau để tạo và lấy mật khẩu cho ứng dụng.
+- <https://huongdan.azdigi.com/wp-content/uploads/2019/11/SMTP-GMAIl.mp4>
+- File của video tại thư mục sau, phòng trường hợp server hết hạn: Monitor_Zabbix\Images\SMTP-GMAIl.mp4
+- Theo hướng dẫn sau để thêm kênh cảnh báo qua gmail:
+- <img src="Images\configuring_email_media_type_on_zabbix_via_gmail.png" width="">
+- Trong mục 4 hiểu các thông số cơ bản như sau:
+  - Name: Tên cho media type
+  - Type: Email (Do đang sử dụng mail nên bạn sẽ chọn kiểu là Email)
+  - SMTP Server: Nhập vào máy chủ email, do mình đang cấu hình với Gmail và máy chủ SMTP Gmail sẽ là: smtp.gmail.com
+  - SMTP server port: Bạn nhập vào 465(SSL) hoặc 587(TLS)
+  - SMTP  hello: mình nhập gmail.com luôn
+  - SMTP email: Nhập vào tên địa chỉ email gửi
+  - Connection security: Bạn chọn SSL/TLS nếu ở trên để port 465. Nếu ở trên để port 587 thì bạn phải chọn kiểu STARTTLS
+  - Authentication: Username and password
+  - Username: Nhập lại tài khoản email
+  - Password: Nhập vào mật khẩu ứng dụng đã tạo ở bước trên vào
+  - Sau khi nhập xong các thông số hoàn tất bạn click `Update` để thêm vào.
+- Sau khi lưu thì nên thử lại cảnh báo:
+- <img src="Images\test_mail.png" width="700">
+- Nhập địa chỉ mail nhận thông báo (nên gửi sang 1 mail khác)
+- <img src="Images\sent_to_mail.png" width="750">
+- Kết quả test nhận được như sau là thành công thiết lập mail để gửi cảnh báo:
+- <img src="Images\kq_mail_test.png" width="750">
 
+**B2: Tạo Action cảnh báo**
 
+- Để nhanh nhất với người mới bắt đầu ta sẽ sử dụng luôn `Action` có sẵn của Zabbix:
+- <img src="Images\enable_trigger_actions_email.png" width="">
+- Với `Action` này thì chỉ có người dùng Admin là được gửi cảnh báo. Có thể chỉnh sửa tuỳ ý Action này hoặc tạo mới tuỳ thích.
+- Hiểu đơn giản là có hành động rồi, thì ta cần chỉ hướng cho hành động này sẽ ảnh hưởng đến ai.
 
+**B3: Cung cấp email cho người dùng được cấu hình**
 
+- Tại B2, sau khi chỉ định người dùng - ở đây là Admin nhận `Action` thì ta cần cung cấp địa chỉ email nhận cảnh báo của người dùng đó. Tại ví dụ này sử dụng luôn người dùng `Admin` nếu muốn có thể hoàn toàn tạo ra người dùng mới.
+- <img src="Images\Enable_media_on_Zabbix_user.png" width="750">
+- Sau khi thực hiện nút 2, thì sẽ nhận được danh sách người dùng trên hệ thống zabbix hiện tại. Click chọn người dùng `Admin` để chuyển tiếp sang giao diện config (bắt đàu từ nút 4) như nút 3 hướng dẫn.
+- Phần quan trọng nhất là ta cần phải cung cấp đúng địa chỉ email nhận cảnh báo.
+- Để kiểm thử hãy stop bất kỳ dịch vụ vào trên hệ thống Zabbix để có thể nhận cảnh báo qua mail.
 
 ### <a name="02" >Tài liệu tham khảo</a>
 
@@ -106,4 +146,43 @@ Date accessed: 30/11/2020
 [Bật SMTP trên account google](https://huongdan.azdigi.com/huong-dan-cau-hinh-smtp-gmail-gsuite-cho-website-wordpress/)
 
 [Hỗ trợ của google về Tạo và sử dụng Mật khẩu ứng dụng](https://support.google.com/accounts/answer/185833)
+
+Date access: 01/12/2022
+___
+
+
+## <a name="3" >III. Cảnh báo leo thang (notifications escalations)</a>
+
+- Dịch thô thì nó là cảnh báo leo thang. Trong cách thức hoạt động cảnh báo của Zabbix, mặc định là chỉ có 1 lần thông báo cho tất cả các: sự cố, cảnh báo hệ thống, vấn đề về hiệu suất của hệ thống được giám sát. Vì thế khi ta muốn đưa ra nhiều cảnh báo cho các vấn đề (problems) của hệ thống được giám sát thì cần phải cấu hình thêm các `Action` phục vụ cho việc này.
+- Về cơ bản khái niệm này sinh ra phục vục cho việc cảnh báo tới nhiều kênh, và nhiều người khác nhau tham gia quản trị hệ thống giám sát. Tuỳ thuộc vào mức độ nghiêm trọng của vấn đề mà cách cảnh báo được tính đến việc gửi cho ai, qua kênh nào và lặp lại bao nhiêu lần.
+- <img src="Images\excalations.png" width="">
+- Thử nghiệm điều này, ta sẽ tận dụng luôn cảnh báo qua email đã thiết lập ở trên. Với việc là tạo nhiều cảnh báo gửi đến cho 1 cá nhân nhất định. Việc gửi cảnh bảo leo thang sẽ tương tự, chỉ khác nơi nhận.
+
+B1: tạo các action mới phục vụ cho việc cảnh báo leo thang:
+
+- <img src="Images\create_trigger_action.png" width="800">
+  - Trong mục * mặc định là: Trigger actions, tuy nên cũng nên để ý tránh bị nhầm chế độ
+
+- Thu được trang cấu hình như sau, trong thẻ `Action` nhập vào tên cho action, và tích chọn vào `Enable`
+- <img src="Images\configure_trigger_action_2.png" width="">
+- Chuyển sang thẻ `Operations`, để tiếp tục cấu hình
+- <img src="Images\configure_advance_trigger_action.png" width="">
+
+add this as the subject:
+
+No one acknowledged problem in 24h: {EVENT.NAME}
+And this as the message:
+
+Problem started at {EVENT.TIME} on {EVENT.DATE}
+Problem name: {EVENT.NAME}
+Host: {HOST.NAME}
+Severity: {EVENT.SEVERITY}
+Operational data: {EVENT.OPDATA}
+Original problem ID: {EVENT.ID}
+{TRIGGER.URL}
+
+Escalation info:
+{ESC.HISTORY}
+
+
 
