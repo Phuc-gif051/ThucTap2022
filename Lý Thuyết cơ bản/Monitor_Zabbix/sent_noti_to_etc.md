@@ -2,6 +2,20 @@
 
 _Gửi cảnh báo của hệ thống từ server thông qua các kênh phổ biến_
 
+[I. Thông qua telegram](#1)
+
+- [Tài liệu tham khảo 01](#01)
+
+[II. Cảnh báo qua email](#2)
+
+- [Tài liệu tham khảo 02](#02)
+
+[III. Lặp lại cảnh báo trong Zabbix](#3)
+
+- [Tài liệu tham khảo 02](#03)
+
+[IV. Cảnh báo leo thang (notifications escalations)](#4)
+
 
 ___
 
@@ -74,7 +88,7 @@ ___
 
 🎆 Trong trường hợp không nhận được cảnh báo thì hãy thử khởi động lại Zabbix server, Kiểm tra xem các cấu hình, các Actions đã được `Enable` hay chưa.
 
-### <a name="01" >Tài liệu tham khảo</a>
+### <a name="01" >Tài liệu tham khảo 01</a>
 
 <https://www.youtube.com/watch?v=TpP6NpS9jjg>
 
@@ -88,7 +102,7 @@ Date accessed: 30/11/2020
 
 ___
 
-## <a name="2" >2. Cảnh báo qua email</a>
+## <a name="2" >II. Cảnh báo qua email</a>
 
 - Mô hình triển khai, gần đúng với hầu hết các trường hợp muốn cài đặt thông báo thông qua các nguồn bên ngoài. Chỉ cần thay đối tượng nguồn bên ngoài trong sơ đồ.
 - <img src="Images\how_email_notifications_work_on_zabbix.png" width="">
@@ -137,7 +151,7 @@ ___
 - Phần quan trọng nhất là ta cần phải cung cấp đúng địa chỉ email nhận cảnh báo.
 - Để kiểm thử hãy stop bất kỳ dịch vụ vào trên hệ thống Zabbix để có thể nhận cảnh báo qua mail.
 
-### <a name="02" >Tài liệu tham khảo</a>
+### <a name="02" >Tài liệu tham khảo 02</a>
 
 <https://www.zabbix.com/documentation/current/en/manual/config/notifications/action/operation>
 
@@ -150,23 +164,59 @@ ___
 Date access: 01/12/2022
 ___
 
+## <a name="3" >III. Lặp lại cảnh báo trong Zabbix</a>
 
-## <a name="3" >III. Cảnh báo leo thang (notifications escalations)</a>
+- Trong cách thức hoạt động cảnh báo của Zabbix, mặc định là chỉ có 1 lần thông báo cho tất cả các: sự cố, cảnh báo hệ thống, vấn đề về hiệu suất của hệ thống được giám sát.
+Để có thể lặp lại cảnh báo ta cần thực hiện 1 số thay đổi trong cấu hình của `Action` cảnh báo đó.
+- Truy cập vào `Configuration >> Actions` tuỳ chọn bất kỳ cảnh bảo nào mà bạn muốn nó được lặp lại. Sẽ thu được bảng cấu hình, chuyển qua tab `Operations` để cấu hình. Click vào `Edit` - nếu bạn muốn sử dụng cấu hình cảnh báo cũ hoặc `Add` - nếu bạn muốn cấu hình 1 thông báo mới.
+- <img src="Images\repeat_noti_zabbix.png" width="800">
+  
+  - `Default operation step duration`: là thời gian cảnh báo này sẽ được khởi chạy sau khi vấn đề suất hiện trên hệ thống.
 
-- Dịch thô thì nó là cảnh báo leo thang. Trong cách thức hoạt động cảnh báo của Zabbix, mặc định là chỉ có 1 lần thông báo cho tất cả các: sự cố, cảnh báo hệ thống, vấn đề về hiệu suất của hệ thống được giám sát. Vì thế khi ta muốn đưa ra nhiều cảnh báo cho các vấn đề (problems) của hệ thống được giám sát thì cần phải cấu hình thêm các `Action` phục vụ cho việc này.
+- Ở đây mình sẽ sử dụng cấu hình có sẵn, click vào `Edit` và thu được popup cấu hình như sau:
+- <img src="Images\repeat_noti_config.png" width="">
+
+  - `1`: Hãy để mặc định là `Send message`
+  - `2`: `Steps` ở ô đầu tiên là thứ tự của thực hiện của cảnh báo, ô thứ 2 là số lượng lặp lại của cảnh báo. Có thể thực hiện lặp lại cảnh báo dù nó là ở bất kỳ bước nào.
+  - `3`: `Steps duration` - thời gian lặp lại của cảnh báo
+  - Vì ở đây sử dụng cấu hình có sẵn nên người nhận và nhóm người nhận cảnh báo đã được cấu hình từ trước. Nếu bạn tạo cảnh báo mới thì phải thêm ít nhất là nhóm người dùng hoặc người dùng nào nhận cảnh báo.
+  - `4`: chọn kênh gửi cảnh báo. Hãy chọn kênh gửi cảnh bảo phù hợp với bạn.
+  - Cơ bản hoàn thành, hãy click vào `Update` hoặc `Add` - nếu là tạo mới, để hoàn thành cấu hình.
+
+- Popup được đóng, trả lại trang cấu hình `Operations` click vào `Update` hoặc `Add` - nếu là tạo mới, để lưu cấu hình.
+- Có thể kiểm thử bằng cách tắt 1 trong các agent trong hệ thống. Rồi chờ cảnh báo đến, có thể tăng giảm thời gian để phù hợp với điều kiện của cá nhân.
+- <img src="Images\repeat_noti_kq.png" width="">
+- Thành công thiết lập việc lặp lại cảnh báo trên Zabbix.
+
+### <a name="03" >Tài liệu tham khảo 03</a>
+
+<https://bestmonitoringtools.com/zabbix-alerts-setup-zabbix-email-notifications-escalations/>
+
+<https://www.zabbix.com/documentation/current/en/manual/config/notifications/action/operation>
+
+___
+
+## <a name="4" >IV. Cảnh báo leo thang (notifications escalations)</a>
+
+- Dịch thô thì nó là cảnh báo leo thang. Trong cách thức hoạt động cảnh báo của Zabbix, mặc định là chỉ có 1 lần thông báo cho tất cả các: sự cố, cảnh báo hệ thống, vấn đề về hiệu suất của hệ thống được giám sát. Dù có thể lặp lại các cảnh báo nhưng nó vẫn là các cảnh bảo chỉ gửi đến 1 đối tượng duy nhất. Vì thế khi ta muốn đưa ra nhiều cảnh báo cho nhiều đối tượng về các vấn đề (problems) của hệ thống được giám sát thì cần phải cấu hình thêm các `Action` (hành động) phục vụ cho việc này.
 - Về cơ bản khái niệm này sinh ra phục vục cho việc cảnh báo tới nhiều kênh, và nhiều người khác nhau tham gia quản trị hệ thống giám sát. Tuỳ thuộc vào mức độ nghiêm trọng của vấn đề mà cách cảnh báo được tính đến việc gửi cho ai, qua kênh nào và lặp lại bao nhiêu lần.
 - <img src="Images\excalations.png" width="">
 - Thử nghiệm điều này, ta sẽ tận dụng luôn cảnh báo qua email đã thiết lập ở trên. Với việc là tạo nhiều cảnh báo gửi đến cho 1 cá nhân nhất định. Việc gửi cảnh bảo leo thang sẽ tương tự, chỉ khác nơi nhận.
+- Về cơ bản nó khác việc lặp lại cảnh báo ở chỗ là thay đổi người nhận hay nhóm người nhận.
 
 B1: tạo các action mới phục vụ cho việc cảnh báo leo thang:
 
-- <img src="Images\create_trigger_action.png" width="800">
-  - Trong mục * mặc định là: Trigger actions, tuy nên cũng nên để ý tránh bị nhầm chế độ
+- <img src="Images\create_trigger_action.png" width="1080">
 
-- Thu được trang cấu hình như sau, trong thẻ `Action` nhập vào tên cho action, và tích chọn vào `Enable`
-- <img src="Images\configure_trigger_action_2.png" width="">
-- Chuyển sang thẻ `Operations`, để tiếp tục cấu hình
-- <img src="Images\configure_advance_trigger_action.png" width="">
+  - Trong mục `*` mặc định là: `Trigger actions`, tuy nên cũng nên để ý tránh bị nhầm chế độ
+
+- Sau khi click vào `Create action`, ta thu được trang cấu hình như sau, trong thẻ `Action` nhập vào tên cho action, và tích chọn vào `Enable`
+- <img src="Images\configure_trigger_action_2.png" width="850">
+- Chuyển sang thẻ `Operations`, để tiếp tục cấu hình các hành động mà action này sẽ thực hiện.
+- <img src="Images\configure_advance_trigger_action.png" width="1080">
+  
+  - Mặc định `Operation type` sẽ là: `Send message`
+  - `2`: Steps - số thứ tự thực hiện của cảnh báo
 
 add this as the subject:
 
