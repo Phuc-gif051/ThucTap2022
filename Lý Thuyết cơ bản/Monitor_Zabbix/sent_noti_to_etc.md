@@ -12,10 +12,11 @@ _Gửi cảnh báo của hệ thống từ server thông qua các kênh phổ bi
 
 [III. Lặp lại cảnh báo trong Zabbix](#3)
 
-- [Tài liệu tham khảo 02](#03)
+- [Tài liệu tham khảo 03](#03)
 
 [IV. Cảnh báo leo thang (notifications escalations)](#4)
 
+- [Tài liệu tham khảo 04](#04)
 
 ___
 
@@ -153,6 +154,8 @@ ___
 
 ### <a name="02" >Tài liệu tham khảo 02</a>
 
+<https://toiyeuit.com/thiet-lap-canh-bao-thong-bang-zabbix-qua-email/>
+
 <https://www.zabbix.com/documentation/current/en/manual/config/notifications/action/operation>
 
 <https://bestmonitoringtools.com/zabbix-alerts-setup-zabbix-email-notifications-escalations/>
@@ -215,24 +218,51 @@ B1: tạo các action mới phục vụ cho việc cảnh báo leo thang:
 - Chuyển sang thẻ `Operations`, để tiếp tục cấu hình các hành động mà action này sẽ thực hiện.
 - <img src="Images\configure_advance_trigger_action.png" width="1080">
   
+  - `Default operation step duration`: được dùng với ý nghĩa là sau khi suất hiện vấn đề bao lâu thì hành động này sẽ được kích hoạt (mặc định là 1h). Thông thường các `Action` (hành động) được định danh là `1` ở `Steps` sẽ xem xét đến giá trị `Start in` trước và bỏ qua giá trị này. Từ các `Action` được định danh là `2` thì ta mới quan tâm đến giá trị này. Với hình ảnh trên thì sau 1h suất hiện các Problems (các vấn đề), action này sẽ được kích hoạt.
   - Mặc định `Operation type` sẽ là: `Send message`
-  - `2`: Steps - số thứ tự thực hiện của cảnh báo
+  - `2`: Steps - ô đầu tiên, là số thứ tự thực hiện của Action. Đây là thứ dùng để `leo thang`. Ô thứ 2, là số lần thực hiện của Action đó, nếu đặt là `0` thì nó sẽ thực hiện action đến vô hạn.
+  - `3`: sau bao lâu thì thực hiện lại action. Ví dụ trên, sau 24h, nếu problem (vấn đề) vẫn còn tồn tại thì action sẽ được thực hiện thêm 1 lần nữa. Còn với ví dụ bên dưới
+  thì cứ sau 5 phút sẽ thực hiện action, thực hiện đến vô hạn cho đến khi vấn đề được giải quyết ().
+    - <img src="Images\action_20_ex.png" width="">
 
-add this as the subject:
+  - `4`: hãy thêm nhóm người dùng được nhận cảnh báo này
+  - `5`: hãy thêm chính xác người dùng được nhận cảnh báo này.
+  >4 và 5 đôi khi chỉ cần 1 trong 2 được điền.
+  - `6`: kênh sẽ sử dụng để gửi thông báo, hãy chọn theo nhu cầu của bạn. Việc thiết lập kênh mới cũng giống như việc thiết lập gửi cảnh báo qua `email` hay `telegram` ở trên, nó cũng sẽ được thêm vào danh sách này.
+  - `7`: Vì đây là cảnh báo ta phải tự thêm vào, nên phải tự chỉnh sửa các nội dung cảnh báo theo nhu cầu. Hãy tích chọn để hiện ra 2 hộp thoại `8` và `9`. Sử dụng mẫu sau, nếu muốn
+    - `8`: add this as the subject:
 
-No one acknowledged problem in 24h: {EVENT.NAME}
-And this as the message:
+          No one acknowledged problem in 24h: {EVENT.NAME}
 
-Problem started at {EVENT.TIME} on {EVENT.DATE}
-Problem name: {EVENT.NAME}
-Host: {HOST.NAME}
-Severity: {EVENT.SEVERITY}
-Operational data: {EVENT.OPDATA}
-Original problem ID: {EVENT.ID}
-{TRIGGER.URL}
+    - `9`: And this as the message:
 
-Escalation info:
-{ESC.HISTORY}
+          Problem started at {EVENT.TIME} on {EVENT.DATE}
+          Problem name: {EVENT.NAME}
+          Host: {HOST.NAME}
+          Severity: {EVENT.SEVERITY}
+          Operational data: {EVENT.OPDATA}
+          Original problem ID: {EVENT.ID}
+          {TRIGGER.URL}
+
+          Escalation info:
+          {ESC.HISTORY}
+  - `10`: đây là nơi đặt điều kiện cho hành động, có thể bỏ qua trong bài viết này.
+  - `11`: thực hiện xong hãy click vào `Add` trong popup để lưu lại cấu hình của actions.
+  - `12`: click vào `Add` để lưu lại Action này.
+
+- Trong quá trình kiểm thử việc hoạt động của Action, thì nên đặt thời gian ngắn để dễ dàng tầm soát hoạt động. Để kiểm thử dễ dàng nhất là ta hãy tắt bất kỳ agent nào trong hệ thống.
+
+### <a name="04" >Tài liệu tham khảo</a>
+
+<https://bestmonitoringtools.com/zabbix-alerts-setup-zabbix-email-notifications-escalations/>
+
+<https://www.zabbix.com/documentation/current/en/manual/config/notifications/action/operation>
+
+<https://linuxcanban.com/huong-dan-cau-hinh-zabbix-server-canh-bao-qua-mail-gmail/>
+
+
+Date accessed: 04/12/2022
+
 
 
 
