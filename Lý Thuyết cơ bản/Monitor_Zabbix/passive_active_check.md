@@ -1,6 +1,6 @@
 ### Sự khác nhau giữa Zabbix active check và Zabbix passive check
 
-Như chúng ta đã được biết, Zabbix server thu thập thông tin từ Agent thông qua các item tương ướng. Các item có nhiều loại, tuy nhiên 2 loại chính là Active Item (Item chủ động) và Passive Item (Item bị động). Vậy nên việc kiểm tra phân loại chủ động (active) hay bị động (passive) dựa vào giá trị item đang sử dụng ở dạng active hay passive. Trong bài viết tôi sẽ phân loại riêng 2 kiểu kiểm tra là Zabbix Passive Check và Zabbix Active Check, đông thời nêu ra đặc điểm của từng loại.
+Như chúng ta đã được biết, Zabbix server thu thập thông tin từ Agent thông qua các item tương ứng. Các item có nhiều loại, tuy nhiên 2 loại chính là Active Item (Item chủ động) và Passive Item (Item bị động). Vậy nên việc kiểm tra phân loại chủ động (active) hay bị động (passive) dựa vào giá trị item đang sử dụng ở dạng active hay passive. Trong bài viết tôi sẽ phân loại riêng 2 kiểu kiểm tra là Zabbix Passive Check và Zabbix Active Check, đông thời nêu ra đặc điểm của từng loại.
 
 Zabbix có hỗ trợ cung cấp các item để hỗ trợ giám sát các máy agent. Tuỳ thuộc vào nhu cầu mà người dùng có thể thêm bớt, chỉnh sửa các item này.
 
