@@ -34,38 +34,25 @@ Zabbix có hỗ trợ cung cấp các item để hỗ trợ giám sát các máy
   - Server: IP của zabbix server
   - ServerActive: IP của zabbix server
   - Hostname: hostname của máy cài agent, đã được khai báo trên Zabbix server khi cấu hình 1 thiết bị mới.
+  - <img src="http://i.imgur.com/BZQWm9p.png">
 
 #### Tiến trình Active Check
 
 - Tiến trình:
-  + Agent mở kết nối TCP đến Zabbix Server
-  + Agent yêu cầu danh sách item cần thu thập
-  + Server phản hồi với danh sách item tương ứng ( danh sách này đã được định sẵn trước đó, gồm item key, delay).
-  + Kết nối TCP đóng lại.
-  + Agent bắt đầu thu thập thông tin tương ứng với danh sách item nhận được.
+  - Agent mở kết nối TCP đến Zabbix Server
+  - Agent yêu cầu danh sách item cần thu thập
+  - Server phản hồi với danh sách item tương ứng ( danh sách này đã được định sẵn trước đó, gồm item key, delay).
+  - Kết nối TCP đóng lại.
+  - Agent bắt đầu thu thập thông tin tương ứng với danh sách item nhận được.
 - Nội dung gói tin "Agent Request": <img src="http://i.imgur.com/dK9q6VR.png">
 - Nội dung gói tin "Agent Response": <img src="http://i.imgur.com/romONxJ.png">
-- Trên máy cài zabbix agent, ta có thể tuỳ chỉnh thời gian làm mới các yêu cầu giám sát của server
-
-  
-  
-### 3. Một số phân tích sâu và một vài lưu ý nhỏ.
-
-#### 3.1 Tiến trình trao đổi dữ liệu 
-
-#### Active Check
-
-- Tiến trình : 
-  + Agent mở kết nối TCP đến Zabbix Server
-  + Agent yêu cầu danh sách item cần thu thập
-  + Server phản hồi với danh sách item tương ứng ( danh sách này đã được định sẵn trước đó, gồm item key, delay).
-  + Kết nối TCP đóng lại.
-  + Agent bắt đầu thu thập thông tin tương ứng với danh sách item nhận được.
-- Nội dung gói tin "Agent Request" : <img src="http://i.imgur.com/dK9q6VR.png">
-- Nội dung gói tin "Agent Response" : <img src="http://i.imgur.com/romONxJ.png">
-- Chú ý : Để sử dụng Active Item, cần cấu hình Server Active trên file cấu hình zabbix_agentd.conf : <img src="http://i.imgur.com/BZQWm9p.png">
 
 #### Một số chú ý nhỏ
 
 - Với Passive item, có thể tùy chỉnh interval time linh hoạt hơn, mỗi item có thể cấu hình interval khác nhau. Trong khi với Active Item, interval time bị fix cứng trong file zabbix_agentd.conf : <img src="http://i.imgur.com/VwgMkzD.png">
- 
+
+### <a name="0" >Tài liệu tham khảo</a>
+
+<https://github.com/manhdinh/ghichep-zabbix/blob/master/Zabbix/Phan%20biet%20Zabbix%20active%20check%20va%20Zabbix%20passive%20check.md>
+
+<https://www.zabbix.com/documentation/5.0/en/manual/appendix/items/activepassive>
