@@ -42,6 +42,8 @@ mode
   - Sau đó, sử dụng phím mũi tên và chọn cho đến dòng cuối cùng
   - Bây giờ nhấn ShiftI, sẽ đưa trình chỉnh sửa vào INSERTchế độ và sau đó nhấn #. Điều này sẽ thêm một hàm băm vào dòng đầu tiên.
   - Sau đó nhấn Esc(cho nó một giây) và nó sẽ chèn một #ký tự trên tất cả các dòng được chọn khác.
-  - Đối với phiên bản rút gọn của vim được vận chuyển với debian / ubfox theo mặc định, hãy nhập : s/^/# bước thứ ba để thay thế.  
+  - Đối với phiên bản rút gọn của vim được vận chuyển với debian / ubfox theo mặc định, hãy nhập : <dong bat dau, dong ket thu>s/^/#.  
 
-[xoa-het-noi-dung-file-text-bang-vi-vim.html](https://cuongquach.com/xoa-het-noi-dung-file-text-bang-vi-vim.html)
+[xoa-het-noi-dung-file-text-bang-vi-vim: %d](https://cuongquach.com/xoa-het-noi-dung-file-text-bang-vi-vim.html)
+
+
