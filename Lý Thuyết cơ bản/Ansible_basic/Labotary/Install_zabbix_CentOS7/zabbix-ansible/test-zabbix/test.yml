@@ -1,0 +1,76 @@
+- hosts: fl004-srv-1
+  remote_user: root
+  become: True
+  tasks:
+  - name: Check if HTTPD is installed
+    register: http_installed
+    command: httpd -v
+    ignore_errors: true
+
+  - name: This task is only executed if HTTPD is installed
+    debug: var=http_installed
+    when: http_installed is success
+
+  - name: This task is only executed if HTTPD is NOT installed
+    debug: msg='HTTPD is NOT installed'
+    when: http_installed is failed
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#  vars:
+#   epic: true
+#   monumental: "yes"
+#  tasks:
+#
+#    - name: Run with items greater than 5
+#      ansible.builtin.command: echo {{ item }}
+#      loop: [ 0, 2, 4, 6, 8, 10 ]
+#      when: item > 5
+
+#  - name: checko OS
+#    shell: echo "only on Red Hat 6, derivatives, and later"
+#    when: ansible_facts['os_family'] == "RedHat"
+#   
+#  - name: Run the command if "epic" or "monumental" is true
+#    ansible.builtin.shell: echo "This certainly is epic!"
+#    when: epic or monumental | bool
+#
+#  - name: Run the command if "epic" is false
+#    ansible.builtin.shell: echo "This certainly isn't epic!"
+#    when: not epic
+
+
+#  - name: add myself to file /etc/opt/rh/rh-php72/php-fpm.d/zabbix.conf
+#    lineinfile:
+#      path:  /etc/opt/rh/rh-php72/php-fpm.d/zabbix.conf
+#      regexp: '^; php_value[date.timezone] = Europe/Riga'
+#      line: php_value[date.timezone] = Asia/Ho_Chi_Minh
+#---
+#- hosts: agent
+#  remote_user: root
+#  tasks:
+#  - name: Configure hostsname in file /etc/zabbix/zabbix_agentd.conf
+#    ansible.builtin.replace:
+#      path: /etc/zabbix/zabbix_agentd.conf
+#      backup: true
+#      after: 'Hostname='
+#      regexp: '0'
+#      replace: "{{ item }}"
+#    loop: 
+#    - a
+

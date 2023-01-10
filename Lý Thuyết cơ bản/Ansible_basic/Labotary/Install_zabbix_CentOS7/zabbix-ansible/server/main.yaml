@@ -1,0 +1,11 @@
+- hosts: fl004-srv-1
+  remote_user: root
+  roles:
+    #- server # Install zabbix server
+    - role: add-host # add host to zabbix server
+
+
+#  tasks:
+#     - name: check OS
+#       ansible.builtin.shell: echo "only on CentOS 7"
+#       when: ansible_facts['distribution'] == hdh

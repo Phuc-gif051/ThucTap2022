@@ -1,0 +1,15 @@
+- hosts: fl004-srv-1
+  remote_user: root
+#  vars:
+#    hdh: "CentOS"
+  roles:
+     - role: add-host
+       when: ansible_facts['distribution'] != hdh and ansible_facts['os_family'] != suppliers
+#     - server
+#       when: (ansible_facts['distribution'] == hdh and ansible_facts['distribution_major_version'] == "7") or
+#              ansible_facts[‘os_family’] == suppliers
+  tags: add-host
+#  tasks:
+#     - name: check OS
+#       ansible.builtin.shell: echo "only on CentOS 7"
+#       when: ansible_facts['distribution'] != hdh

@@ -1,0 +1,2 @@
+- name: install zabbix agent on CentOS 7
+  include: agent.yml

@@ -1,0 +1,3 @@
+- name: add host to zabbix server
+  include_tasks: add-hosts.yaml
+  when: ansible_facts['distribution'] == hdh and ansible_facts['distribution_major_version'] == "7"

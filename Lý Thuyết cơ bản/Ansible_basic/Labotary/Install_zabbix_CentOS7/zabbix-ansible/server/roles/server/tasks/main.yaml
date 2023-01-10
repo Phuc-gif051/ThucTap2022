@@ -1,0 +1,3 @@
+- name: install zabbix server
+  include_tasks: server.yaml
+  when: ansible_facts['distribution'] == hdh and ansible_facts['distribution_major_version'] == "7"
