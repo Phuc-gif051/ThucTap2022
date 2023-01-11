@@ -25,6 +25,7 @@
   - name: Install Zabbix agent
     yum:
       name: zabbix-agent
+      state: present
 
   - name: Start and enabled Zabbix agent processes
     service:
