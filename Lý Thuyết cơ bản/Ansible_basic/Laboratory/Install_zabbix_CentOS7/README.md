@@ -1,4 +1,4 @@
-### Các bài hướng dẫn thực hành Ansible của nhóm cloud365s:
+### Các bài hướng dẫn thực hành Ansible của nhóm cloud365s
 
 [1. Dựng LAB để thực hành ansible](https://news.cloud365.vn/10-phut-ansible-co-ban-phan-2-dung-lab-de-thuc-hanh-ansible/)
 
