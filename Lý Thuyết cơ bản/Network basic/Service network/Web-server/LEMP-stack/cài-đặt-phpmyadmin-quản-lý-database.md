@@ -50,7 +50,8 @@ wget https://files.phpmyadmin.net/phpMyAdmin/5.2.0/phpMyAdmin-5.2.0-all-language
 - Giải nén:
 
 ```sh
-tar -xzvf phpMyAdmin-5.2.0-all-languages.zip
+yum install unzip -y
+unzip phpMyAdmin-5.2.0-all-languages.zip
 ```
 
 - Di chuyển nó sang bất kỳ thư thư mục nào mà bạn muốn, và phải nhớ đường dẫn đến thư mục đó.
