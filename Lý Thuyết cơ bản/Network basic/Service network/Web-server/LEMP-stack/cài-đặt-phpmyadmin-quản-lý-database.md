@@ -112,6 +112,12 @@ systemctl restart nginx
 
 - Để truy cập vào database thì hãy sử dụng tài khoản và mật khẩu đã thiết lập từ trước trong MariaDB để truy cập.
 
+>Nếu truy cập đúng địa chỉ mà chỉ nhận được trang trắng thì hãy cấp quyền thực thi cho thư mục session với câu lệnh sau:
+
+```sh
+chmod -R 777 /var/lib/php/session
+```
+
 ⏹ **Cài đặt thành công PhpMyAdmin để quản trị MariaDB**
 
 ## <a name="3" >Tài liệu tham khảo</a>
