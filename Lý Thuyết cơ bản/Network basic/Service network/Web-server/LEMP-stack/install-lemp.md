@@ -270,7 +270,7 @@ Zend Engine v4.2.0RC5, Copyright (c) Zend Technologies
       ```sh
         user = apache                       user = nginx
         group = apache                      group = nginx
-        listen = 127.0.0.1:9000    =====>   listen = /var/run/php_fpm.sock
+        listen = 127.0.0.1:9000    =====>   listen = /var/run/php-fpm/www.sock
         ;listen.owner = nobody              listen.owner = nginx
         ;listen.group = nobody              listen.group = nginx
         ;listen.mode = 0660                 listen.mode = 0660
