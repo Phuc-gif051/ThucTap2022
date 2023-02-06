@@ -31,7 +31,9 @@ Việc thay đổi cấu hình này ảnh hưởng trực tiếp đến php-fpm 
 
 >Tham khảo mở rộng backlog tại đây: 
 
-<https://serverfault.com/questions/867866/11-resource-temporarily-unavailable-while-connecting-to-upstream-bad-gateway>
+<https://veithen.io/2014/01/01/how-tcp-backlog-works-in-linux.html#:~:text=When%20an%20application%20puts%20a%20socket%20into%20LISTEN,the%20limit%20for%20the%20queue%20of%20incoming%20connections.>
+
+<https://stackoverflow.com/questions/62641621/what-is-the-difference-between-tcp-max-syn-backlog-and-somaxconn>
 
 <https://serverfault.com/questions/867866/11-resource-temporarily-unavailable-while-connecting-to-upstream-bad-gateway>
 
