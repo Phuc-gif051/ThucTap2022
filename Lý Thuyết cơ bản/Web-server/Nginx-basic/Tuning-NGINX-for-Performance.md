@@ -4,6 +4,8 @@ _Cấu hình Nginx cho hiệu suất tốt nhất có thể. Các cấu hình v�
 
 ## <a name="1" >I. Lý thuyết</a>
 
+- Đã tiến hành cấu hình Nginx load balancing, tại đây thực hiện theo bài hướng dẫn trên Youtube sau: [Load Balancing with NGINX](https://www.youtube.com/watch?v=a41jxGP9Ic8)
+
 - Đầu tiên, ta cần mở rộng Backlog của hệ thống (ở đây là hệ thống Linux - CentOS 7) và số connect tối đa đến hệ thống. Hiểu cơ bản thì Backlog là danh sách lưu trữ các kết nối đến hệ thống theo kiểu hàng đợi. Giới hạn phổ biến của Backlog là 65535.
 
 >Xem chi tiết tại đây: [Backlog](https://veithen.io/2014/01/01/how-tcp-backlog-works-in-linux.html#:~:text=When%20an%20application%20puts%20a%20socket%20into%20LISTEN,the%20limit%20for%20the%20queue%20of%20incoming%20connections.)
