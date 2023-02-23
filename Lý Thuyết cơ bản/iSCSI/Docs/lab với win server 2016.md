@@ -1,19 +1,19 @@
 # Mục lục
 
-[I. Chuẩn bị ⏯️](#I)
+[I. Chuẩn bị ⏯️](#1)
 
-[II. Thực hành 🖥️](#II)
+[II. Thực hành 🖥️](#2)
 
- - [1. Cấu hình máy chạy windows server 💻](#1-cấu-hình-máy-chạy-windows-server-💻)
- - [2. Kết nối iSCSI Virtual Disk cho iSCSI Initiator trên Windows 💻](#2-kết-nối-iscsi-virtual-disk-cho-iscsi-initiator-trên-windows-10-💻2)
- - [3. Kết nối iSCSI Virtual Disk cho iSCSI Initiator trên CentOS 💻](#3-kết-nối-iscsi-virtual-disk-cho-iscsi-initiator-trên-centos-7-💻3)
- - [4. Kết luận ⏯️](#4-kết-luận-⏯️4)
+ - [1. Cấu hình máy chạy windows server 💻](#2.1)
+ - [2. Kết nối iSCSI Virtual Disk cho iSCSI Initiator trên Windows 💻](#2.2)
+ - [3. Kết nối iSCSI Virtual Disk cho iSCSI Initiator trên CentOS 💻](#2.3)
+ - [4. Kết luận ⏯️](#2.4)
 
-[III. Tài liệu tham khảo 📚](#iii-tài-liệu-tham-khảo-📚)
+[III. Tài liệu tham khảo 📚](#0)
 
 ___
 
-## <a name="I" >I. Chuẩn bị ⏯️</a>
+## <a name="1" >I. Chuẩn bị ⏯️</a>
 
 **1. ít nhất 3 máy:**
 
@@ -31,11 +31,11 @@ Biết được địa chỉ IPv4 của các máy. Các máy có thể ping đư
 
 <img src="https://user-images.githubusercontent.com/79830542/179896058-76a7ecb3-78ae-41f9-a485-fb40d7ce6d47.png" width="">
 
-## <a name="II" >II. Thực hành 🖥️</a>
+## <a name="2" >II. Thực hành 🖥️</a>
 
 _Ta sẽ dùng máy chạy windows server 2016 làm máy target, tiến hành quản lý và chia sẻ tài nguyên lưu trữ_
 
-### <a name="II.1" >1. Cấu hình máy chạy windows server 💻</a>
+### <a name="2.1" >1. Cấu hình máy chạy windows server 💻</a>
 
 Bước 1: Cài đặt iSCSI Target Server:
 
@@ -121,7 +121,7 @@ Bạn có thể thấy file ổ cứng ảo iSCSI Virtual Disk được lưu tr�
 
 _Lưu ý: Server dùng triển khai iSCSI target server không được bật dịch vụ iSCSI Initiator._
 
-## <a name="II.2" >2. Kết nối iSCSI Virtual Disk cho iSCSI Initiator trên Windows 10 💻</a>
+## <a name="2.2" >2. Kết nối iSCSI Virtual Disk cho iSCSI Initiator trên Windows 10 💻</a>
 
 Truy cập vào iSCSI Initiator như đã nói ở Bước 2 - mục 1. Trong cửa sổ iSCSI Initiator Properties chọn tab Discovery, chọn Discover Portal…, điền vào thông tin IP hoặc DNS name của máy đang chạy iSCSI target server.
 
@@ -143,7 +143,7 @@ Sau khi, tạo ra Volume mới, bạn có thể thấy các phân vùng của iS
 
 <img src="https://user-images.githubusercontent.com/79830542/179176895-dcc7373a-e0d5-46c5-a5d8-024d3b2a397a.png" width="600">
 
-## <a name="II.3" >3. Kết nối iSCSI Virtual Disk cho iSCSI Initiator trên CentOS 7 💻</a>
+## <a name="2.3" >3. Kết nối iSCSI Virtual Disk cho iSCSI Initiator trên CentOS 7 💻</a>
 
 Trên CentOS 7 cần cài thêm các gói Initiator để có thể sử dụng được iSCSI Initiator. Sử dụng câu lệnh:
 
@@ -204,7 +204,7 @@ Sau đó chạy câu lệnh login
  Thường thì sẽ không thấy ngay lập tức, ta phải reload lại để cập nhật. Nút được khoanh đỏ trên hình.
  Trên máy centos7 ta có thể định dạng, mount, phân vùng,... đầy đủ các thao tác như với 1 ổ cứng thông thường.
 
-### <a name="II.4" >4. Kết luận ⏯️</a>
+### <a name="2.4" >4. Kết luận ⏯️</a>
 
  🌭 _Như vậy về cơ bản ta đã cấu hình thành công iSCSI target trên máy windows server và kết nối thành công trên máy windows 10, centos7 một cách đơn giản nhất.
 
@@ -212,7 +212,7 @@ Sau đó chạy câu lệnh login
 
  <img src="https://user-images.githubusercontent.com/79830542/179435810-898ec53f-01e0-4a68-8c3b-81264c89178b.png" width="600">
 
-## <a name="III" >III. Tài liệu tham khảo 📚</a>
+## <a name="0" >III. Tài liệu tham khảo 📚</a>
 
  1. [Triển khai iSCSI trên Windows Server](https://www.engisv.info/?p=4782)
 
