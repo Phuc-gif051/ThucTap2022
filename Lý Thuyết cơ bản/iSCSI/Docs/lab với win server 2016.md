@@ -1,7 +1,9 @@
 # Mục lục
-[I. Chuẩn bị ⏯️](#i-chuẩn-bị-⏯️)
 
-[II. Thực hành 🖥️](#ii-thực-hành-🖥️)
+[I. Chuẩn bị ⏯️](#I)
+
+[II. Thực hành 🖥️](#II)
+
  - [1. Cấu hình máy chạy windows server 💻](#1-cấu-hình-máy-chạy-windows-server-💻)
  - [2. Kết nối iSCSI Virtual Disk cho iSCSI Initiator trên Windows 💻](#2-kết-nối-iscsi-virtual-disk-cho-iscsi-initiator-trên-windows-10-💻2)
  - [3. Kết nối iSCSI Virtual Disk cho iSCSI Initiator trên CentOS 💻](#3-kết-nối-iscsi-virtual-disk-cho-iscsi-initiator-trên-centos-7-💻3)
@@ -11,8 +13,10 @@
 
 ___
 
-# <a name="I" >I. Chuẩn bị ⏯️</a>
+## <a name="I" >I. Chuẩn bị ⏯️</a>
+
 **1. ít nhất 3 máy:**
+
  - 1 máy chạy windows server 2016
  - 1 máy chạy windows 10 pro
  - 1 máy chạy Linux, ở bài thực hành này là chạy CentOS 7.
@@ -27,9 +31,12 @@ Biết được địa chỉ IPv4 của các máy. Các máy có thể ping đư
 
 <img src="https://user-images.githubusercontent.com/79830542/179896058-76a7ecb3-78ae-41f9-a485-fb40d7ce6d47.png" width="">
 
-# <a name="II" >II. Thực hành 🖥️</a>
+## <a name="II" >II. Thực hành 🖥️</a>
+
 _Ta sẽ dùng máy chạy windows server 2016 làm máy target, tiến hành quản lý và chia sẻ tài nguyên lưu trữ_
-## <a name="II.1" >1. Cấu hình máy chạy windows server 💻</a>
+
+### <a name="II.1" >1. Cấu hình máy chạy windows server 💻</a>
+
 Bước 1: Cài đặt iSCSI Target Server:
 
 Để triển khai dịch vụ, chúng ta tiến hành cài đặt Server roles iSCSI Target Server. Tại Server Roles mở rộng File and Storage Services -> File and iSCSI  Services và chọn iSCSI Target Server.
@@ -139,10 +146,12 @@ Sau khi, tạo ra Volume mới, bạn có thể thấy các phân vùng của iS
 ## <a name="II.3" >3. Kết nối iSCSI Virtual Disk cho iSCSI Initiator trên CentOS 7 💻</a>
 
 Trên CentOS 7 cần cài thêm các gói Initiator để có thể sử dụng được iSCSI Initiator. Sử dụng câu lệnh:
-```sh 
+
+```sh
 sudo yum install iscsi-initiator-utils* -y
 ```
-Dùng lệnh `vi /etc/iscsi/initiatorname.iscsi` để vào chỉnh sửa tên IQN theo ý thích của bạn hoặc dùng câu lệnh 
+
+Dùng lệnh `vi /etc/iscsi/initiatorname.iscsi` để vào chỉnh sửa tên IQN theo ý thích của bạn hoặc dùng câu lệnh
 
 ```sh
 echo "InitiatorName=iqn.2022-07.com.linux:CentOS7>" | sudo tee /etc/iscsi/initiatorname.iscsi
@@ -152,9 +161,11 @@ echo "InitiatorName=iqn.2022-07.com.linux:CentOS7>" | sudo tee /etc/iscsi/initia
 Lưu lại IQN này theo cách của bạn dùng để cấu hình trên Windows server 2016 tương tự như ở [mục 1](#II.1)
 
 Sau khi cấu hình xong trên server, tại máy centos ta cũng sẽ dò tìm xem có kết nối nào hay không bằng câu lệnh
+
 ```sh
 iscsiadm --mode discovery --type sendtargets --portal <IP server> --discover
 ```
+
 thay thế <IP server> bằng IP của Windows server 2016. Bạn sẽ nhận lại kết quả trả về tương tự thế này:
   
   <img src="https://user-images.githubusercontent.com/79830542/179185597-22501b5b-1829-45fa-947a-e892b0d8cf69.png" width="600">
@@ -178,32 +189,34 @@ sudo iscsiadm --mode node --targetname <iqn name server> --portal <IP server>:<p
  Để chắc chắn sau khi chạy câu lệnh trên thì ta có thể kết nối được đến phân vùng đã chia sẻ thì trên Centos 7 ta dùng câu lệnh `lsblk` để kiểm tra các phân vùng đang có trên máy.
  
  <img src="https://user-images.githubusercontent.com/79830542/179435013-fdedc836-eed2-4602-934b-bb6bab5ea388.png" width="600">
- 
+
 Sau đó chạy câu lệnh login
- 
+
  <img src="https://user-images.githubusercontent.com/79830542/179435213-a4a71436-c155-461a-9c3c-e63aced8725b.png" width="600">
- 
+
  Rồi lại dùng câu lệnh `lsblk` để kiểm tra lại, ta thấy phân vùng `sda` mới với dung lượng là 5 GiB
- 
- 
+
+
  Kiểm tra trên máy win server
- 
+
  <img src="https://user-images.githubusercontent.com/79830542/179435400-375392a2-8bfd-4237-a317-87bd478914d6.png" width="600">
- 
+
  Thường thì sẽ không thấy ngay lập tức, ta phải reload lại để cập nhật. Nút được khoanh đỏ trên hình.
  Trên máy centos7 ta có thể định dạng, mount, phân vùng,... đầy đủ các thao tác như với 1 ổ cứng thông thường.
- 
- ### <a name="II.4" >4. Kết luận ⏯️</a>
+
+### <a name="II.4" >4. Kết luận ⏯️</a>
+
  🌭 _Như vậy về cơ bản ta đã cấu hình thành công iSCSI target trên máy windows server và kết nối thành công trên máy windows 10, centos7 một cách đơn giản nhất.
- 
+
   - Chứng thực, ta vẫn sẽ dùng wireshark.
+
  <img src="https://user-images.githubusercontent.com/79830542/179435810-898ec53f-01e0-4a68-8c3b-81264c89178b.png" width="600">
- 
- # <a name="III" >III. Tài liệu tham khảo 📚</a>
- 
+
+## <a name="III" >III. Tài liệu tham khảo 📚</a>
+
  1. [Triển khai iSCSI trên Windows Server](https://www.engisv.info/?p=4782)
- 
+
  2. [How to Install and Configure iSCSI Storage Server on CentOS 7](https://onet.vn/how-to-install-and-configure-iscsi-storage-server-on-centos-7.html)
- 
- Date access: 18/07/2022, HN, VN 
+
+ Date access: 18/07/2022, HN, VN
 
