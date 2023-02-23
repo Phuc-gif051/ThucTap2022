@@ -2,7 +2,22 @@
 
 _Triển khai RADOS block device trên môi trường thử nghiệm. Không nên sử dụng cho môi trường thực tế_
 
-## <a name="I" >I. Chuẩn bị</a>
+[I. Chuẩn bị](#i-chuẩn-bị)
+[II. Thực hành](#thực-hành)
+
+- [1. Cài đặt các gói cần thiết](#1-cài-đặt-các-gói-cần-thiết)
+- [2-cài-đặt-ceph-iscsi-từ-github](#2-cài-đặt-ceph-iscsi-từ-github)
+- [3-cấu-hình-iscsi-và-sử-dụng](#3-cấu-hình-iscsi-và-sử-dụng)
+  
+  - [3.1-cấu-hình-iscsi](#31-cấu-hình-iscsi)
+  - [3.2-sử-dụng](#32-sử-dụng)
+
+___
+
+
+<a name="I" ></a>
+
+## I. Chuẩn bị
 
 - Tài khoản sử dụng trong bài labs là tài khoản `root`.
 - Trong bài sử dụng môi trường labs có IPPlanning và cấu hình cơ bản như sau:
@@ -42,7 +57,9 @@ _Triển khai RADOS block device trên môi trường thử nghiệm. Không nê
     ceph mgr services
     ```
 
-## <a name="II" >Thực hành</a>
+<a name="II" ></a>
+
+## Thực hành
 
 - Ceph RBD, hỗ trợ rất nhiều trong việc cung cấp storage cho các máy và hệ thống khác nhau ví dụ như: [QEMU](https://docs.ceph.com/en/latest/rbd/qemu-rbd/), [Kubernetes](https://docs.ceph.com/en/latest/rbd/rbd-kubernetes/), [OpenStack](https://docs.ceph.com/en/latest/rbd/rbd-openstack/), [CloudStack](https://docs.ceph.com/en/latest/rbd/rbd-cloudstack/),...
 
@@ -53,6 +70,8 @@ _Triển khai RADOS block device trên môi trường thử nghiệm. Không nê
 - [File bash to install](install-ceph-iscsi.sh). Các bước chi tiết bên dưới. Nếu cài đặt lần đầu thì lên thực hiện theo từng bước để còn debug khi có lỗi.
 
 ### <a name="2.1" >1. Cài đặt các gói cần thiết</a>
+
+_Thực hiện trên tất cả các node dự dịnh làm iSCSI gateway_
 
 - Cài python3 từ yum repo:
 
@@ -114,6 +133,8 @@ trusted_ip_list =172.16.5.2,172.16.5.3,172.16.5.4,172.16.5.10
 ```
 
 ### <a name="2.2" >2. Cài đặt ceph-iscsi từ github</a>
+
+_Thực hiện trên tất cả các node dự dịnh làm iSCSI gateway_
 
 - Cài đặt TCMU-RUNNER
 
@@ -187,7 +208,7 @@ trusted_ip_list =172.16.5.2,172.16.5.3,172.16.5.4,172.16.5.10
 
 _Nếu cài đặt thành công có thể di chuyển sang bước tiếp theo. Cấu hình và sử dụng._
 
-### <a name="2.3" >Cấu hình iSCSI và sử dụng</a>
+### <a name="2.3" >3. Cấu hình iSCSI và sử dụng</a>
 
 #### <a name="2.31" >3.1. Cấu hình iSCSI</a>
 
@@ -221,12 +242,13 @@ _Nếu cài đặt thành công có thể di chuyển sang bước tiếp theo. 
   ```
 
 >Nếu không sử dụng RHEL/CentOS thì hãy thêm `skipchecks=true` vào sau câu lệnh.
+>Với IP đầu tiên thì bắt buộc phải là IP thuộc máy đang thực hiện cấu hình.
 
 - Tạo disk có tên là disk_1 với pool quản lý là rbd:
 
   ```sh
   /iscsi-target...-igw/gateways> cd /disks
-  /disks> create pool=rbd image=disk_1 size=10G
+  /disks> create pool=rbd image=disk_1 size=9G
   ```
 
 - Thêm client là máy CentOS 7 có iqn là `iqn.1994-05.com.redhat:rh7-client`:
@@ -244,4 +266,51 @@ _Nếu cài đặt thành công có thể di chuyển sang bước tiếp theo. 
 
 ### <a name="2.32" >3.2. Sử dụng</a>
 
-- Sử dụng trên máy chạy CentOS.
+#### Sử dụng trên máy chạy CentOS 7
+
+- Yêu cầu cài đặt gói hỗ trợ cho máy để có thể sử dụng:
+
+ ```sh
+ yum install iscsi-initiator-utils -y
+ ```
+
+- Cài gói bổ trợ thành công thì chỉnh sửa iqn của máy cho chính xác với tên đã khai báo trong target hoặc cập nhật tên mặc định của máy cho target. iqn của máy được lưu tại:
+
+ ```sh
+ vi /etc/iscsi/initiatorname.iscsi
+ ```
+
+- Thao tác xong với iqn của máy, ta sẽ tiến hành dò tìm target bằng câu lệnh:
+
+ ```sh
+ iscsiadm --mode discovery --type sendtargets --portal <IP server> --discover
+ ```
+
+Ví dụ như hình dưới:
+<img src="../Images/ceph-iscsi-search-target.png" width="">
+
+- Nhận được chính xác 02 ip mà ta đã khai báo ở trên. Tiến hành kết nối bằng câu lệnh:
+
+ ```sh
+ iscsiadm --mode node --targetname <iqn name server> --portal <IP server>:<port> --login
+ ```
+
+Ví dụ như hình dưới:
+
+<img src="../Images/ceph-iscsi-connect-target.png" width="">
+
+- Nhận được thành ổ cứng với dung lượng 9GiB như đã khai báo ở trên. Tới đây ta có thể hoàn toàn định dạng lại kiểu dữ liệu và mount vào hệ thống để sử dụng.
+- Tốc độ đọc ghi phụ thuộc khá nhiều chất lượng đường truyền mạng. Có thể cải thiện với tính năng MPIO. Xem thêm về MPIO tại đây: <https://docs.ceph.com/en/nautilus/rbd/iscsi-initiator-linux/>
+
+#### Sử dụng trên máy chạy Windows 10 (bản home và personal không được hỗ trợ)
+
+- Trên windows 10 pro đã cài đặt ứng dụng hỗ trợ cho iSCSI chỉ cần khởi chạy là có thể sử dụng.
+- Thực hành kết nối theo bài hướng dẫn sau: [Target là Centos - Initiator là windows](https://github.com/Phuc-gif051/ThucTap2022/blob/main/L%C3%BD%20Thuy%E1%BA%BFt%20c%C6%A1%20b%E1%BA%A3n/iSCSI/Docs/Lab%20v%E1%BB%9Bi%20Centos%207.md#3-target-l%C3%A0-centos---initiator-l%C3%A0-windows)
+
+<a name="0" ></a>
+
+## Tài liệu tham khảo
+
+- [docs ceph - CEPH ISCSI GATEWAY](https://docs.ceph.com/en/nautilus/rbd/iscsi-overview/)
+- [youtube - Setting up iSCSI in Ceph](https://www.youtube.com/watch?v=Qx6lxotzI0k)
+- [github - tutorial-ceph](https://github.com/uncelvel/tutorial-ceph)

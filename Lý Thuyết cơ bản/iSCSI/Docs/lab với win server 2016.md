@@ -115,7 +115,7 @@ _Lưu ý: Server dùng triển khai iSCSI target server không được bật d�
 
 ## <a name="II.2" >2. Kết nối iSCSI Virtual Disk cho iSCSI Initiator trên Windows 10 💻</a>
 
-Truy cập vào iSCSI Initiator như đã nói ở Bước 2. Trong cửa sổ iSCSI Initiator Properties chọn tab Discovery, chọn Discover Portal…, điền vào thông tin IP hoặc DNS name của máy đang chạy iSCSI target server.
+Truy cập vào iSCSI Initiator như đã nói ở Bước 2 - mục 1. Trong cửa sổ iSCSI Initiator Properties chọn tab Discovery, chọn Discover Portal…, điền vào thông tin IP hoặc DNS name của máy đang chạy iSCSI target server.
 
 <img src="https://user-images.githubusercontent.com/79830542/179176369-a4c55ef5-5659-4d07-a05e-390517ad0405.png" width="600">
 
