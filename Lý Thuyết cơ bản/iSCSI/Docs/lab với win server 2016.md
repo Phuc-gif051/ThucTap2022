@@ -10,6 +10,7 @@
 [III. Tài liệu tham khảo 📚](#III)
 
 ___
+<a name="I" >
 # <a name="I" >I. Chuẩn bị ⏯️</a>
 **1. ít nhất 3 máy:**
  - 1 máy chạy windows server 2016
