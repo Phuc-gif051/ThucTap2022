@@ -12,6 +12,8 @@ _Triển khai RADOS block device trên môi trường thử nghiệm. Không nê
   - [3.1-cấu-hình-iscsi](#31-cấu-hình-iscsi)
   - [3.2-sử-dụng](#32-sử-dụng)
 
+[tài-liệu-tham-khảo](#tài-liệu-tham-khảo)
+
 ___
 
 
@@ -306,6 +308,15 @@ Ví dụ như hình dưới:
 
 - Trên windows 10 pro đã cài đặt ứng dụng hỗ trợ cho iSCSI chỉ cần khởi chạy là có thể sử dụng.
 - Thực hành kết nối theo bài hướng dẫn sau: [Target là Centos - Initiator là windows](https://github.com/Phuc-gif051/ThucTap2022/blob/main/L%C3%BD%20Thuy%E1%BA%BFt%20c%C6%A1%20b%E1%BA%A3n/iSCSI/Docs/Lab%20v%E1%BB%9Bi%20Centos%207.md#3-target-l%C3%A0-centos---initiator-l%C3%A0-windows)
+- Thu được kết quả tương tự như hình dưới:
+
+<img src="../Images/ceph-iscsi-windows-10-connect-target.png" width="">
+
+- Kiểm tra trên ceph-dashboard:
+
+<img src="../Images/labs-ceph-check-dashboard.PNG" width="">
+
+- Thành công khởi tạo trên cụm ceph, kết nối thành công trên cả CentOS 7 và windows 10
 
 <a name="0" ></a>
 
