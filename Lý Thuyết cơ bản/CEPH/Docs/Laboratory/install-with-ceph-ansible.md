@@ -2,6 +2,15 @@
 
 _Cài đặt ceph nautilus sử dụng ceph-ansible từ git source_
 
+[chuẩn-bị](#i-chuẩn-bị)
+
+[chuẩn-bị-tất-cả-server](#chuẩn-bị-tất-cả-server)
+
+[cài-đặt-trên-node-admin](#cài-đặt-trên-node-admin)
+
+ - [cấu-hình-ceph-ansible](#cấu-hình-ceph-ansible)
+ - [cài-đặt](#cài-đặt)
+
 
 ___
 
@@ -22,6 +31,13 @@ ___
 
  ```sh
  curl -Lso- https://raw.githubusercontent.com/nhanhoadocs/scripts/master/Utilities/cmdlog.sh | bash
+ ```
+
+- Cài đặt python3
+
+ ```sh
+ yum install centos-release-scl 
+ yum install python36 -y
  ```
 
 - Cài đặt NTPD
@@ -103,13 +119,6 @@ sudo firewall-cmd --reload
 ```
 
 ## Cài đặt trên node admin
-
-- Cài đặt python3
-
- ```sh
- yum install centos-release-scl 
- yum install python36 -y
- ```
 
 - Cài đặt pip hoặc pip3 và update lên phiên bản mới nhất
 
