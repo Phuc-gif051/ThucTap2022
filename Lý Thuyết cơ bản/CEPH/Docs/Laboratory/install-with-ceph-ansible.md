@@ -8,8 +8,10 @@ _Cài đặt ceph nautilus sử dụng ceph-ansible từ git source_
 
 [cài-đặt-trên-node-admin](#cài-đặt-trên-node-admin)
 
- - [cấu-hình-ceph-ansible](#cấu-hình-ceph-ansible)
- - [cài-đặt](#cài-đặt)
+- [cấu-hình-ceph-ansible](#cấu-hình-ceph-ansible)
+- [cài-đặt](#cài-đặt)
+
+[Tài liệu tham khảo](#0)
 
 
 ___

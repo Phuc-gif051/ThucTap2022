@@ -27,7 +27,7 @@ ___
 <img src="../Images/labs-ceph-iscsi-ipPlanning.PNG" width="">
 
 - Cài đặt Python 3 lên tất cả các máy và gói bổ trợ `pip`
-- Yêu cầu sử dụng Kernel từ 4.16 trở lên. Hãy kiểm tra và update kernel linux. Đối với các máy chạy CentOS yêu cầu phiên bản CentOS lớn hơn 7.5.
+- Yêu cầu sử dụng Kernel từ 4.16 trở lên. Hãy kiểm tra và update kernel linux - có thể tham khảo câu lệnh sau [update-kernel](update-kernel-centos7.sh). Đối với các máy chạy CentOS yêu cầu phiên bản CentOS lớn hơn 7.5.
 - Vì đây là môi trường lab nên sẽ tắt filewalld và SElinux. Trong môi trường thực tế ta cần phải khai báo để thông port. Bắt buộc phải dùng ít nhất 1 biện pháp an toàn. Recommend IPtable.
 
 - Mô hình triển khai:
@@ -125,6 +125,9 @@ gateway_keyring = ceph.client.admin.keyring
 
 # To support the API, the bear minimum settings are:
 api_secure = false
+
+# Them cau hinh sau neu gap loi _gateway change on localhost failed with 500
+# api_host = 0.0.0.0
 
 # Additional API configuration options are as follows, defaults shown.
 # api_user = admin
