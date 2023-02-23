@@ -1,16 +1,16 @@
 # Mục lục
-[I. Chuẩn bị ⏯️](#I)
+[I. Chuẩn bị ⏯️](#i-chuẩn-bị-⏯️)
 
-[II. Thực hành 🖥️](#II)
- - [1. Cấu hình máy chạy windows server 💻](#II.1)
- - [2. Kết nối iSCSI Virtual Disk cho iSCSI Initiator trên Windows 💻](#II.2)
- - [3. Kết nối iSCSI Virtual Disk cho iSCSI Initiator trên CentOS 💻](#II.3)
- - [4. Kết luận ⏯️](#II.4)
+[II. Thực hành 🖥️](#ii-thực-hành-🖥️)
+ - [1. Cấu hình máy chạy windows server 💻](#1-cấu-hình-máy-chạy-windows-server-💻)
+ - [2. Kết nối iSCSI Virtual Disk cho iSCSI Initiator trên Windows 💻](#2-kết-nối-iscsi-virtual-disk-cho-iscsi-initiator-trên-windows-10-💻2)
+ - [3. Kết nối iSCSI Virtual Disk cho iSCSI Initiator trên CentOS 💻](#3-kết-nối-iscsi-virtual-disk-cho-iscsi-initiator-trên-centos-7-💻3)
+ - [4. Kết luận ⏯️](#4-kết-luận-⏯️4)
 
-[III. Tài liệu tham khảo 📚](#III)
+[III. Tài liệu tham khảo 📚](#iii-tài-liệu-tham-khảo-📚)
 
 ___
-<a name="I" >
+
 # <a name="I" >I. Chuẩn bị ⏯️</a>
 **1. ít nhất 3 máy:**
  - 1 máy chạy windows server 2016

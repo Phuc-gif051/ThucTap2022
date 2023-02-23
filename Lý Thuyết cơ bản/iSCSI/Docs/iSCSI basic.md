@@ -1,11 +1,11 @@
 # Mục lục
-[I. iSCSI là gì❔](#I)
+[I. iSCSI là gì❔](#i-iscsi-là-gì❔)
 
-[II. Các thành phần chính 🥧](#II)
- - [1. iSCSI Initiator](#II.1)
- - [2. iSCSI Target](#II.2)
+[II. Các thành phần chính 🥧](#ii-các-thành-phần-chính-🥧)
+ - [1. iSCSI Initiator](#1-iscsi-initiator)
+ - [2. iSCSI Target](#2-iscsi-target)
 
-[III. iSCSI hoạt động như thế nào? 👷‍♂️](#III)
+[III. iSCSI hoạt động như thế nào? 👷‍♂️](#iii-iscsi-hoạt-động-như-thế-nào-👷‍♂️)
 ___
 
 # <a name="I" >I. iSCSI là gì❔</a>

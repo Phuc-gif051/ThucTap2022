@@ -1,13 +1,13 @@
 # Mục lục
-[I. Chuẩn bị ⏯️](#I)
+[I. Chuẩn bị ⏯️](#i-chuẩn-bị-⏯️)
 
-[II. Thực hành 🖥️](#II)
-  - [1. Cấu hình iSCSI target 💻](#II.1)
-  - [2. Kết nối đến target trên máy centos 7](#II.2)
-  - [3. Target là Centos - Initiator là windows](#II.3)
-  - [4. Chứng thực](#II.4)
+[II. Thực hành 🖥️](#ii-thực-hành-🖥️)
+  - [1. Cấu hình iSCSI target 💻](#1-cấu-hình-iscsi-target-💻)
+  - [2. Kết nối đến target trên máy centos 7](#2-kết-nối-đến-target-trên-máy-centos-7)
+  - [3. Target là Centos - Initiator là windows](#3-target-là-centos---initiator-là-windows)
+  - [4. Chứng thực](#4-chứng-thực)
 
-[III. Tài liệu tham thảo 📚](#III)
+[III. Tài liệu tham thảo 📚](#iii-tài-liệu-tham-khảo)
 ___
 
 # <a name="I" >I. Chuẩn bị ⏯️</a>
