@@ -3,9 +3,14 @@
 #link youtube: https://www.youtube.com/watch?v=Qx6lxotzI0k
 
 yum install -y libnl3 libkmod librbd1 pyparsing python3-kmod python3-pyudev python3-gobject python3-urwid python3-rados python3-rbd python3-netifaces python3-crypto python3-requests python3-flask pyOpenSSL
-yum groupinstall 'development tools' -y
 yum install python3-devel openssl-devel libffi-devel -y
 pip3 install pyOpenSSL
+
+# install groups Development Tools
+
+yum groups mark install "Development Tools"
+yum groups mark convert "Development Tools"
+yum groupinstall "Development Tools"
 
 # Nen chuyen sang python3 de cai dat cac buoc ben duoi
 
