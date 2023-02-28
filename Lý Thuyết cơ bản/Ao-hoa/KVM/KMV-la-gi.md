@@ -14,7 +14,7 @@ ___
 
 ## KVM là gì?
 
-KVM là từ viết tắt của Kernel Virtualization Machine hoặc Kernel-based Virtual Machine, được giới thiệu là công nghệ ảo hóa phần cứng có mã nguồn mở. Điều này có nghĩa là hệ điều hành chính OS có nhiệm vụ mô phỏng phần cứng cho các OS khác để chạy trên đó.
+KVM là từ viết tắt của Kernel Virtualization Machine hoặc Kernel-based Virtual Machine, được giới thiệu là công nghệ ảo hóa phần cứng có mã nguồn mở. Điều này có nghĩa là hệ điều hành chính (OS) có nhiệm vụ mô phỏng phần cứng cho các OS khác để chạy trên đó.
 
 Chính vì vậy, ảo hóa KVM có cách hoạt động giống như người quản lý, giúp chia sẻ các nguồn tài nguyên ổ đĩa, network, CPU một cách tối ưu nhất. Ngoài ra, công nghệ ảo hóa KVM còn được tích hợp trong Linux như sau:
 
@@ -62,9 +62,15 @@ Về cơ bản, mỗi kiểu ảo hoá đều cần các tiến trình cấp h�
 
 ## Tài liệu tham khảo
 
+<https://www.linux-kvm.org/page/Documents>
+
+
 <https://www.redhat.com/en/topics/virtualization/what-is-KVM>
+
+<https://github.com/hocchudong/thuctap012017/blob/master/TamNT/Virtualization/docs/KVM/1.Tim_hieu_KVM.md>
 
 <https://bizflycloud.vn/tin-tuc/kvm-la-gi-20210924181610644.htm>
 
+<https://news.cloud365.vn/kvm-tong-quan-ve-virtualization-va-hypervisor/>
 
 Date accessed: 27/02/2023
