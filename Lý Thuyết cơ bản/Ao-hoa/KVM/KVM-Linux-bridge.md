@@ -2,7 +2,9 @@
 
 [Tổng quan](#tổng-quan)
 
-[]()
+[Thực hành với Linux-bridge](#thực-hành-với-linux-bridge)
+
+[Tài liệu tham khảo](#tài-liệu-tham-khảo)
 
 
 ## Tổng quan
@@ -97,7 +99,7 @@ sudo yum install bridge-utils
 |Delete VLAN filter entry||`bridge vlan delete dev <dev>` (parameters same as for vlan add)|
 |List VLAN configuration||`bridge vlan show`|
 
-Nguồn : https://github.com/hocchudong/thuctap012017/blob/master/TamNT/Virtualization/docs/Virtual_Switch/1.Linux-Bridge.md
+Nguồn: <https://github.com/hocchudong/thuctap012017/blob/master/TamNT/Virtualization/docs/Virtual_Switch/1.Linux-Bridge.md>
 
 
 
