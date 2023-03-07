@@ -16,6 +16,8 @@
 
 [Tài liệu tham khảo](#tài-liệu-tham-khảo)
 
+___
+
 ## 1. Kiến trúc của hệ thống KVM
 
 Trong kiến trúc KVM, máy ảo là 1 tiến trình Linux, được lập lịch bởi chuẩn Linux schduler. Trong thực tế mỗi CPU ảo xuất hiện như là 1 tiến trình Linux. Điều này cho phép KVM sử dụng tất cả tính năng của Linux kernel
