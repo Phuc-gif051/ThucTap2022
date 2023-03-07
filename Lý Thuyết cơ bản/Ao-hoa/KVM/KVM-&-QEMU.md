@@ -20,6 +20,8 @@ Do KVM kết hợp QEMU nên các máy ảo và mạng ảo có file cấu hình
 
 QEMU cần KVM để boost performance và ngược lại KVM cần QEMU (modified version) để cung cấp giải pháp full virtualization hoàn chỉnh.
 
+<https://github.com/lamth/Report-MDT/blob/master/KVM/docs/06.KVM-internals.md>
+
 <https://github.com/qemu/qemu>
 
 <https://www.linux-kvm.org/page/Main_Page>

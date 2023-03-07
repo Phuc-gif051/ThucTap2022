@@ -6,9 +6,13 @@
 
 [3. KVM-QEMU kết hợp với Linux-bridge](#3-kvm-qemu-kết-hợp-với-linux-bridge)
 
-[4. Các chế dộ mạng trong KVM](#4-các-chế-dộ-mạng-trong-kvm)
+[4. Execution-Model - Quy trình vận hành KVM](#4-execution-model---quy-trình-vận-hành-kvm)
 
-[5. Các file cấu hình của KVM](#5-các-file-cấu-hình-của-kvm)
+[5. Các chế dộ mạng trong KVM](#5-các-chế-dộ-mạng-trong-kvm)
+
+[6. Các file cấu hình của KVM](#6-các-file-cấu-hình-của-kvm)
+
+[7. LibVirtd - 1 số trình điều khiển KVM-QEMU](#7-libvirtd---1-số-trình-điều-khiển-kvm-qemu)
 
 [Tài liệu tham khảo](#tài-liệu-tham-khảo)
 
@@ -118,32 +122,32 @@ Như ta thấy:
 
 Khi một máy ảo chạy, có rất nhiều chuyển đổi giữa các chế độ. Từ kernel-mode tới guest-mode và ngược lại rất nhanh, bởi vì chỉ có mã nguồn gốc được thực hiện trên phần cứng cơ bản. Khi I/O hoạt động diễn ra các luồng thực thi tới user-mode, rất nhiều thiết bị ảo I/O được tạo ra, do vậy rất nhiều I/O thoát ra và chuyển sang chế độ user-mode chờ. Hãy tưởng tượng mô phỏng một đĩa cứng và 1 guest đang đọc các block từ nó. Sau đó QEMU mô phỏng các hoạt động bằng cách giả lập các hoạt động bằng các mô phỏng hành vi của các ổ đĩa cứng và bộ điều khiển nó được kết nối. Để thực hiện các hoạt động đọc, nó đọc các khối tương ứng từ một tập tin lớp và trả về dữ liệu cho guest. Vì vậy, user-mode giả lập I/O có xu hướng xuất hiện một nút cổ chai làm chậm việc thực hiện máy ảo.
 
-## 4. Các chế dộ mạng trong KVM
+## 5. Các chế dộ mạng trong KVM
 
-Trong KVM có 3 chế độ card mạng là NAT (routing with iptables), Public Bridge và Private Bridge.\
+Trong KVM có 3 chế độ card mạng là NAT (routing with iptables), Public Bridge và Private Bridge.
 
-### 4.1. Private Bridge
+### 5.1. Private Bridge
 
 Trường hợp sử dụng:
 Để tạo một mạng nội bộ giữa 2 hay nhiều máy ảo. Mạng này sẽ không thấy được từ các máy ảo khác cũng như mạng bên ngoài.
 
-### 4.2. Public Bridge
+### 5.2. Public Bridge
 
 Trường hợp sử dụng:
 Gán bridge với một card mạng để giúp các máy ảo kết nối với public bridge có thể giao tiếp trực tiếp với mạng như một thiết bị trong mạng.
 
-### 4.3. NAT (routing with iptables)
+### 5.3. NAT (routing with iptables)
 
 Đây là chế độ mạng mặc định của KVM. Các máy ảo được cấp phát ip và sẽ được định tuyến để có thể ra được mạng ngoài bằng iptables.
 
 
 <a name="fileconfig"></a>
 
-## 5. Các file cấu hình của KVM
+## 6. Các file cấu hình của KVM
 
 ### Thư mục chưa máy ảo
 
-Thông tin cấu hình của máy ảo nằm ở thư mục /etc/libvirt/qemu/. Trong thư mục này sẽ chứa tất cả các file cấu hình của từng máy ảo hiện có trong KVM dưới dạng file xml. Chúng ta có thể chỉnh sửa thông tin của máy ảo trực tiếp từ file này hoặc bằng lệnh virsh edit <tên máy ảo>
+Thông tin cấu hình của máy ảo nằm ở thư mục /etc/libvirt/qemu/. Trong thư mục này sẽ chứa tất cả các file cấu hình của từng máy ảo hiện có trong KVM dưới dạng file xml. Chúng ta có thể chỉnh sửa thông tin của máy ảo trực tiếp từ file này hoặc bằng lệnh `virsh edit <tên máy ảo>`
 
 Thư mục chứ các file storage của máy ảo như image thường sẽ được để ở  `/var/lib/libvirt/image`
 
@@ -154,6 +158,20 @@ Các file log của KVM nằm trong `/var/log/libvirt/`
 Log ghi lại hoạt động của từng máy ảo nằm trong thư mục /var/log/libvirt/qemu/. Khi một máy ảo được tạo thì sẽ tự động tạo một file log cho máy ảo đó và được lưu trong thư mục này
 
 Thư mục chứa image /var/lib/libvirt/image
+
+## 7. LibVirtd - 1 số trình điều khiển KVM-QEMU
+
+1 số trình điều khiển tiêu biểu như:
+
+- virsh
+- virt-manager
+- Openstack
+- ovirt
+- ...
+
+Các trình này cần API để có thể quản trị cũng như điều khiển các máy ảo. Thứ cung cấp API và các thư viện cần thiết chính là `LibVirt`. Nó hỗ trợ tốt nhất trên nền Linux và hầu hết các trình quản trị nổi bật hiện nay.
+
+![libvirt](../Images/KVM-libvirt.png)
 
 
 ## Tài liệu tham khảo
