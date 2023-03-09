@@ -104,8 +104,13 @@ Kết nối thành công thì TAP interface vnet2 sẽ được khởi tạo đ�
 
 <img src="../../Images/VM78.PNG" width="">
 
+Mô hình kết nối như sau:
+
+![Mo-Hinh-Ket-Noi](../../Images/Mo-Hinh-VM-Host-Bridge.png)
+
 ### 4. Chứng thực kết nối
 
+- Từ máy VM hãy `ping` tới các máy cùng dải mạng với card vật lý hoặc
 - Hãy cài đặt `WireShark` lên host và VM cần chứng thực. Khởi chạy chúng với giao diện đồ họa để bắt gói tin. Nhớ hãy chọn đúng card cần bắt gới tin để có kết quả đúng. Bắt gói tin với bộ lọc là `icmp`
 - Trên VM, dùng lệnh `ping` để kiểm tra kết nối đến một web site bất kỳ. Tại đây sẽ ping đến `google.com`
 - Trên máy VM, truy cập vào `WireShark`, thu được kết quả tương tự như hình dưới:
@@ -126,6 +131,8 @@ Kết nối thành công thì TAP interface vnet2 sẽ được khởi tạo đ�
 <https://github.com/nhanhoadocs/thuctapsinh/blob/master/NiemDT/KVM/docs/Linux-bridge.md>
 
 <https://github.com/lamth/Report-MDT/blob/master/KVM/docs/14.Linux-Bridge.md>
+
+<https://github.com/hocchudong/thuctap012017/blob/master/TamNT/Virtualization/docs/Virtual_Switch/1.Linux-Bridge.md#5.1>
 
 Date accessed: 07/03/2023
 
