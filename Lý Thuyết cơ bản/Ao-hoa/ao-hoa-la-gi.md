@@ -80,8 +80,7 @@ Sau đây là hai loại phần mềm giám sát máy ảo chính.
 
 #### Phần mềm giám sát máy ảo loại 1
 
-Phần mềm giám sát máy ảo loại 1 – cũng được gọi là phần mềm giám sát máy ảo bare metal (called a bare-metal hypervisor) – chạy trực tiếp trên phần cứng của máy tính vật lý. Loại phần mềm giám sát máy ảo này có một số khả năng của hệ điều hành và mang lại hiệu quả cao nhờ tương tác trực tiếp với các tài nguyên vật lý. Ví dụ: Linux KVM, Microsoft Hyper-V, Citrix XenServer,...
-
+Phần mềm giám sát máy ảo loại 1 – cũng được gọi là phần mềm giám sát máy ảo bare metal (called a bare-metal hypervisor) – chạy trực tiếp trên phần cứng của máy tính vật lý. Loại phần mềm giám sát máy ảo này có một số khả năng của hệ điều hành và mang lại hiệu quả cao nhờ tương tác trực tiếp với các tài nguyên vật lý. Ví dụ: VMware ESXi, Microsoft Hyper-V và Apple Boot Camp.
 <p align="center">
  <img src="Images/hypervisor-Native-Baremetal.png" width="">
 </p>

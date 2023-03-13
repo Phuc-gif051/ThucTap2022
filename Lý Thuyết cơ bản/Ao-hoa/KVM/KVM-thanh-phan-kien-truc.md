@@ -178,6 +178,8 @@ Các trình này cần API để có thể quản trị cũng như điều khi�
 
 ## Tài liệu tham khảo
 
+[Sach-KVM](Mastering%20KVM%20Virtualization-GEEKBOY-IR.pdf)
+
 <https://ductam.info/tong-quan-ve-kvm/>
 
 <https://wiki.nhanhoa.com/kb/kvm-ao-hoa-kvm-phan-1/>
