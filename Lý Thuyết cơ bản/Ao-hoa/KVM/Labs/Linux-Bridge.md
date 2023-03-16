@@ -52,7 +52,7 @@ _Tại đây sẽ tiến hành tạo bridge ảo bằng giao diện dòng lệnh
   brctl addbr br1
   ```
 
-**Bước 3:** Gán interface eth2 vào swicth br1
+**Bước 3:** Gán interface eth2 vào swicth port br1
 
   ```sh
   brctl addif br1 eth2
@@ -79,7 +79,7 @@ _Tại đây sẽ tiến hành tạo bridge ảo bằng giao diện dòng lệnh
   TYPE=Bridge
   ```
 
-- Cấu trình trên interface được dùng làm bridge cho `br1`, ở đây là `eth2`:
+- Cấu trình lại interface được dùng làm bridge cho `br1`, ở đây là `eth2`:
 
   ```sh
   DEVICE=eth2
