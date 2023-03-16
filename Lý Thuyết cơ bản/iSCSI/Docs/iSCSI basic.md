@@ -26,7 +26,7 @@ Một giao tiếp kết nối iSCSI sẽ bao gồm 2 thành phần chính sau:
  - iSCSI Initator: là client, được chia sẻ tài nguyên lưu trữ
  - iSCSI Target: là server, quản lý và chia sẻ tài nguyên.
 
-<img src="https://github.com/Phuc-gif051/ThucTap2022/blob/main/L%C3%BD%20Thuy%E1%BA%BFt%20c%C6%A1%20b%E1%BA%A3n/iSCSI/Images/architechture.jpg" width="300">
+<img src="https://github.com/Phuc-gif051/ThucTap2022/blob/main/L%C3%BD%20Thuy%E1%BA%BFt%20c%C6%A1%20b%E1%BA%A3n/iSCSI/Images/architechture.jpg" width="">
 
 ## <a name="II.1" >1. iSCSI Initiator</a>
 iSCSI Initiator (iSCSI Initiator Node) là thiết bị client trong kiến trúc hệ thống lưu trữ qua mạng. iSCSI Initiator sẽ kết nối đến máy chủ iSCSI Target và truyền tải các lệnh SCSI thông qua đường truyền mạng TCP/IP. iSCSI Initiator có thể được khởi chạy từ chương trình phần mềm trên OS hoặc phần cứng thiết bị hỗ trợ iSCSI. Từ windows 7 trở lên thì iSCSI initiator đã được cài đặt sẵn và sẵn sàng sử dụng.
@@ -46,11 +46,11 @@ iSCSI Target thường sẽ là một máy chủ lưu trữ (server storage) có
  – Sau đó lệnh SCSI sẽ được đưa vào SCSI Controller để thực thi và xử lý theo yêu cầu. Đến cuối cùng iSCSI Target sẽ gửi trả thông tin iSCSI response. Từ đó cho phép block data lưu trữ được truyền tải giữa Inititator và Target.
  
 
-<img src="https://github.com/Phuc-gif051/ThucTap2022/blob/main/L%C3%BD%20Thuy%E1%BA%BFt%20c%C6%A1%20b%E1%BA%A3n/iSCSI/Images/iscsi-tcp-ip.jpg" width="600">
+<img src="https://github.com/Phuc-gif051/ThucTap2022/blob/main/L%C3%BD%20Thuy%E1%BA%BFt%20c%C6%A1%20b%E1%BA%A3n/iSCSI/Images/iscsi-tcp-ip.jpg" width="">
 
 _Chú ý:_ Các kết nối iSCSI giữa Inititator và Target có thể hoạt động của cùng 1 cuộc giao tiếp giữa Initiator và Target. Một cuộc giao tiếp như vậy sẽ được gọi là một iSCSI Session.
 
-<img src="https://github.com/Phuc-gif051/ThucTap2022/blob/main/L%C3%BD%20Thuy%E1%BA%BFt%20c%C6%A1%20b%E1%BA%A3n/iSCSI/Images/iscsi-session.png" width="500">
+<img src="https://github.com/Phuc-gif051/ThucTap2022/blob/main/L%C3%BD%20Thuy%E1%BA%BFt%20c%C6%A1%20b%E1%BA%A3n/iSCSI/Images/iscsi-session.png" width="">
 
 
 # <a name="4" >Tài liệu tham khảo</a>
