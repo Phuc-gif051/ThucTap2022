@@ -10,7 +10,7 @@ _Các câu lệnh được thực hiện trong môi trường labs và đăng nh
 
 [4. Chứng thực kết nối](#4-chứng-thực-kết-nối)
 
-[Tài liệu tham khảo](Tài liệu tham khảo)
+[Tài liệu tham khảo](#tài-liệu-tham-khảo)
 
 ___
 
