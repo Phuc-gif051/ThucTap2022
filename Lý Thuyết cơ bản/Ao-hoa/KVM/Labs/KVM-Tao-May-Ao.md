@@ -13,7 +13,7 @@ egrep -c "svm|vmx" /proc/cpuinfo
 - Cài các gói cần thiết:
 
 ```sh
-yum install qemu-kvm libvirt bridge-utils virt-manager virt-viewer
+yum install qemu-kvm libvirt virt-install virt-manager virt-install -y
 ```
 
 Kiểm tra để chắc chắn rằng KVM đã được cài đặt

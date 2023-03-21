@@ -27,7 +27,9 @@ Chúng ta có thể thấy rằng có một con switch được tạo ra nằm b
 
 _Chú ý ta không thể kết nối switch ảo với card wireless do HĐH không hỗ trợ._
 
-Và bây giờ trên các VM muốn giao tiếp với nhau hoặc ra ngoài internet ta chỉ cần kết nối VM đó với switch ảo. Lúc này card mạng trên VM sẽ được gắn với 1 cổng của switch ảo thông qua tap interface và cổng này thường có tên là `vnet`. Khi một bridge được đấu nối thì một vnet sẽ được khởi tạo tự động tương ứng cho bridge đó.
+Và bây giờ trên các VM muốn giao tiếp với nhau hoặc ra ngoài internet ta chỉ cần kết nối VM đó với switch ảo. Lúc này card mạng trên VM sẽ được gắn với 1 cổng của switch ảo thông qua tap device, mặc định device này được khởi tạo sau khi tạo bridge và có định dạng tên là `<tên_bridge-nic>`.
+Khi VM kết nối vào, sẽ tự động tạo ra 1
+ cổng này thường có tên là `vnet`. Khi một bridge được đấu nối thì một vnet sẽ được khởi tạo tự động tương ứng cho bridge đó.
 Ví dụ như hình dưới: br1 có một máy kết nối đến thông qua vnet2
 
 <p align="center">
