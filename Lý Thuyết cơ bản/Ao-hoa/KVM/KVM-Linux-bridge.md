@@ -19,7 +19,7 @@ KVM cũng cung cấp các mô hình mạng trong việc ảo hóa network. Các 
 Trong đó Linux-bridge là một mô hình ảo hóa mạng được hỗ trợ bởi KVM. Linux bridge là một công nghệ cung cấp switch ảo để giải quyết vấn đề ảo hóa Network bên trong các máy vật lý.
 
 <p align="center">
- <img src="../Images/linux-bridge.png" width="">
+ <img src="../KVM/Images/linux-bridge.png" width="">
 </p>
 
 Chúng ta có thể thấy rằng có một con switch được tạo ra nằm bên trong của máy vật lý. Các VM kết nối đến đây để có thể liên lạc được với nhau. Nếu muốn liên lạc ra bên ngoài ta có thể kết nối con switch này với card mạng trên máy vật lý của ta (giống như ta dùng dây kết nối switch với router). Ta có thể kết nối switch với 1 hoặc nhiều port vật lý.

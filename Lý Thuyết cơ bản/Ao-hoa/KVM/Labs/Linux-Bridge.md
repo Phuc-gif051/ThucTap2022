@@ -21,7 +21,7 @@ ___
 
 ### 2. Ôn lại lý thuyết
 
-<img src="../../Images/linux-bridge.png" width="">
+<img src="../../KVM/Images/linux-bridge.png" width="">
 
 Chúng ta có thể thấy rằng có một con switch được tạo ra nằm bên trong của máy vật lý. Các VM kết nối đến đây để có thể liên lạc được với nhau. Nếu muốn liên lạc ra bên ngoài ta có thể kết nối con switch này với card mạng trên máy vật lý của ta (giống như ta dùng dây kết nối switch với router). Ta có thể kết nối switch ảo này với 1 hoặc nhiều card mạng vật lý.
 
@@ -33,7 +33,7 @@ Khi VM kết nối vào, sẽ tự động tạo ra 1
 Ví dụ như hình dưới: br1 có một máy kết nối đến thông qua vnet2
 
 <p align="center">
- <img src="../../Images/linux-bridge-br1-vnet2.PNG" width="">
+ <img src="../../KVM/Images/linux-bridge-br1-vnet2.PNG" width="">
 </p>
 
 Khi ta kết nối vào switch ảo các VM sẽ nhận địa chỉ IP cùng với dải địa chỉ IP của card mà ta add và switch và các địa chỉ IP này sẽ được cấp bởi dịch vụ DHCP trên router. Nếu config manual thì ta cũng cần phải config chuẩn với dải IP.
@@ -100,15 +100,15 @@ _Tại đây sẽ tiến hành tạo bridge ảo bằng giao diện dòng lệnh
 
 **Bước 6:** Để kiểm tra, hãy tạo 1 máy ảo rồi gắn vào `br1`
 
-<img src="../../Images/VM-add-br1.PNG" width="">
+<img src="../../KVM/Images/VM-add-br1.PNG" width="">
 
 Kết nối thành công thì TAP interface vnet2 sẽ được khởi tạo để VM kết nối vào mạng. Như vậy là thành công kết nối đến bridge ảo đã tạo ra. Hãy tiến hành config manual cho card mạng của VM.
 
-<img src="../../Images/VM78.PNG" width="">
+<img src="../../KVM/Images/VM78.PNG" width="">
 
 Mô hình kết nối như sau:
 
-![Mo-Hinh-Ket-Noi](../../Images/Mo-Hinh-VM-Host-Bridge.png)
+![Mo-Hinh-Ket-Noi](../../KVM/Images/Mo-Hinh-VM-Host-Bridge.png)
 
 ### 4. Chứng thực kết nối
 
@@ -117,11 +117,11 @@ Mô hình kết nối như sau:
 - Trên VM, dùng lệnh `ping` để kiểm tra kết nối đến một web site bất kỳ. Tại đây sẽ ping đến `google.com`
 - Trên máy VM, truy cập vào `WireShark`, thu được kết quả tương tự như hình dưới:
 
-<img src="../../Images/WireShark_On_VM.PNG" width="">
+<img src="../../KVM/Images/WireShark_On_VM.PNG" width="">
 
 - Trên Host, thu được kết quả như hình dưới:
 
-<img src="../../Images/WireShark_On_Host.PNG" width="">
+<img src="../../KVM/Images/WireShark_On_Host.PNG" width="">
 
 **Kết luận**
 

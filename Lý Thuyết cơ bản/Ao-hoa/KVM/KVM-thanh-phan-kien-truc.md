@@ -46,7 +46,7 @@ Kiến trúc của KVM bao gồm 3 thành phần chính:
 - Cung cấp chế độ quản lý từ xa an toàn
 
 <p align="center">
- <img src="../Images/kien-truc-kvm-2.png" width="">
+ <img src="../KVM/Images/kien-truc-kvm-2.png" width="">
 </p>
 
 ## 2. Cấu trúc ảo hóa KVM kết hợp QEMU
@@ -57,7 +57,7 @@ Do KVM hỗ trợ ánh xạ CPU vật lý sang CPU ảo, cung cấp khả năng 
 Hình sau mô tả cấu trúc KVM stack làm việc chung với QEMU:
 
 <p align="center">
- <img src="../Images/KVM-ket-hop-QEMU.png" width="">
+ <img src="../KVM/Images/KVM-ket-hop-QEMU.png" width="">
 </p>
 
 Trong đó:
@@ -92,7 +92,7 @@ Trong đó:
 - Cấu trúc của Linux Bridge khi kết hợp với KVM-QEMU:
 
 <p align="center">
- <img src="../Images/kientruc-linux-bridge.png" width="">
+ <img src="../KVM/Images/kientruc-linux-bridge.png" width="">
 </p>
 
 Trong đó:
@@ -113,7 +113,7 @@ Các tính năng chính:
 Hình dưới đây mô tả mô hình thực hiện của KVM. Đây là một vòng lặp của các hành động diễn ra để vận hành các máy ảo. Những hành động này được phân cách bằng 3 phương thức: user-mode, kernel-mode, guest-mode.
 
 <p align="center">
- <img src="../Images/KVM-Execution-Model.jpg" width="">
+ <img src="../KVM/Images/KVM-Execution-Model.jpg" width="">
 </p>
 
 Như ta thấy:
@@ -173,12 +173,12 @@ Thư mục chứa image /var/lib/libvirt/image
 
 Các trình này cần API để có thể quản trị cũng như điều khiển các máy ảo. Thứ cung cấp API và các thư viện cần thiết chính là `LibVirt`. Nó hỗ trợ tốt nhất trên nền Linux và hầu hết các trình quản trị nổi bật hiện nay.
 
-![libvirt](../Images/KVM-libvirt.png)
+![libvirt](../KVM/Images/KVM-libvirt.png)
 
 
 ## Tài liệu tham khảo
 
-[Sach-KVM](Mastering%20KVM%20Virtualization-GEEKBOY-IR.pdf)
+[Sach-Mastering KVM Virtualization](Mastering%20KVM%20Virtualization-GEEKBOY-IR.pdf)
 
 <https://ductam.info/tong-quan-ve-kvm/>
 
