@@ -25,7 +25,7 @@ kvm                   593920  1 kvm_intel
 irqbypass              16384  1 kvm
 ```
 
-Đối với bản Minimal để dùng được công cụ đồ họa virt-manager người dùng phải cài đặt gói x-window bằng câu lệnh
+Đối với bản Minimal để dùng được công cụ đồ họa `virt-manager` người dùng phải cài đặt gói `x-window` bằng câu lệnh
 
 ```sh
 yum install "@X Window System" xorg-x11-xauth xorg-x11-fonts-* xorg-x11-utils -y
