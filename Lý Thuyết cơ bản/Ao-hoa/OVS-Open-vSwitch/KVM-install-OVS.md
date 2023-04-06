@@ -22,13 +22,18 @@ adduser ovs
 su - ovs
 ```
 
+_tao 1 thu muc -> tai goi openvswitch -> copy sang thu muc moi tao:_
+
 ```sh
 mkdir -p ~/rpmbuild/SOURCES
 wget https://www.openvswitch.org/releases/openvswitch-2.17.5.tar.gz
 cp openvswitch-2.17.5.tar.gz ~/rpmbuild/SOURCES
 ```
 
+_tien hanh giai nen -> roi build:_
+
 ```sh
+tar xfz openvswitch-2.17.5.tar.gz
 rpmbuild -bb --without check openvswitch-2.17.5/rhel/openvswitch-fedora.spec
 ```
 
