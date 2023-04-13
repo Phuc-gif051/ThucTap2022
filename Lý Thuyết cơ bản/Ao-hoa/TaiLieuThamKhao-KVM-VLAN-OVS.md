@@ -4,6 +4,8 @@ bridge vlan add vid 30 dev eth1
 
 systemctl restart network
 
+[An introduction to Linux bridging commands and features - developers.redhat.com](https://developers.redhat.com/articles/2022/04/06/introduction-linux-bridging-commands-and-features#)
+
 [bridge - show / manipulate bridge addresses and devices](https://manpages.debian.org/unstable/iproute2/bridge.8.en.html#bridge_vlan_-_VLAN_filter_list)
 
 [Linux VLAN-aware bridges and trunk ports - unix.stackexchange.com](https://unix.stackexchange.com/questions/556735/linux-vlan-aware-bridges-and-trunk-ports)

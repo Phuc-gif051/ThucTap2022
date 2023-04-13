@@ -98,8 +98,9 @@
     </portgroup>
     ```
 
-Ở đây, ta khai báo 2 file xml cấu hình 2 network tương ứng với hai switch ảo ở trên:
-    - Cấu hình network tương ứng br-ex: `vi ovs-vlan.xml`:
+Ở đây, ta khai báo 2 file xml cấu hình 2 network tương ứng với hai switch ảo ở trên, tại thư mục `/etc/libvirt/qemu/networks/`:
+
+- Cấu hình network tương ứng br-ex: `vi ovs-vlan.xml`:
 
     ```xml
     <network>
@@ -128,10 +129,10 @@
       </portgroup>
     </network>
     ```
->Thẻ <vlan trunk='yes'> là thẻ khai báo sử dụng trunk port cho switch. Ta phải tự thêm các vlan nào được trunk bằng id của chúng.
 
-
-    - Cấu hình network tương ứng với br-ex1: `vi ovs-vlan_br-ex1.xml`
+>Thẻ `<vlan trunk='yes'>` là thẻ khai báo sử dụng trunk port cho switch. Ta phải tự thêm các vlan nào được trunk bằng id của chúng.
+  
+- Cấu hình network tương ứng với br-ex1: `vi ovs-vlan_br-ex1.xml`
 
     ```xml
     <network>
@@ -160,7 +161,7 @@
     </network>
     ```
 
-    - Áp dụng cấu hình network mới:
+  - Áp dụng cấu hình network mới:
 
     ```sh
     # define new networks
@@ -175,7 +176,8 @@
     virsh net-autostart ovs-network
     virsh net-autostart ovs-network-1
     ```
-    - Kiểm tra lại:
+
+  - Kiểm tra lại:
 
     ```sh
     virsh net-list --all

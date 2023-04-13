@@ -4,7 +4,7 @@ Cai dat python3
 
 ```sh
 yum update -y
-yum install python3 -y
+yum install python3 gcc-c++ python3-devel -y
 ```
 
 Cai dat cac goi can thiet
@@ -73,7 +73,7 @@ Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.bxkCwx
 + exit 0
 ```
 
-Tien hanh cai dat
+Tien hanh cai dat, su dung tai khoan `root` hoac tai khoan co quyen `root`
 
 ```sh
 exit

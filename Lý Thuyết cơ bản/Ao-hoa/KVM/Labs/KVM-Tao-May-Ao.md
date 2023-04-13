@@ -1,6 +1,6 @@
 # Tìm hiểu tạo máy ảo
 
-## 1. Tạo máy ảo với file ISO bằng virt-install
+## 1. Cài đặt KVM - Tạo máy ảo với file ISO bằng virt-install
 
 - Kiểm tra việc hỗ trợ ảo hóa của CPU:
 

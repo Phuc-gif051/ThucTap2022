@@ -1,10 +1,16 @@
 ## Nội dụng chính
 
-- Khởi tạo và cấu hình vlan id sử dụng linux bridge
+- Khởi tạo và cấu hình vlan id sử dụng linux bridge và virsh
 
 **wireshark**
-sudo yum install gcc gcc-c++ bison flex libpcap-devel qt-devel gtk3-devel rpm-build libtool c-ares-devel qt5-qtbase-devel qt5-qtmultimedia-devel qt5-linguist desktop-file-utils
-sudo yum install wireshark wireshark-qt wireshark-gnome
+
+```sh
+sudo yum install -y gcc gcc-c++ bison flex libpcap-devel qt-devel gtk3-devel rpm-build libtool c-ares-devel qt5-qtbase-devel qt5-qtmultimedia-devel qt5-linguist desktop-file-utils
+```
+
+```sh
+sudo yum install -y wireshark wireshark-qt wireshark-gnome
+```
 
 - Để khởi tạo được vlan thì ta cần tắt hoặc gỡ cài đặt NetworkManager. Nên tắt hơn là gỡ cài đặt.
 
@@ -67,7 +73,7 @@ systemctl restart network
 
 ___
 
-You can check the connection type of a virtual machine in KVM by using the command 
+You can check the connection type of a virtual machine in KVM by using the command
 `virsh domiflist <domain-name>`². This command will list all network interfaces of
 a domain, including their source bridge, virtual network, and MAC address¹.
 
@@ -98,6 +104,8 @@ Conversation with Bing, 3/30/2023
 [How to configure a VLAN in Linux](https://www.redhat.com/sysadmin/vlans-configuration)
 
 [Method 2: Create KVM bridge with virsh command](https://computingforgeeks.com/how-to-create-and-configure-bridge-networking-for-kvm-in-linux/)
+
+[Vlan tagging with ip link - cuongquach.com](https://cuongquach.com/cau-hinh-vlan-tagging-interface-tren-linux.html)
 
 sudo yum -y install NetworkManager NetworkManager-libnm NetworkManager-team NetworkManager-tui NetworkManager-wifi
 
