@@ -20,8 +20,10 @@ mode
 - save file and quit: `wq` hoac `x!`
 - Thoát ra và không lưu lại: `q!`
 - Xóa một hàng : `dd`
+- Xóa một từ : `dw`
 - Muốn copy một hàng : `yy`
 - Dán : `p`
+- Thay thế 1 loạt các từ hoặc ký tự: %s/<ký tự/từ cần thay thế>/<ký tự/từ sẽ được thay thế vào>. Ví dụ cần thay thế từ no thành yes: %s/no/yes
 - Tìm một chữ nào đó: `?User` hoac `/User`
 - `n`( không viết hoa) —> lùi lại
 - `N` ( Viết hoa) —> tiếp theo
