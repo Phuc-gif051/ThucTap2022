@@ -32,3 +32,4 @@ systemctl restart network
 
 [How to configure 802.1Q VLAN Tagging on CentOS 7](https://www.snel.com/support/how-to-configure-802-1q-vlan-tagging-on-centos-7/)
 
+[Tìm hiểu Open vSwitch - github/thaonguyenvan](https://github.com/meditechopen/meditech-ghichep-openstack/blob/master/docs/04.Neutron/openvswitch.md)
