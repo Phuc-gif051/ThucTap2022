@@ -4,7 +4,7 @@
 
 
 
-## 1. VLAN là gì?
+## I. VLAN là gì?
 
 VLAN (Virtual Local Area Network) là một mạng tùy chỉnh, được tạo từ một hay nhiều mạng cục bộ khác (LAN). Mạng VLAN cho phép một nhóm thiết bị khả dụng trong nhiều mạng được kết hợp với nhau thành một mạng logic. Từ đó tạo ra một mạng LAN ảo (Virtual LAN), được quản lý giống như một mạng LAN vật lý.
 
@@ -27,7 +27,7 @@ Các card Virtual LAN cho mạng Ethernet đều tuân theo tiêu chuẩn công 
 
 Các phương pháp hay nhất về việc quản trị Virtual LAN xác định một số loại mạng ảo tiêu chuẩn như sau:
 
-- Native LAN: Các thiết bị Ethernet VLAN coi mọi frame không được dán nhãn (untagged frame) đều thuộc về Native VLAN. Số của native Virtual LAN theo mặc định là 1, tuy nhiên admin có thể thay đổi.
+- Native LAN: Các thiết bị Ethernet VLAN coi mọi frame không được dán nhãn (untagged frame) đều thuộc về Native VLAN. Số của native Virtual LAN theo mặc định là 1, tuy nhiên admin có thể thay đổi. Dù có thay đổi ID của native VLAN thì chúng vẫn có thể nói chuyện được với nhau, chỉ cần dạng tồn tại của chúng là `native`
 - Quản lý VLAN: Hỗ trợ các kết nối từ xa của những người quản trị mạng. Có nhiều người thích sử dụng VLAN 1 để quản lý, nhưng cũng có người đặt các con số đặc biệt khác (nhằm tránh xung đột với các lưu lượng mạng khác).
 
 ### 4. Ưu điểm của VLAN
@@ -86,7 +86,7 @@ Tóm gọn lại, ta có những ý chính của bài viết như sau:
 Tham khảo tại: [Mạng VLAN là gì? Cách thức hoạt động của mạng VLAN](https://vietnix.vn/vlan/#:~:text=VLAN%20(Virtual%20Local%20Area%20Network,m%E1%BB%99t%20m%E1%BA%A1ng%20LAN%20v%E1%BA%ADt%20l%C3%BD.)
 
 
-## Khởi tạo Vlan trên Linux
+## II. Khởi tạo Vlan trên Linux
 
 ### 1. Khởi tạo
 
@@ -236,6 +236,245 @@ netplan apply
 [Hướng dẫn cấu hình VLAN Tagging trên Linux Interface](https://cuongquach.com/cau-hinh-vlan-tagging-interface-tren-linux.html)
 
 [Cấu hình bonding và multiple vlan trên Ubuntu server 18](https://fixloinhanh.com/cau-hinh-bonding-va-multiple-vlan-tren-ubuntu-server-18/)
+
+
+## III. Định tuyến tĩnh trên linux
+
+**Yêu cầu bật tính năng forward gói tin cho IPv4**
+
+```sh
+vi /etc/sysctl.conf
+```
+
+- Với CentOS thêm vào cấu hình sau:
+
+```sh
+net.ipv4.ip_forward=1
+```
+
+- Với Ubuntu thì chỉ cần bỏ chú thích (loại bỏ dấu `#`)
+
+### 1. Sử dụng công cụ Route
+
+- Để sử dụng được công cụ này ta cần tải về gói `net-tools`. Yêu cầu máy có internet.
+- Giống như các hệ thống Unix khác hay OS khác, thì route là 1 dòng thông tin (entry) trong bảng định tuyến, hỗ trợ kernel xác định được IP packet sẽ được gửi đến đích IP theo đường nào. Với nội dung định tuyến này bạn cần kiến thức mạng căn bản (CCNA) để nắm rõ vai trò của Routing Table như trên các máy tính. Việc cấu hình route chính xác là cực kì quan trọng để hệ thống Linux của bạn có thể thông suốt phần network nhằm hoạt động ổn định được. Thường sau khi cấu hình IP tĩnh trên Linux như CentOS/Ubuntu ta sẽ kiểm tra tiếp phần routing table của hệ thống và để cấu hình route trên Linux ta sẽ dùng chương trình lệnh route trên Linux. Sau này được thay thế bằng công cụ lệnh `ip`. Với cú pháp tương tự, chỉ cần thêm tiền tố `ip`.
+
+**Lưu ý:**
+
+- Trước khi chỉnh sửa bảng định tuyến trên Linux, bạn phải cực kì lưu ý là nếu route thông tin sai sẽ khiến cho hệ thống không thể truy cập được và lúc này sẽ phải truy cập console của hệ thống nhằm chỉnh sửa tay. Nên cần thực sự cẩn thận và chắc chắn về thông tin route khi cấu hình, có thể show thông tin route trước để kiểm tra.
+- Các thông tin route được cấu hình bằng lệnh route trên Linux chỉ có tác dụng hiện hữu trên OS vận hành cho đến khi hệ thống reboot thì sẽ mất hết thông tin route. Nếu muốn cấu hình route mang tính vĩnh viễn kể cả khi reboot OS lại vẫn còn thì cần phải tạo file cấu hình route trên Linux.
+
+`Liệt kê thông tin bảng routing (định tuyến)`: Trước khi bạn muốn chỉnh sửa thông tin bảng định tuyến, thì tốt nhất bạn nên review lại bảng routing hiện tại trên hệ thống Linux.
+
+```sh
+route
+```
+
+```sh
+Kernel IP routing table
+Destination Gateway Genmask Flags Metric Ref Use Iface
+default gateway 0.0.0.0 UG 0 0 0 eth0
+10.12.166.0 0.0.0.0 255.255.255.0 U 0 0 0 eth0
+link-local 0.0.0.0 255.255.0.0 U 1002 0 0 eth0
+```
+
+Nếu sử dụng option ‘-n‘ thì chương trình sẽ không cố phân giải ip thành hostname hay domain, mà chỉ hiển thị thông tin IP cụ thể.
+
+```sh
+~~~: route -n
+Kernel IP routing table
+Destination Gateway Genmask Flags Metric Ref Use Iface
+0.0.0.0 10.12.166.1 0.0.0.0 UG 0 0 0 eth0
+10.12.166.0 0.0.0.0 255.255.255.0 U 0 0 0 eth0
+169.254.0.0 0.0.0.0 255.255.0.0 U 1002 0 0 eth0
+```
+
+`Chú thích flag:`  Với nội dung output ở trên , nếu bạn chú ý cột ‘Flags‘ sẽ thể hiện những giá trị kí tự khác nhau. Chúng có ý nghĩa gì và như thế nào , bạn hoàn toàn có thể manual lệnh route để xem thêm ‘man route‘.
+
+|Ký hiệu | Ý nghĩa |
+|:--------:|:------:|
+| U | route đang up |
+| H | đối tượng là host |
+| G | sử dụng route này là route gateway |
+| R | routing động |
+| D | routing động tạo ra bởi 1 dịch vụ |
+| M | được chỉnh sửa bởi 1 dịch vụ |
+| A | được cài đặt bởi addrconf |
+| C | cache entry |
+| ! | route bị reject |
+
+`Thêm route với 1 network`: định tuyến để truyền thông với cả một dải mạng
+
+- Cú pháp lệnh:
+
+```sh
+route add -net {NETWORK-ADDRESS}/{BETMASK} gw {IP_GATEWAY} {INTERFACE-NAME}
+```
+
+hoặc
+
+```sh
+route add -net {NETWORK-ADDRESS} netmask {NETMASK} gw {IP_GATEWAY} {INTERFACE-NAME}
+```
+
+- Để hiển thị thông tin network đích mà bạn muốn đi tới thì bạn thay thế phần `{NETWORK_ADDRESS}` bằng thông tin network đó.
+
+```sh
+route add -net 192.168.1.0/24 gw 192.168.1.1 eth0
+```
+
+- Ta có thể chỉ định thông tin netmask đối với lớp mạng bằng cấu hình `NETMASK` cụ thể như cú pháp 2.
+
+```sh
+route add -net 192.168.1.0 netmask 255.255.255.0 gw 192.168.1.1 eth0
+```
+
+- Kiểm tra lại bảng routing.
+
+```sh
+~~~:route -n
+Kernel IP routing table
+Destination Gateway Genmask Flags Metric Ref Use Iface
+0.0.0.0 10.12.166.1 0.0.0.0 UG 0 0 0 eth0
+10.12.166.0 0.0.0.0 255.255.255.0 U 0 0 0 eth0
+192.168.1.0 0.0.0.0 255.255.255.0 U 0 0 0 eth0
+169.254.0.0 0.0.0.0 255.255.0.0 U 1002 0 0 eth0
+```
+
+`Thêm route với 1 host cụ thể`: định tuyến để nói chuyện với 1 ip cụ thể nào đó
+
+- Cú pháp lệnh
+
+```sh
+route add -host {IP-ADDRESS} gw {IP_GATEWAY} {INTERFACE-NAME}
+```
+
+- Giả sử bạn muốn khai báo route muốn đến địa chỉ IP 192.168.1.5 thì hãy đi qua IP gateway 192.168.1.1 hướng card mạng eth0.
+
+```sh
+route add -host 192.168.1.5 gw 192.168.1.1 eth0
+```
+
+`Xoá route khỏi routing table của 1 network`:
+
+- cú pháp:
+
+```sh
+route del -net {NETWORK-ADDRESS}/{SUBNET} gw {IP_GATEWAY} {INTERFACE-NAME}
+```
+
+- Ví dụ:
+
+```sh
+route del -net 192.168.1.0/24 netmask 255.255.255.0 gw 192.168.1.1 eth0
+```
+
+`Xoá route khỏi routing table của 1 host cụ thể`:
+
+- Cú pháp:
+
+```sh
+route del -host {IP-ADDRESS} gw {IP_GATEWAY} {INTERFACE-NAME}
+```
+
+- Ví dụ:
+
+```sh
+route del -host 192.168.1.5 netmask 255.255.255.0 gw 192.168.1.1 eth0
+```
+
+`Reject route`:
+
+- Cú pháp đối với 1 dải mạng:
+
+```sh
+route add -net 192.168.1.0/24 reject
+```
+
+- Cú pháp đối với 1 host cụ thể:
+
+```sh
+route add -host 192.168.1.5 reject
+```
+
+`Thêm default gateway route`:
+
+- Cú pháp:
+
+```sh
+route add default gw {IP-ADDRESS} {INTERFACE-NAME}
+```
+
+- Trong đó:
+
+IP-ADDRESS: địa chỉ IP của router gateway.
+INTERFACE-NAME: chỉ định cổng card mạng sẽ đi ra ngoài đến router gateway.
+
+- Ví dụ: router gateway của chúng ta có địa chỉ IP 192.168.1.1, vậy chúng ta muốn add default route theo card mạng eth0 thì sẽ dùng lệnh như sau.
+
+```sh
+route add default gw 192.168.1.1 eth0
+```
+
+Muốn xoá default route gateway cũng dễ như trên, chỉ cần gõ lại đúng thông tin đã sử dụng để add default route.
+
+```sh
+route del default gw 192.168.0.1 eth0
+```
+
+**Muốn cấu hình vĩnh viễn, thường là không bị mất cấu hình khi khởi động lại thì ta cần lưu lại file config**
+
+- _Trên CentOS_: file config được lưu tại `/etc/sysconfig/network-scripts/`. Đặt tên theo định dạng `route-<name dev>`
+
+Trong đó name dev là tên của card mạng được cấu hình routing.
+
+- C1: lưu lại câu lệnh cấu hình (sử dụng ip route hay route đều được)
+- C2: lưu lại theo định dạng:
+
+```sh
+ADDRESS0=<IP>
+NETMASK0=<NETMASK NUMBER>
+GATEWAY0=<IP GATEWAY>
+```
+
+- Khởi động lại dịch vụ để nhận cấu hình: `systemctl restart network`
+
+- _Trên Ubuntu_:
+
+- C1: sudo vi /etc/netplan/<configuration_file>.yaml
+
+Lưu lại theo định dạng:
+
+```sh
+network:
+    version: 2
+    renderer: NetworkManager
+    ethernets:
+        enp0s3:
+            dhcp4: no
+            addresses:
+            - 172.16.5.18/16
+            gateway4: 172.16.0.1
+            routes:
+            - to: 10.0.2.0/24
+              via: 10.0.2.1
+              metric: 100
+```
+
+Lưu lại và thoát, áp dụng cấu hình: `sudo netplan apply`
+
+- C2: sudo vi /etc/network/interfaces
+
+Thêm vào cấu hình:
+
+```sh
+auto eth0
+iface eth0 inet static
+      address 10.0.2.2
+      netmask 255.255.255.0
+      up route add -net 10.0.3.0 netmask 255.255.0.0 gw 10.0.2.1
+```
+
 
 
 Date accessed: 24/04/2023
