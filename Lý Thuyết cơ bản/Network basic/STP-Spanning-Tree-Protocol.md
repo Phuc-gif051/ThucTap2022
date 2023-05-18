@@ -1,3 +1,7 @@
+Seri CCNA cơ bản:
+
+<https://github.com/Phuc-gif051/meditech-thuctap/tree/master/Songle/CCNA>
+
 video on youtube:
 
 [Bài 17 Giao thức chống loop STP](https://www.youtube.com/watch?v=D_vOUA02LDc)
