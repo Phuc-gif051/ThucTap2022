@@ -475,6 +475,16 @@ iface eth0 inet static
       up route add -net 10.0.3.0 netmask 255.255.0.0 gw 10.0.2.1
 ```
 
+### Tafi lieeuj tham kharo
 
+- Ngoài ra ta còn có cách thức định tuyến động (dynamic routing), sẽ tiến hành tìm hiểu tiếp.
+
+[linux-router-and-ip-forwarding](https://www.linode.com/docs/guides/linux-router-and-ip-forwarding/)
+
+[setup-linux-as-router](https://www.tecmint.com/setup-linux-as-router/)
+
+[how-to-add-route-on-ubuntu](https://devconnected.com/how-to-add-route-on-linux/)
+
+[cau-hinh-bonding-va-multiple-vlan-tren-ubuntu-server-18](https://fixloinhanh.com/cau-hinh-bonding-va-multiple-vlan-tren-ubuntu-server-18/)
 
 Date accessed: 24/04/2023
