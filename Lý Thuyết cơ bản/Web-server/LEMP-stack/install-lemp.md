@@ -144,7 +144,7 @@ mysql -u root -p
 
 Nhập mật khẩu của `root` mà bạn vừa tạo ở bước trên. Hiện ra giao diện như sau là cài đặt thành công.
 
-![login-mariadb](../../Network basic/Images/login-mariadb.PNG)
+![login-mariadb](../../Images/login-mariadb.PNG)
 
 _Tiến hành tạo thử 1 database (có thể thực hiện hoặc chuyển sang [B4](#b4))_
 
